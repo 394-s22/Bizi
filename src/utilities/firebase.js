@@ -17,3 +17,44 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 const analytics = getAnalytics(app);
 
+export const setData = (path, value) => (
+  set(ref(database, path), value)
+);
+
+export const pushData = (path, value) => (
+  push(ref(database, path), value)
+);
+
+export const getData = async (path) => {
+  const snap = await get(ref(database, path));
+  if (snap.exists()) {
+    return snap.val();
+  } else {
+    return null;
+  }
+};
+
+export const useData = (path, transform) => {
+  const [data, setData] = useState();
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState();
+
+  useEffect(() => {
+    const dbRef = ref(database, path);
+    const devMode = !process.env.NODE_ENV || process.env.NODE_ENV === 'development';
+    if (devMode) { console.log(`loading ${path}`); }
+    return onValue(dbRef, (snapshot) => {
+      const val = snapshot.val();
+      if (devMode) { console.log(val); }
+      setData(transform ? transform(val) : val);
+      setLoading(false);
+      setError(null);
+    }, (error) => {
+      setData(null);
+      setLoading(false);
+      setError(error);
+    });
+  }, [path, transform]);
+
+  return [data, setData, loading];
+};
