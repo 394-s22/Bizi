@@ -1,13 +1,11 @@
-import React from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import logo from './logo.svg';
 import './App.css';
-import { Business } from './components/Business';
+import { BusinessList } from './components/BusinessList';
 import businessData from './data/fakedata.json';
 
 function App() {
   return (
-    <Business business={businessData}/>
+    <BusinessList businessList={businessData}/>
   );
 }
 

@@ -1,4 +1,5 @@
-{
+[
+	{
     "Title": "Evanston 1st Liquors",
 	"Description":"Evanston 1st Liquors, or 'EV1', is one of Evanston’s most popular liquor stores. They have a huge selection of alcoholic beverages– from wine to craft beers to tasty mixers. The store is also conveniently located in front of Cozy Noodles & Rice, which is a yummy BYOB restaurant. Stop by Evanston 1st to grab a nice bottle of wine before going to dinner. Must be 21+. ",
     "BusinessType": "Food/Drink",
@@ -11,4 +12,19 @@
 	"Approved": true,
     "Subheading": "Liquor Store",
     "SearchTags": ["Liquor", "Wine", "Alcohol", "Liquor Store", "Wine store", "Wine shop", "Beverages", "Alcoholic beverages", "EV1", "E V 1", "EV 1", "Evanston First Liquors", "Evanston First", "Evanston 1 Liquors", "Beer", "Vodka", "Sake", "Hard Seltzer", "Alcohol Store", "Drinks"]
-}
+	},
+	{
+	"Title": "Vinic Wine Co",
+	"Description": "Vinic Wine is a great way to meet quality wines. They offer two tastings a week and they also have an online shop. Vinic is a super useful place to visit before a date— they’ll give you recommendations of food that pairs well with a specific wine you choose. Must be 21+.",
+    "BusinessType": "Food/Drink",
+    "Policies":["Masks enforced", "Controlled capacity", "Regular sanitizing"],
+	"Initiatives": ["Charitable"],
+	"Website": "",
+	"PhoneNumber": "(847) 328-9651",
+	"Address": "1019 Davis St, Evanston, IL 60201",
+	"Schedule": [[11, 22], [11, 22], [11, 22], [11, 22], [11, 22], [11, 22], [12,20]],
+	"Approved": true,
+    "Subheading": "Liquor Store",
+    "SearchTags": ["Liquor", "Wine", "Alcohol", "Liquor Store", "Wine store", "Wine shop", "Beverages", "Alcoholic beverages", "EV1", "E V 1", "EV 1", "Evanston First Liquors", "Evanston First", "Evanston 1 Liquors", "Beer", "Vodka", "Sake", "Hard Seltzer", "Alcohol Store", "Drinks"]
+	}
+]

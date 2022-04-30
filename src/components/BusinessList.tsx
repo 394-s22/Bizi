@@ -7,14 +7,11 @@ type BusinessListProps = {
     businessList: BusinessEntry[]
 }
 
-const filteredBusinesses = () => {
-    
-}
-
 export const BusinessList = (props: BusinessListProps ) => {
+    const filteredBusinesses = props.businessList;
     return (
         <Stack direction="vertical">
-            
+            {filteredBusinesses.map((business : BusinessEntry) => <Business business={business}/>)}
         </Stack>
     );
 }
