@@ -1,26 +1,17 @@
-import React from 'react';
-// import 'bootstrap/dist/css/bootstrap.min.css';
-import logo from './logo.svg';
+import 'bootstrap/dist/css/bootstrap.min.css';
 import './App.css';
+import { BusinessList } from './components/BusinessList';
+import businessData from './data/fakedata.json';
+import { useData } from './utilities/firebase';
 
+import { BusinessEntry } from './types/BusinessTypes';
+ 
 function App() {
+  const [businessData2, setBusinessData, loadingBusinesses] = useData("/")
+  console.log(businessData2);
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <BusinessList businessList={businessData}/>
   );
 }
 
