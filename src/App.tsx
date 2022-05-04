@@ -5,14 +5,19 @@ import businessData from './data/fakedata.json';
 import { useData } from './utilities/firebase';
 
 import { BusinessEntry } from './types/BusinessTypes';
- 
+
 function App() {
-  const [businessData2, setBusinessData, loadingBusinesses] = useData("/")
+  const [businessData2, setBusinessData, loadingBusinesses] = useData<any>("/");
   console.log(businessData2);
 
-  return (
-    <BusinessList businessList={businessData}/>
-  );
+  if (businessData2) {
+    return (
+      <BusinessList businessList={businessData2} />
+    );
+  }
+  else {
+    return <></>;
+  }
 }
 
 
