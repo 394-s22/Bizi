@@ -20,15 +20,15 @@ const app = initializeApp(firebaseConfig);
 // const analytics = getAnalytics(app);
 const database = getDatabase(app);
 
-export const setData = (path, value) => (
+export const setData = (path: string, value: any) => (
   set(ref(database, path), value)
 );
 
-export const pushData = (path, value) => (
+export const pushData = (path: string, value: any) => (
   push(ref(database, path), value)
 );
 
-export const getData = async (path) => {
+export const getData = async (path: string) => {
   const snap = await get(ref(database, path));
   if (snap.exists()) {
     return snap.val();
@@ -37,10 +37,10 @@ export const getData = async (path) => {
   }
 };
 
-export const useData = (path, transform) => {
+export function useData<T>(path: string): [T | undefined, React.Dispatch<React.SetStateAction<undefined>>, boolean | null] {
   const [data, setData] = useState();
   const [loading, setLoading] = useState(true);
-  const [error, setError] = useState();
+  const [error, setError] = useState("");
 
   useEffect(() => {
     const dbRef = ref(database, path);
@@ -49,15 +49,15 @@ export const useData = (path, transform) => {
     return onValue(dbRef, (snapshot) => {
       const val = snapshot.val();
       if (devMode) { console.log(val); }
-      setData(transform ? transform(val) : val);
+      setData(val);
       setLoading(false);
-      setError(null);
+      setError("");
     }, (error) => {
-      setData(null);
+      //setData(val);
       setLoading(false);
-      setError(error);
+      setError(error.message);
     });
-  }, [path, transform]);
+  }, [path]);
 
   return [data, setData, loading];
 };
