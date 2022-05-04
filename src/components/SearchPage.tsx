@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { Button, Stack, Form } from 'react-bootstrap';
 
-const SearchPage = () => {
+export const SearchPage = () => {
     const [searchText, setSearchText] = useState('');
     const [diversityBool, setDiversityBool] = useState(false);
     const [communityBool, setCommunityBool] = useState(false);
@@ -19,25 +19,38 @@ const SearchPage = () => {
             />
             <p>Select Your Values</p>
             <Form>
-                <Form.Check
-                    inline
-                    label="Diversity"
-                />
-                <Form.Check
-                    inline
-                    label="Community"
-                />
-                <Form.Check
-                    inline
-                    label="Sustainability"
-                />
-                <Form.Check
-                    inline
-                    label="Ethical"
-                />
+                <Button>
+                    <img src = "https://staybizi.com/static/media/diversity.d5c365f9.png"
+                    width = "20"
+                    height = "20"/>
+
+                    Diversity
+                </Button>
+                <Button>
+                <img src = "https://staybizi.com/static/media/community_engagement.b2f4e847.png"
+                    width = "20"
+                    height = "20"/>
+                    
+                    Community
+                </Button>
+                <Button>
+                <img src = "https://staybizi.com/static/media/sustainability.01853b09.png"
+                    width = "20"
+                    height = "20"/>
+
+                    Sustainability
+                    </Button>
+                    
+                <Button>
+                <img src = "https://staybizi.com/static/media/ethical.d185af13.png"
+                    width = "20"
+                    height = "20"/>
+
+                    Ethical
+                </Button>
             </Form>
         </>
     )
 };
 
-export default SearchPage;
+//export default SearchPage;
