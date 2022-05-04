@@ -11,7 +11,7 @@ export const Business = (props: BusinessProps) => {
             <Card.Body>
                 <Card.Title>{props.business.Title}</Card.Title>
                 <Card.Subtitle className="mb-2 text-muted">{props.business.Subheading}</Card.Subtitle>
-                <Card.Subtitle className="mb-2 text-muted">Values: {props.business.Initiatives.join(", ")}</Card.Subtitle>
+                <Card.Subtitle className="mb-2 text-muted">Values: {props.business.Initiatives?.join(", ")}</Card.Subtitle>
                 <Card.Subtitle className="mb-2 text-muted">Distance</Card.Subtitle>
             </Card.Body>
             
