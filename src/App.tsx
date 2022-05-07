@@ -6,15 +6,19 @@ import { useData } from './utilities/firebase';
 import { SearchPage } from './components/SearchPage';
 
 import { BusinessEntry } from './types/BusinessTypes';
- 
-function App() {
-  const [businessData2, setBusinessData, loadingBusinesses] = useData("/")
-  console.log(businessData2);
 
-  return (
-    // <BusinessList businessList={businessData}/>
-    <SearchPage/>
-  );
+function App() {
+  const [businessData2, setBusinessData, loadingBusinesses] = useData<any>("/");
+  console.log(businessData2);
+  
+  if (businessData2) {
+    return (
+      <SearchPage/>
+    );
+  }
+  else {
+    return <></>;
+  }
 }
 
 
