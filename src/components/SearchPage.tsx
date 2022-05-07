@@ -1,41 +1,24 @@
-import { useState } from 'react';
-import { Button, Stack, Form } from 'react-bootstrap';
+import { Form } from 'react-bootstrap';
+import { BasicFilter } from './BasicFilter';
+import { AdvancedSearch } from './AdvancedSearch';
 import { SearchBar } from './SearchBar';
+import { useState } from 'react';
 
 type SearchPageProps = {
     businessList: any;
 };
-
+        
 export const SearchPage = (props: SearchPageProps) => {
     const [searchText, setSearchText] = useState('');
-    const [diversityBool, setDiversityBool] = useState(false);
-    const [communityBool, setCommunityBool] = useState(false);
-    const [sustainabilityBool, setSustainabilityBool] = useState(false);
-    const [ethicalBool, setEthicalBool] = useState(false);
+    const [filterValues, setFilterValues] = useState<string[]>([] as string[]);
 
-    return (
+    return(
         <>
-            <p style={{ textAlign: "center" }}>Find small businesses near you that support your values</p>
+            <p style={{textAlign: "center"}}>Find small businesses near you that support your values</p>
             <SearchBar searchText={searchText} setSearchText={setSearchText} businessList={props.businessList} />
-            <p>Select Your Values</p>
-            <Form>
-                <Form.Check
-                    inline
-                    label="Diversity"
-                />
-                <Form.Check
-                    inline
-                    label="Community"
-                />
-                <Form.Check
-                    inline
-                    label="Sustainability"
-                />
-                <Form.Check
-                    inline
-                    label="Ethical"
-                />
-            </Form>
+            <br></br>
+            {/* <BasicFilter filterValues={filterValues} setFilterValues={setFilterValues}/> */}
+            <AdvancedSearch filterValues={filterValues}/>
         </>
     );
 };

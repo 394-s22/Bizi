@@ -9,7 +9,7 @@ import { BusinessEntry } from './types/BusinessTypes';
 function App() {
   const [businessData2, setBusinessData, loadingBusinesses] = useData<BusinessEntry[]>("/");
   console.log(businessData2);
-
+  
   if (businessData2) {
     return (
       <>
