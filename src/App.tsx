@@ -7,14 +7,13 @@ import { useData } from './utilities/firebase';
 import { BusinessEntry } from './types/BusinessTypes';
 
 function App() {
-  const [businessData2, setBusinessData, loadingBusinesses] = useData<any>("/");
+  const [businessData2, setBusinessData, loadingBusinesses] = useData<BusinessEntry[]>("/");
   console.log(businessData2);
 
   if (businessData2) {
     return (
       <>
-        <SearchPage />
-        {/* <BusinessList businessList={businessData2} /> */}
+        <SearchPage businessList={businessData2}/>
       </>
     );
   }

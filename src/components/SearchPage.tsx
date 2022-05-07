@@ -2,17 +2,21 @@ import { useState } from 'react';
 import { Button, Stack, Form } from 'react-bootstrap';
 import { SearchBar } from './SearchBar';
 
-export const SearchPage = () => {
+type SearchPageProps = {
+    businessList: any;
+};
+
+export const SearchPage = (props: SearchPageProps) => {
     const [searchText, setSearchText] = useState('');
     const [diversityBool, setDiversityBool] = useState(false);
     const [communityBool, setCommunityBool] = useState(false);
     const [sustainabilityBool, setSustainabilityBool] = useState(false);
     const [ethicalBool, setEthicalBool] = useState(false);
-    
-    return(
+
+    return (
         <>
-            <p style={{textAlign: "center"}}>Find small businesses near you that support your values</p>
-            <SearchBar searchText={searchText} setSearchText={setSearchText}/>
+            <p style={{ textAlign: "center" }}>Find small businesses near you that support your values</p>
+            <SearchBar searchText={searchText} setSearchText={setSearchText} businessList={props.businessList} />
             <p>Select Your Values</p>
             <Form>
                 <Form.Check
@@ -33,5 +37,5 @@ export const SearchPage = () => {
                 />
             </Form>
         </>
-    )
+    );
 };
