@@ -1,5 +1,9 @@
 import { Button, Form, Stack } from "react-bootstrap";
 import { BusinessEntry } from '../types/BusinessTypes';
+import {
+    useNavigate,
+    Link
+  } from "react-router-dom";
 
 type SearchBarProps = {
     searchText: string,

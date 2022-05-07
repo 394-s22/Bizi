@@ -1,6 +1,6 @@
-import { BasicFilter } from './BasicFilter';
-import { AdvancedSearch } from './AdvancedSearch';
-import { SearchBar } from './SearchBar';
+import { BasicFilter } from '../components/BasicFilter';
+import { AdvancedSearch } from '../components/AdvancedSearch';
+import { SearchBar } from '../components/SearchBar';
 import { useState } from 'react';
 import { BusinessEntry } from '../types/BusinessTypes';
 
