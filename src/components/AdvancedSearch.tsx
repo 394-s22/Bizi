@@ -5,6 +5,7 @@ import valueData from '../data/values.json';
 
 type AdvancedSearchProps = {
     filterValues : string[]
+    setValues: React.Dispatch<React.SetStateAction<string[]>>
 }
 
 type ValueEntry = {
@@ -17,11 +18,10 @@ export const AdvancedSearch = (props : AdvancedSearchProps) => {
     const [sustainabilityVals, setSustainabilityVals] = useState<string[]>([]);
     const [communityVals, setCommunityVals] = useState<string[]>([]);
     const [ethicalVals, setEthicalVals] = useState<string[]>([]);
-    const [values, setValues] = useState<string[]>([]);
+    //const [values, setValues] = useState<string[]>([]);
 
     useEffect( () => {
-        setValues(diversityVals.concat(sustainabilityVals).concat(communityVals).concat(ethicalVals));
-        console.log(values);
+        props.setValues(diversityVals.concat(sustainabilityVals).concat(communityVals).concat(ethicalVals));
     }, [diversityVals, sustainabilityVals, communityVals, ethicalVals]);
 
     /* const formatButtons = (values : ValueEntry[]) => {
