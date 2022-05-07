@@ -1,7 +1,8 @@
 import { useState } from 'react';
 import { Button, Stack, Form } from 'react-bootstrap';
+import { SearchBar } from './SearchBar';
 
-const SearchPage = () => {
+export const SearchPage = () => {
     const [searchText, setSearchText] = useState('');
     const [diversityBool, setDiversityBool] = useState(false);
     const [communityBool, setCommunityBool] = useState(false);
@@ -11,12 +12,7 @@ const SearchPage = () => {
     return(
         <>
             <p style={{textAlign: "center"}}>Find small businesses near you that support your values</p>
-            <Form.Control
-                className="me-auto"
-                placeholder="Search Keywords"
-                onChange={(e) => setSearchText(e.target.value)}
-                style={{backgroundColor: "lightgrey"}}
-            />
+            <SearchBar searchText={searchText} setSearchText={setSearchText}/>
             <p>Select Your Values</p>
             <Form>
                 <Form.Check
@@ -39,5 +35,3 @@ const SearchPage = () => {
         </>
     )
 };
-
-export default SearchPage;

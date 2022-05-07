@@ -1,9 +1,9 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './App.css';
 import { BusinessList } from './components/BusinessList';
+import { SearchPage } from './components/SearchPage';
 import businessData from './data/fakedata.json';
 import { useData } from './utilities/firebase';
-
 import { BusinessEntry } from './types/BusinessTypes';
 
 function App() {
@@ -12,7 +12,10 @@ function App() {
 
   if (businessData2) {
     return (
-      <BusinessList businessList={businessData2} />
+      <>
+        <SearchPage />
+        {/* <BusinessList businessList={businessData2} /> */}
+      </>
     );
   }
   else {
