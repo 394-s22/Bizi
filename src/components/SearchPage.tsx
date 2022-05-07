@@ -7,8 +7,8 @@ export const SearchPage = () => {
     const [communityBool, setCommunityBool] = useState(false);
     const [sustainabilityBool, setSustainabilityBool] = useState(false);
     const [ethicalBool, setEthicalBool] = useState(false);
-    
-    
+
+
     return(
         <>
             <p style={{textAlign: "center"}}>Find small businesses near you that support your values</p>
