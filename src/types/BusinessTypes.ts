@@ -13,6 +13,6 @@ export type BusinessEntry = {
     Schedule : number[][],//[[open(decimal between 0 and 24, representing 24 - hour time OR - 1 if closed on that day), close(same)], [open, close], ..., [open, close]](Monday, Tuesday, Wednesday, ..., Sunday) (required),
     //Discounts?: ,//[[% discount, quantity available], ..., [% discount, quantity available]](optional field, keep blank since we don’t have this established yet),
     Subheading: string,//“Business Type such as Grocery Store, Liquor Shop...”
-    SearchTags: string[], //(required),
+    "Search Tags": string[], //(required),
     Approved: boolean   // 
 }
