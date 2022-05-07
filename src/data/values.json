@@ -1,6 +1,7 @@
 [
     {
-        "Diversity": [
+        "Title": "Diversity",
+        "Values": [
             "Family Owned",
             "Female Owned",
             "Minority Owned",
@@ -10,15 +11,16 @@
         ]
     }, 
     {
-        "Community": [
+        "Title": "Community",
+        "Values": [
             "Charitable Donations",
             "Community Engagement",
             "Volunteer Efforts"
-
         ]
     },
     {
-        "Sustainability": [
+        "Title": "Sustainability",
+        "Values": [
             "Recycling",
             "Waste Reduction",
             "Renewable Energy Sources",
@@ -31,7 +33,8 @@
         ]
     },
     {
-        "Ethical": [
+        "Title" : "Ethical",
+        "Values" : [
             "Ethical Supply Chain",
             "Handmade",
             "Animal Cruelty Free", 

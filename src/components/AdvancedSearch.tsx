@@ -9,11 +9,28 @@ type AdvancedSearchProps = {
 
 export const AdvancedSearch = (props : AdvancedSearchProps) => {
 
+    const formatButtons = (values:any[]) => {
+        return (
+            <ToggleButtonGroup type="checkbox">
+                {values.map(
+                    (category) => {
+                        return (
+                            category.Values.map( (value : string) => <ToggleButton value={value}>{value}</ToggleButton>)
+                        )
+                    })
+                }
+            </ToggleButtonGroup>
+        )        
+    }
+
     return (
-        <Button variant = "light">
-            <FaAngleLeft /> 
-            Back to Quick Filter
-        </Button>
+        <>
+            <Button variant = "light">
+                <FaAngleLeft /> 
+                Back to Quick Filter
+            </Button>
+            <ul>{formatButtons(valueData)}</ul>
+        </>
         
     );
 }
