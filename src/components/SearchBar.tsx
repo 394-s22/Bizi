@@ -23,10 +23,28 @@ export const SearchBar = ({ searchText, setSearchText, businessList }: SearchBar
         //     Object.values(businessList).filter(business => 
         //         business["Search Tags"].includes(text.toLowerCase())));
 
+        // [...searchText.split(' '), searchText] // [Ruby, Nails, Ruby Nails]
+
+        // const isTag = () => { }
+
+        const intersect = (keywords: Array<string>, tags: Array<string>) => (
+            keywords.filter(keyword => tags.some(tag => tag.includes(keyword)))
+        );
+        const arr1 = ["Hello World!", "Javascript", "TypeScript", "ode"];
+        const arr2 = ["Hello World!", "Python", "Business"];
+        const arr3 = ["ello", "Python", "Business"];
+        const arr4 = ["Python", "Business", "Code"];
+        console.log(intersect(arr1, arr2));
+        console.log(intersect(arr1, arr3));
+        console.log(intersect(arr1, arr4));
+        console.log(intersect(arr3, arr1));
+
         const filteredBusinesses = Object.values(businessList).filter(business =>
-            business["Search Tags"].map(tag =>
-                tag.toLowerCase()).includes(searchText.toLowerCase()));
+            (business["Search Tags"].concat([business.Title, business.Description])).map(tag =>
+                tag.toLowerCase().includes(searchText.toLowerCase())).includes(true));
         console.log(filteredBusinesses);
+
+
     };
 
     return (
