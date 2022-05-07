@@ -1,11 +1,17 @@
 import { Form, ToggleButton, ToggleButtonGroup, ButtonGroup} from 'react-bootstrap';
 import { useState } from 'react';
 
-export const BasicFilter = () => {
-    const [filterValues, setFilterValues] = useState<string[]>([] as string[]);
+type BasicFilterProps = {
+    filterValues : string[], 
+    setFilterValues: React.Dispatch<React.SetStateAction<string[]>>
+}
 
+export const BasicFilter = (props : BasicFilterProps) => {
+    
     return (
-        <ToggleButtonGroup type="checkbox" defaultValue={[]} className="mb-2" onChange={(val) => {setFilterValues(val); console.log(val)}}>
+        <>
+            <p>Select Your Values</p>
+            <ToggleButtonGroup type="checkbox" defaultValue={props.filterValues} className="mb-2" onChange={(val) => {props.setFilterValues(val); console.log(val)}}>
 
                 <ToggleButton id = "diversity-btn" variant="outline-primary" value={'diversity'}  size="sm">
                     <img src = "https://staybizi.com/static/media/diversity.d5c365f9.png"
@@ -39,6 +45,7 @@ export const BasicFilter = () => {
                     Ethical
                 </ToggleButton>
             </ToggleButtonGroup>
+        </>
     );
 }
 

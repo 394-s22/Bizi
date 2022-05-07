@@ -1,10 +1,11 @@
 import { useState } from 'react';
 import { Form } from 'react-bootstrap';
 import { BasicFilter } from './BasicFilter';
+import { AdvancedSearch } from './AdvancedSearch';
 
 export const SearchPage = () => {
     const [searchText, setSearchText] = useState('');
-
+    const [filterValues, setFilterValues] = useState<string[]>([] as string[]);
 
     return(
         <>
@@ -16,8 +17,8 @@ export const SearchPage = () => {
                 style={{backgroundColor: "lightgrey"}}
             />
             <br></br>
-            <p>Select Your Values</p>
-            <BasicFilter/>
+            {/* <BasicFilter filterValues={filterValues} setFilterValues={setFilterValues}/> */}
+            <AdvancedSearch filterValues={filterValues}/>
         </>
     )
 };
