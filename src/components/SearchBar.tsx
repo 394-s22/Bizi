@@ -1,17 +1,16 @@
 import { Button, Form, Stack } from "react-bootstrap";
+import { useNavigate } from "react-router-dom";
 import { BusinessEntry } from '../types/BusinessTypes';
-import {
-    useNavigate,
-    Link
-  } from "react-router-dom";
 
 type SearchBarProps = {
     searchText: string,
     setSearchText: React.Dispatch<React.SetStateAction<string>>,
-    businessList: BusinessEntry[];
+    businessList: BusinessEntry[],
+    setFilteredData: React.Dispatch<React.SetStateAction<BusinessEntry[]>>;
 };
 
-export const SearchBar = ({ searchText, setSearchText, businessList }: SearchBarProps) => {
+export const SearchBar: React.FC<SearchBarProps> = ({ searchText, setSearchText, businessList, setFilteredData }) => {
+    let navigate = useNavigate();
     const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
 
@@ -25,19 +24,20 @@ export const SearchBar = ({ searchText, setSearchText, businessList }: SearchBar
             intersect(filteredText.map(text =>
                 text.toLowerCase()), business["Search Tags"].concat([business.Title, business.Description]).map(text =>
                     text.toLowerCase())).length > 0);
-        console.log(filteredBusinesses);
+        setFilteredData(filteredBusinesses);
+        navigate('/results');
     };
 
     return (
         <Form onSubmit={(e) => handleSubmit(e)}
             onKeyDown={(e) => e.key === 'Enter' ? handleSubmit(e) : null}
         >
-            <Stack direction="horizontal">
+            <Stack style={{ width: '20rem', margin: "auto" }} direction="horizontal">
                 < Form.Control
                     className="me-auto"
                     placeholder="Search Keywords"
                     onChange={(e) => setSearchText(e.target.value)}
-                    style={{ backgroundColor: "lightgrey" }}
+                    style={{backgroundColor: "lightgrey" }}
                 />
                 <Button type="submit">Search</Button>
             </Stack>

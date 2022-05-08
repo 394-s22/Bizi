@@ -1,7 +1,6 @@
-import { useState, useEffect } from "react";
 import { initializeApp } from "firebase/app";
-import { getDatabase, onValue, ref, set, get, push } from 'firebase/database';
-import { getAnalytics } from "firebase/analytics";
+import { get, getDatabase, onValue, push, ref, set } from 'firebase/database';
+import { useEffect, useState } from "react";
 
 // For Firebase JS SDK v7.20.0 and later, measurementId is optional
 const firebaseConfig = {

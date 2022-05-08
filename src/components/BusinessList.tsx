@@ -5,15 +5,14 @@ import { Stack } from "react-bootstrap";
 import { BusinessEntry } from "../types/BusinessTypes";
 
 type BusinessListProps = {
-    businessList: BusinessEntry[]
-}
+    businessList: BusinessEntry[];
+};
 
-export const BusinessList = (props: BusinessListProps ) => {
-    const filteredBusinesses = props.businessList;
-    console.log('filterbusniesses prop', filteredBusinesses);
+export const BusinessList: React.FC<BusinessListProps> = ({businessList}) => {
+    const filteredBusinesses = businessList;
     return (
         <Stack direction="vertical">
-            {Object.values(filteredBusinesses).map<ReactNode>((business : BusinessEntry, key: number) => <Business key={key} business={business}/>)}
+            {Object.values(filteredBusinesses).map<ReactNode>((business: BusinessEntry, key: number) => <Business key={key} business={business} />)}
         </Stack>
     );
-}
+};
