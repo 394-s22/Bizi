@@ -36,6 +36,7 @@ export const SearchPage: React.FC<SearchPageProps> = ({
       return false;
     }
   );
+  console.log('advancedFilteredBusinesses', advancedFilteredBusinesses);
 
   const filteredText = searchText.split(' ');
 
@@ -43,9 +44,7 @@ export const SearchPage: React.FC<SearchPageProps> = ({
     keywords.filter((keyword) => tags.some((tag) => tag.includes(keyword)));
 
   const finalFilteredBusinesses = Object.values(
-    advancedFilteredBusinesses.length > 0
-      ? advancedFilteredBusinesses
-      : businessList
+    advancedFilterValues.length > 0 ? advancedFilteredBusinesses : businessList
   ).filter(
     (business) =>
       intersect(
@@ -64,9 +63,7 @@ export const SearchPage: React.FC<SearchPageProps> = ({
       >
         Find small businesses near you that support your values
       </p>
-      <SearchBar
-        setSearchText={setSearchText}
-      />
+      <SearchBar setSearchText={setSearchText} />
       <br />
       {searchComponent === 'basic' ? (
         <BasicFilter

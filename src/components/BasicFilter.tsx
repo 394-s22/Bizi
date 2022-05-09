@@ -1,7 +1,4 @@
-import {
-    Button, ToggleButton,
-    ToggleButtonGroup
-} from 'react-bootstrap';
+import { Button, ToggleButton, ToggleButtonGroup } from 'react-bootstrap';
 import valueData from '../data/values.json';
 
 type BasicFilterProps = {
@@ -15,7 +12,9 @@ const dictionary: { [key: string]: string[] } = valueData;
 
 export const BasicFilter = (props: BasicFilterProps) => {
   const getAdvancedFilters = (filterValues: string[]) => {
-    return filterValues.map((val) => dictionary[val]).flat();
+    const result = filterValues.map((val) => dictionary[val]).flat();
+    console.log(result);
+    return result;
   };
 
   return (
