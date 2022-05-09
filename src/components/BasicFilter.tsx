@@ -1,5 +1,9 @@
 import { Button, ToggleButton, ToggleButtonGroup } from 'react-bootstrap';
 import valueData from '../data/values.json';
+import communityLogo from '../logos/community.png';
+import diversityLogo from '../logos/diversity.png';
+import ethicalLogo from '../logos/ethical.png';
+import sustainabilityLogo from '../logos/sustainability.png';
 
 type BasicFilterProps = {
   advancedFilterValues: string[];
@@ -36,11 +40,7 @@ export const BasicFilter = (props: BasicFilterProps) => {
             value={'Diversity'}
             size='sm'
           >
-            <img
-              src='https://staybizi.com/static/media/diversity.d5c365f9.png'
-              width='50'
-              height='50'
-            />
+            <img src={diversityLogo} width='50' height='50' />
             <br></br>
             Diversity
           </ToggleButton>
@@ -51,11 +51,7 @@ export const BasicFilter = (props: BasicFilterProps) => {
             value={'Community'}
             size='sm'
           >
-            <img
-              src='https://staybizi.com/static/media/community_engagement.b2f4e847.png'
-              width='50'
-              height='50'
-            />
+            <img src={communityLogo} width='50' height='50' />
             <br></br>
             Community
           </ToggleButton>
@@ -66,11 +62,7 @@ export const BasicFilter = (props: BasicFilterProps) => {
             value={'Sustainability'}
             size='sm'
           >
-            <img
-              src='https://staybizi.com/static/media/sustainability.01853b09.png'
-              width='50'
-              height='50'
-            />
+            <img src={ethicalLogo} width='50' height='50' />
             <br></br>
             Sustainability
           </ToggleButton>
@@ -81,11 +73,7 @@ export const BasicFilter = (props: BasicFilterProps) => {
             value={'Ethical'}
             size='sm'
           >
-            <img
-              src='https://staybizi.com/static/media/ethical.d185af13.png'
-              width='50'
-              height='50'
-            />
+            <img src={sustainabilityLogo} width='50' height='50' />
             <br></br>
             Ethical
           </ToggleButton>

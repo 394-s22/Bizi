@@ -1,8 +1,5 @@
 import { useEffect, useState } from 'react';
-import {
-    Button, ToggleButton,
-    ToggleButtonGroup
-} from 'react-bootstrap';
+import { Button, ToggleButton, ToggleButtonGroup } from 'react-bootstrap';
 import { FaAngleLeft } from 'react-icons/fa';
 import { useNavigate } from 'react-router-dom';
 
@@ -74,7 +71,8 @@ export const AdvancedSearch = (props: AdvancedSearchProps) => {
         <ToggleButtonGroup
           type='checkbox'
           size='sm'
-          style={{ flexWrap: 'wrap', width:"90%" }}
+          className='mb-2'
+          style={{ flexWrap: 'wrap', width: '90%' }}
           onChange={(vals) => setDiversityVals(vals)}
         >
           <ToggleButton
@@ -125,7 +123,8 @@ export const AdvancedSearch = (props: AdvancedSearchProps) => {
         <ToggleButtonGroup
           type='checkbox'
           size='sm'
-          style={{ flexWrap: 'wrap', width:"90%" }}
+          className='mb-2'
+          style={{ flexWrap: 'wrap', width: '90%' }}
           onChange={(vals) => setCommunityVals(vals)}
         >
           <ToggleButton
@@ -155,7 +154,8 @@ export const AdvancedSearch = (props: AdvancedSearchProps) => {
         <ToggleButtonGroup
           type='checkbox'
           size='sm'
-          style={{ flexWrap: 'wrap', width:"90%" }}
+          className='mb-2'
+          style={{ flexWrap: 'wrap', width: '90%' }}
           onChange={(vals) => setSustainabilityVals(vals)}
         >
           <ToggleButton
@@ -227,7 +227,8 @@ export const AdvancedSearch = (props: AdvancedSearchProps) => {
         <ToggleButtonGroup
           type='checkbox'
           size='sm'
-          style={{ flexWrap: 'wrap', width:"90%" }}
+          className='mb-2'
+          style={{ flexWrap: 'wrap', width: '90%' }}
           onChange={(vals) => setEthicalVals(vals)}
         >
           <ToggleButton
