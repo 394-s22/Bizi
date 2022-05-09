@@ -1,44 +1,32 @@
-[
-    {
-        "Title": "Diversity",
-        "Values": [
-            "Family Owned",
-            "Female Owned",
-            "Minority Owned",
-            "LGBTQ Owned", 
-            "Black Owned",
-            "Wheelchair Friendly"
-        ]
-    }, 
-    {
-        "Title": "Community",
-        "Values": [
-            "Charitable Donations",
-            "Community Engagement",
-            "Volunteer Efforts"
-        ]
-    },
-    {
-        "Title": "Sustainability",
-        "Values": [
-            "Recycling",
-            "Waste Reduction",
-            "Renewable Energy Sources",
-            "LEED Certified",
-            "Sustainable Products",
-            "Vegan Friendly",
-            "Vegetarian Friendly",
-            "Vegan Products",
-            "Vintage"
-        ]
-    },
-    {
-        "Title" : "Ethical",
-        "Values" : [
-            "Ethical Supply Chain",
-            "Handmade",
-            "Animal Cruelty Free", 
-            "Locally Sourced"
-        ]
-    }
-]
+{
+    "Diversity": [
+        "Family Owned",
+        "Female Owned",
+        "Minority Owned",
+        "LGBTQ Owned",
+        "Black Owned",
+        "Wheelchair Friendly"
+    ],
+    "Community": [
+        "Charitable Donations",
+        "Community Engagement",
+        "Volunteer Efforts"
+    ],
+    "Sustainability": [
+        "Recycling",
+        "Waste Reduction",
+        "Renewable Energy Sources",
+        "LEED Certified",
+        "Sustainable Products",
+        "Vegan Friendly",
+        "Vegetarian Friendly",
+        "Vegan Products",
+        "Vintage"
+    ],
+    "Ethical": [
+        "Ethical Supply Chain",
+        "Handmade",
+        "Animal Cruelty Free",
+        "Locally Sourced"
+    ]
+}

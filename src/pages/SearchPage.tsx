@@ -8,13 +8,11 @@ import { BusinessEntry } from '../types/BusinessTypes';
 
 type SearchPageProps = {
   businessList: BusinessEntry[];
-  filteredData: BusinessEntry[];
   setFilteredData: React.Dispatch<React.SetStateAction<BusinessEntry[]>>;
 };
 
 export const SearchPage: React.FC<SearchPageProps> = ({
   businessList,
-  filteredData,
   setFilteredData,
 }) => {
   const [searchText, setSearchText] = useState<string>('');
@@ -72,8 +70,8 @@ export const SearchPage: React.FC<SearchPageProps> = ({
       <br />
       {searchComponent === 'basic' ? (
         <BasicFilter
-          filterValues={filterValues}
-          setFilterValues={setFilterValues}
+          advancedFilterValues={advancedFilterValues}
+          setAdvancedFilterValues={setAdvancedFilterValues}
           searchComponent={searchComponent}
           setSearchComponent={setSearchComponent}
         />

@@ -27,7 +27,6 @@ const App = () => {
           element={
             <SearchPage
               businessList={businessData}
-              filteredData={filteredData}
               setFilteredData={setFilteredData}
             />
           }
