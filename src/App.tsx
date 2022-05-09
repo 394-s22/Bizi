@@ -12,7 +12,6 @@ const App = () => {
   const [businessData, setBusinessData, loadingBusinesses] =
     useData<BusinessEntry[]>('/');
   const [filteredData, setFilteredData] = useState<BusinessEntry[]>([]);
-  console.log('appFilteredData', filteredData);
   if (loadingBusinesses || !businessData)
     return (
       <div>

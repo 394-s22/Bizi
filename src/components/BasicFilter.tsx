@@ -13,7 +13,6 @@ const dictionary: { [key: string]: string[] } = valueData;
 export const BasicFilter = (props: BasicFilterProps) => {
   const getAdvancedFilters = (filterValues: string[]) => {
     const result = filterValues.map((val) => dictionary[val]).flat();
-    console.log(result);
     return result;
   };
 
@@ -29,7 +28,6 @@ export const BasicFilter = (props: BasicFilterProps) => {
           className='mb-2'
           onChange={(val) => {
             props.setAdvancedFilterValues(getAdvancedFilters(val));
-            console.log(val);
           }}
         >
           <ToggleButton

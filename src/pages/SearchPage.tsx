@@ -36,7 +36,6 @@ export const SearchPage: React.FC<SearchPageProps> = ({
       return false;
     }
   );
-  console.log('advancedFilteredBusinesses', advancedFilteredBusinesses);
 
   const filteredText = searchText.split(' ');
 
