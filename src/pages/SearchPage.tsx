@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { Button } from 'react-bootstrap';
 import { useNavigate } from 'react-router-dom';
+import { BasicFilter } from '../components/BasicFilter';
 import { AdvancedSearch } from '../components/AdvancedSearch';
 import { SearchBar } from '../components/SearchBar';
 import { BusinessEntry } from '../types/BusinessTypes';
@@ -14,6 +15,7 @@ export const SearchPage: React.FC<SearchPageProps> = ({ businessList, setFiltere
     const [searchText, setSearchText] = useState('');
     const [filterValues, setFilterValues] = useState<string[]>([] as string[]);
     const [advancedFilterValues, setAdvancedFilterValues] = useState<string[]>([] as string[]);
+    const [searchComponent, setSearchComponent] = useState<string>('basic');
     let navigate = useNavigate();
 
     const filteredBusinesses = Object.values(businessList).filter(
@@ -34,8 +36,11 @@ export const SearchPage: React.FC<SearchPageProps> = ({ businessList, setFiltere
             </p>
             <SearchBar searchText={searchText} setSearchText={setSearchText} businessList={businessList} setFilteredData={setFilteredData} />
             <br />
-            {/* <BasicFilter filterValues={filterValues} setFilterValues={setFilterValues}/> */}
-            <AdvancedSearch filterValues={filterValues} setValues={setAdvancedFilterValues} />
+            {searchComponent === 'basic' ? 
+                <BasicFilter filterValues={filterValues} setFilterValues={setFilterValues} searchComponent={searchComponent} setSearchComponent={setSearchComponent}/>
+                :
+                 <AdvancedSearch filterValues={filterValues} setValues={setAdvancedFilterValues} searchComponent={searchComponent} setSearchComponent={setSearchComponent} />
+            }
             <div className="text-center mb-5">
                 <Button className="mb-3" variant="secondary" size="lg" active onClick={() => { setFilteredData(filteredBusinesses); navigate('/results'); }}>
                     Let's go!

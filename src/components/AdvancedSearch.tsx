@@ -6,6 +6,8 @@ import { useNavigate } from 'react-router-dom';
 
 type AdvancedSearchProps = {
     filterValues: string[];
+    searchComponent: string;
+    setSearchComponent: React.Dispatch<React.SetStateAction<string>>;
     setValues: React.Dispatch<React.SetStateAction<string[]>>;
 };
 
@@ -55,7 +57,7 @@ export const AdvancedSearch = (props: AdvancedSearchProps) => {
     return (
         <>
             <Button variant="light"
-                onClick={() => navigate("/")}>
+                onClick={() => props.setSearchComponent('basic')}>
                 <FaAngleLeft />
                 Back to Quick Filter
             </Button>

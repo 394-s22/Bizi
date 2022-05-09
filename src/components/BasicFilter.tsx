@@ -1,8 +1,10 @@
-import { Form, ToggleButton, ToggleButtonGroup, ButtonGroup} from 'react-bootstrap';
+import { Button, Form, ToggleButton, ToggleButtonGroup, ButtonGroup} from 'react-bootstrap';
 import { useState } from 'react';
 
 type BasicFilterProps = {
     filterValues : string[], 
+    searchComponent : string,
+    setSearchComponent : React.Dispatch<React.SetStateAction<string>>,
     setFilterValues: React.Dispatch<React.SetStateAction<string[]>>
 }
 
@@ -45,6 +47,10 @@ export const BasicFilter = (props : BasicFilterProps) => {
                     Ethical
                 </ToggleButton>
             </ToggleButtonGroup>
+
+            <Button variant="light" onClick={() => props.setSearchComponent('advanced')}>
+                Advanced Filter +
+            </Button>
         </>
     );
 }
