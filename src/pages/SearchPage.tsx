@@ -1,8 +1,8 @@
 import { useState } from 'react';
 import { Button } from 'react-bootstrap';
 import { useNavigate } from 'react-router-dom';
-import { BasicFilter } from '../components/BasicFilter';
 import { AdvancedSearch } from '../components/AdvancedSearch';
+import { BasicFilter } from '../components/BasicFilter';
 import { SearchBar } from '../components/SearchBar';
 import { BusinessEntry } from '../types/BusinessTypes';
 

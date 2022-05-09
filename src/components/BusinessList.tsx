@@ -1,18 +1,22 @@
-import { Business } from "./Business";
-import type { ReactNode } from "react";
-import { Stack } from "react-bootstrap";
+import type { ReactNode } from 'react';
+import { Stack } from 'react-bootstrap';
+import { BusinessEntry } from '../types/BusinessTypes';
+import { Business } from './Business';
 
-import { BusinessEntry } from "../types/BusinessTypes";
 
 type BusinessListProps = {
-    businessList: BusinessEntry[];
+  businessList: BusinessEntry[];
 };
 
-export const BusinessList: React.FC<BusinessListProps> = ({businessList}) => {
-    const filteredBusinesses = businessList;
-    return (
-        <Stack direction="vertical">
-            {Object.values(filteredBusinesses).map<ReactNode>((business: BusinessEntry, key: number) => <Business key={key} business={business} />)}
-        </Stack>
-    );
+export const BusinessList: React.FC<BusinessListProps> = ({ businessList }) => {
+  const filteredBusinesses = businessList;
+  return (
+    <Stack direction='vertical'>
+      {Object.values(filteredBusinesses).map<ReactNode>(
+        (business: BusinessEntry, key: number) => (
+          <Business key={key} business={business} />
+        )
+      )}
+    </Stack>
+  );
 };
