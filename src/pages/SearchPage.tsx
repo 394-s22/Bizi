@@ -7,23 +7,17 @@ import { SearchBar } from '../components/SearchBar';
 import { BusinessEntry } from '../types/BusinessTypes';
 
 type SearchPageProps = {
-  businessList: BusinessEntry[];
-  setFilteredData: React.Dispatch<React.SetStateAction<BusinessEntry[]>>;
   setAdvancedFilterValues: React.Dispatch<React.SetStateAction<string[]>>;
   setSearchText: React.Dispatch<React.SetStateAction<string>>;
 };
 
 export const SearchPage: React.FC<SearchPageProps> = ({
-  businessList,
-  setFilteredData,
   setSearchText,
   setAdvancedFilterValues,
 }) => {
   const [filterValues, setFilterValues] = useState<string[]>([] as string[]);
   const [searchComponent, setSearchComponent] = useState<string>('basic');
   let navigate = useNavigate();
-
-  
 
   return (
     <>
@@ -37,7 +31,6 @@ export const SearchPage: React.FC<SearchPageProps> = ({
       <br />
       {searchComponent === 'basic' ? (
         <BasicFilter
-          advancedFilterValues={advancedFilterValues}
           setAdvancedFilterValues={setAdvancedFilterValues}
           searchComponent={searchComponent}
           setSearchComponent={setSearchComponent}
@@ -57,7 +50,6 @@ export const SearchPage: React.FC<SearchPageProps> = ({
           size='lg'
           active
           onClick={() => {
-            setFilteredData(finalFilteredBusinesses);
             navigate('/results');
           }}
         >

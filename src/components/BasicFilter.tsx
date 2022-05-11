@@ -6,7 +6,6 @@ import ethicalLogo from '../logos/ethical.png';
 import sustainabilityLogo from '../logos/sustainability.png';
 
 type BasicFilterProps = {
-  advancedFilterValues: string[];
   setAdvancedFilterValues: React.Dispatch<React.SetStateAction<string[]>>;
   searchComponent: string;
   setSearchComponent: React.Dispatch<React.SetStateAction<string>>;
