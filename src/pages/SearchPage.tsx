@@ -9,50 +9,21 @@ import { BusinessEntry } from '../types/BusinessTypes';
 type SearchPageProps = {
   businessList: BusinessEntry[];
   setFilteredData: React.Dispatch<React.SetStateAction<BusinessEntry[]>>;
+  setAdvancedFilterValues: React.Dispatch<React.SetStateAction<string[]>>;
+  setSearchText: React.Dispatch<React.SetStateAction<string>>;
 };
 
 export const SearchPage: React.FC<SearchPageProps> = ({
   businessList,
   setFilteredData,
+  setSearchText,
+  setAdvancedFilterValues,
 }) => {
-  const [searchText, setSearchText] = useState<string>('');
   const [filterValues, setFilterValues] = useState<string[]>([] as string[]);
-  const [advancedFilterValues, setAdvancedFilterValues] = useState<string[]>(
-    [] as string[]
-  );
   const [searchComponent, setSearchComponent] = useState<string>('basic');
   let navigate = useNavigate();
 
-  const advancedFilteredBusinesses = Object.values(businessList).filter(
-    (business) => {
-      for (const value of advancedFilterValues) {
-        if (
-          business.hasOwnProperty('Initiatives') &&
-          business.Initiatives.includes(value)
-        ) {
-          return true;
-        }
-      }
-      return false;
-    }
-  );
-
-  const filteredText = searchText.split(' ');
-
-  const intersect = (keywords: Array<string>, tags: Array<string>) =>
-    keywords.filter((keyword) => tags.some((tag) => tag.includes(keyword)));
-
-  const finalFilteredBusinesses = Object.values(
-    advancedFilterValues.length > 0 ? advancedFilteredBusinesses : businessList
-  ).filter(
-    (business) =>
-      intersect(
-        filteredText.map((text) => text.toLowerCase()),
-        business['Search Tags']
-          .concat([business.Title, business.Description])
-          .map((text) => text.toLowerCase())
-      ).length > 0
-  );
+  
 
   return (
     <>
