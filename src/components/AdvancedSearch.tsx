@@ -1,26 +1,23 @@
 import { useEffect, useState } from 'react';
 import { Button, ToggleButton, ToggleButtonGroup } from 'react-bootstrap';
 import { FaAngleLeft } from 'react-icons/fa';
-import { useNavigate } from 'react-router-dom';
 
 type AdvancedSearchProps = {
-  filterValues: string[];
   searchComponent: string;
   setSearchComponent: React.Dispatch<React.SetStateAction<string>>;
   setValues: React.Dispatch<React.SetStateAction<string[]>>;
 };
 
-type ValueEntry = {
-  Title: string;
-  Values: string[];
-};
+// type ValueEntry = {
+//   Title: string;
+//   Values: string[];
+// };
 
 export const AdvancedSearch = (props: AdvancedSearchProps) => {
   const [diversityVals, setDiversityVals] = useState<string[]>([]);
   const [sustainabilityVals, setSustainabilityVals] = useState<string[]>([]);
   const [communityVals, setCommunityVals] = useState<string[]>([]);
   const [ethicalVals, setEthicalVals] = useState<string[]>([]);
-  let navigate = useNavigate();
   //const [values, setValues] = useState<string[]>([]);
 
   useEffect(() => {

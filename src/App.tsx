@@ -17,6 +17,7 @@ const App = () => {
   const [advancedFilterValues, setAdvancedFilterValues] = useState<string[]>(
     [] as string[]
   );
+  const [filterValues, setFilterValues] = useState<string[]>([] as string[]);
 
   // filtering businesses
   useEffect(() => {
@@ -53,9 +54,9 @@ const App = () => {
         ).length > 0
     );
     setFilteredData(finalFilteredBusinesses);
-    console.log('searchText:', searchText);
-    console.log('advancedFilterValues:', advancedFilterValues);
-    console.log(finalFilteredBusinesses);
+    // console.log('searchText:', searchText);
+    // console.log('advancedFilterValues:', advancedFilterValues);
+    // console.log(finalFilteredBusinesses);
   }, [searchText, advancedFilterValues]);
   
   // returned page
@@ -67,7 +68,10 @@ const App = () => {
           element={
             <SearchPage
               setAdvancedFilterValues={setAdvancedFilterValues}
+              searchText={searchText}
               setSearchText={setSearchText}
+              filterValues={filterValues}
+              setFilterValues={setFilterValues}
             />
           }
         />

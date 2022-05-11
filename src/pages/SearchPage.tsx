@@ -7,15 +7,20 @@ import { SearchBar } from '../components/SearchBar';
 import { BusinessEntry } from '../types/BusinessTypes';
 
 type SearchPageProps = {
-  setAdvancedFilterValues: React.Dispatch<React.SetStateAction<string[]>>;
+  searchText: string;
   setSearchText: React.Dispatch<React.SetStateAction<string>>;
+  setAdvancedFilterValues: React.Dispatch<React.SetStateAction<string[]>>;
+  filterValues: string[];
+  setFilterValues: React.Dispatch<React.SetStateAction<string[]>>;
 };
 
 export const SearchPage: React.FC<SearchPageProps> = ({
+  searchText,
   setSearchText,
   setAdvancedFilterValues,
+  filterValues,
+  setFilterValues,
 }) => {
-  const [filterValues, setFilterValues] = useState<string[]>([] as string[]);
   const [searchComponent, setSearchComponent] = useState<string>('basic');
   let navigate = useNavigate();
 
@@ -27,17 +32,18 @@ export const SearchPage: React.FC<SearchPageProps> = ({
       >
         Find small businesses near you that support your values
       </p>
-      <SearchBar setSearchText={setSearchText} />
+      <SearchBar searchText={searchText} setSearchText={setSearchText} />
       <br />
       {searchComponent === 'basic' ? (
         <BasicFilter
+          filterValues={filterValues}
+          setFilterValues={setFilterValues}
           setAdvancedFilterValues={setAdvancedFilterValues}
           searchComponent={searchComponent}
           setSearchComponent={setSearchComponent}
         />
       ) : (
         <AdvancedSearch
-          filterValues={filterValues}
           setValues={setAdvancedFilterValues}
           searchComponent={searchComponent}
           setSearchComponent={setSearchComponent}
