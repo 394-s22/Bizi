@@ -1,12 +1,12 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
-import './App.css';
+import { useEffect, useState } from 'react';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
-import { BusinessEntry } from './types/BusinessTypes';
-import { useData } from './utilities/firebase';
-import { useState, useEffect } from 'react';
+import './App.css';
+import { NavBar } from './components/NavBar';
 import { Results } from './pages/Results';
 import { SearchPage } from './pages/SearchPage';
-import { NavBar } from './components/NavBar';
+import { BusinessEntry } from './types/BusinessTypes';
+import { useData } from './utilities/firebase';
 
 const App = () => {
   // state variables
@@ -26,24 +26,23 @@ const App = () => {
     const advancedFilteredBusinesses = Object.values(businessData).filter(
       (business) => {
         for (const value of advancedFilterValues) {
-          if (
-            business.hasOwnProperty('Initiatives') &&
-            business.Initiatives.includes(value)
-          ) {
+          if (business.Initiatives?.includes(value)) {
             return true;
           }
         }
         return false;
       }
     );
-  
+
     const filteredText = searchText.split(' ');
-  
+
     const intersect = (keywords: Array<string>, tags: Array<string>) =>
       keywords.filter((keyword) => tags.some((tag) => tag.includes(keyword)));
-  
+
     const finalFilteredBusinesses = Object.values(
-      advancedFilterValues.length > 0 ? advancedFilteredBusinesses : businessData
+      advancedFilterValues.length > 0
+        ? advancedFilteredBusinesses
+        : businessData
     ).filter(
       (business) =>
         intersect(
@@ -54,11 +53,8 @@ const App = () => {
         ).length > 0
     );
     setFilteredData(finalFilteredBusinesses);
-    // console.log('searchText:', searchText);
-    // console.log('advancedFilterValues:', advancedFilterValues);
-    // console.log(finalFilteredBusinesses);
-  }, [searchText, advancedFilterValues]);
-  
+  }, [searchText, advancedFilterValues, businessData]);
+
   // returned page
   return (
     <Router>
@@ -77,7 +73,13 @@ const App = () => {
         />
         <Route
           path='/results'
-          element={<Results businessList={filteredData} />}
+          element={
+            <Results
+              businessList={filteredData}
+              searchText={searchText}
+              setSearchText={setSearchText}
+            />
+          }
         />
         <Route path='/advanced-search' />
       </Routes>
