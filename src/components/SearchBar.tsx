@@ -1,4 +1,4 @@
-import { Form, Stack } from 'react-bootstrap';
+import { Form, Stack } from "react-bootstrap";
 
 type SearchBarProps = {
   searchText: string;
@@ -10,15 +10,15 @@ export const SearchBar: React.FC<SearchBarProps> = ({
   setSearchText,
 }) => {
   return (
-    <Stack style={{ width: '80%', margin: 'auto' }} direction='horizontal'>
+    <Stack style={{ width: "80%", margin: "auto" }} direction="horizontal">
       <Form.Control
-        className='me-auto'
-        placeholder='Search Keywords'
+        className="me-auto"
+        placeholder="Search Keywords"
         value={searchText}
         onChange={(e) => {
           setSearchText(e.target.value);
         }}
-        style={{ backgroundColor: 'lightgrey' }}
+        style={{ backgroundColor: "lightgrey" }}
       />
     </Stack>
   );

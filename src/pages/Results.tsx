@@ -1,7 +1,7 @@
-import React from 'react';
-import { BusinessList } from '../components/BusinessList';
-import { SearchBar } from '../components/SearchBar';
-import { BusinessEntry } from '../types/BusinessTypes';
+import React from "react";
+import { BusinessList } from "../components/BusinessList";
+import { SearchBar } from "../components/SearchBar";
+import { BusinessEntry } from "../types/BusinessTypes";
 
 type ResultsProps = {
   businessList: BusinessEntry[];
@@ -16,7 +16,7 @@ export const Results: React.FC<ResultsProps> = ({
 }) => {
   return (
     <>
-      <div className='my-3'>
+      <div className="my-3">
         <SearchBar setSearchText={setSearchText} searchText={searchText} />
       </div>
       {businessList.length > 0 ? (
@@ -24,8 +24,8 @@ export const Results: React.FC<ResultsProps> = ({
           <BusinessList businessList={businessList} />
         </div>
       ) : (
-        <div className='d-flex justify-content-center align-items-center vh-100'>
-          <p style={{ color: 'grey', fontSize: 'large' }}>
+        <div className="d-flex justify-content-center align-items-center vh-100">
+          <p style={{ color: "grey", fontSize: "large" }}>
             No results found . . .
           </p>
         </div>
