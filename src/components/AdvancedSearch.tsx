@@ -1,5 +1,6 @@
-import { Button, ToggleButton, ToggleButtonGroup } from "react-bootstrap";
-import { FaAngleLeft } from "react-icons/fa";
+import { Button, ToggleButton, ToggleButtonGroup } from 'react-bootstrap';
+import { FaAngleLeft } from 'react-icons/fa';
+import valueData from '../data/values.json';
 
 type AdvancedSearchProps = {
   searchComponent: string;
@@ -8,249 +9,68 @@ type AdvancedSearchProps = {
   setAdvancedFilterValues: React.Dispatch<React.SetStateAction<string[]>>;
 };
 
+const valueDictionary: { [key: string]: string[] } = valueData;
+
 export const AdvancedSearch = (props: AdvancedSearchProps) => {
+  const buttonStyle: React.CSSProperties = {
+    backgroundColor: '#ddd',
+    border: 'none',
+    color: 'black',
+    padding: '5px 10px',
+    textAlign: 'center',
+    margin: '2px 1px',
+    borderRadius: '16px',
+  };
+
+  const toggleButton = (val: string) => {
+    const state = props.advancedFilterValues.includes(val);
+    let result = props.advancedFilterValues;
+    if (state) {
+      result = result.filter((v) => v !== val);
+    } else result = result.concat(val);
+    props.setAdvancedFilterValues(result);
+  };
+
   return (
     <>
-      <Button variant="light" onClick={() => props.setSearchComponent("basic")}>
-        <FaAngleLeft />
-        Back to Quick Filter
-      </Button>
-      <br />
-      <ul>
-        <h3>Diversity</h3>
-        <ToggleButtonGroup
-          type="checkbox"
-          size="sm"
-          className="mb-2"
-          style={{ flexWrap: "wrap", width: "90%" }}
-          onChange={(vals: string[]) =>
-            props.setAdvancedFilterValues(
-              props.advancedFilterValues.concat(vals)
-            )
-          }
+      <div className='mx-2'>
+        <Button
+          variant='light'
+          onClick={() => props.setSearchComponent('basic')}
         >
-          <ToggleButton
-            id="family_owned"
-            active={props.advancedFilterValues.includes("Family Owned")}
-            variant="outline-secondary"
-            value={"Family Owned"}
-          >
-            Family Owned
-          </ToggleButton>
-          <ToggleButton
-            id="female_owned"
-            active={props.advancedFilterValues.includes("Female Owned")}
-            variant="outline-secondary"
-            value={"Female Owned"}
-          >
-            Female Owned
-          </ToggleButton>
-          <ToggleButton
-            id="minority_owned"
-            active={props.advancedFilterValues.includes("Minority Owned")}
-            variant="outline-secondary"
-            value={"Minority Owned"}
-          >
-            Minority Owned
-          </ToggleButton>
-          <ToggleButton
-            id="lgbtq_owned"
-            active={props.advancedFilterValues.includes("LGBTQ Owned")}
-            variant="outline-secondary"
-            value={"LGBTQ Owned"}
-          >
-            LGBTQ Owned
-          </ToggleButton>
-          <ToggleButton
-            id="black_owned"
-            active={props.advancedFilterValues.includes("Black Owned")}
-            variant="outline-secondary"
-            value={"Black Owned"}
-          >
-            Black Owned
-          </ToggleButton>
-          <ToggleButton
-            id="wheelchair_friendly"
-            active={props.advancedFilterValues.includes("Wheelchair Friendly")}
-            variant="outline-secondary"
-            value={"Wheelchair Friendly"}
-          >
-            Wheelchair Friendly
-          </ToggleButton>
-        </ToggleButtonGroup>
-
-        <h3>Community</h3>
-        <ToggleButtonGroup
-          type="checkbox"
-          size="sm"
-          className="mb-2"
-          style={{ flexWrap: "wrap", width: "90%" }}
-          onChange={(vals: string[]) =>
-            props.setAdvancedFilterValues(
-              props.advancedFilterValues.concat(vals)
-            )
-          }
-        >
-          <ToggleButton
-            id="charitable_donations"
-            active={props.advancedFilterValues.includes("Charitable Donations")}
-            variant="outline-secondary"
-            value={"Charitable Donations"}
-          >
-            Charitable Donations
-          </ToggleButton>
-          <ToggleButton
-            id="community_engagement"
-            active={props.advancedFilterValues.includes("Community Engagement")}
-            variant="outline-secondary"
-            value={"Community Engagement"}
-          >
-            Community Engagement
-          </ToggleButton>
-          <ToggleButton
-            id="volunteer_efforts"
-            active={props.advancedFilterValues.includes("Volunteer Efforts")}
-            variant="outline-secondary"
-            value={"Volunteer Efforts"}
-          >
-            Volunteer Efforts
-          </ToggleButton>
-        </ToggleButtonGroup>
-
-        <h3>Sustainability</h3>
-        <ToggleButtonGroup
-          type="checkbox"
-          size="sm"
-          className="mb-2"
-          style={{ flexWrap: "wrap", width: "90%" }}
-          onChange={(vals: string[]) =>
-            props.setAdvancedFilterValues(
-              props.advancedFilterValues.concat(vals)
-            )
-          }
-        >
-          <ToggleButton
-            id="recycling"
-            active={props.advancedFilterValues.includes("Recycling")}
-            variant="outline-secondary"
-            value={"Recycling"}
-          >
-            Recycling
-          </ToggleButton>
-          <ToggleButton
-            id="waste_reduction"
-            active={props.advancedFilterValues.includes("Waste Reduction")}
-            variant="outline-secondary"
-            value={"Waste Reduction"}
-          >
-            Waste Reduction
-          </ToggleButton>
-          <ToggleButton
-            id="renewable_energy_sources"
-            active={props.advancedFilterValues.includes(
-              "Renewable Energy Sources"
-            )}
-            variant="outline-secondary"
-            value={"Renewable Energy Sources"}
-          >
-            Renewable Energy Sources
-          </ToggleButton>
-          <ToggleButton
-            id="LEED_certified"
-            active={props.advancedFilterValues.includes("LEED Certified")}
-            variant="outline-secondary"
-            value={"LEED Certified"}
-          >
-            LEED Certified
-          </ToggleButton>
-          <ToggleButton
-            id="sustainable_products"
-            active={props.advancedFilterValues.includes("Sustainable Products")}
-            variant="outline-secondary"
-            value={"Sustainable Products"}
-          >
-            Sustainable Products
-          </ToggleButton>
-          <ToggleButton
-            id="vegan_friendly"
-            active={props.advancedFilterValues.includes("Vegan Friendly")}
-            variant="outline-secondary"
-            value={"Vegan Friendly"}
-          >
-            Vegan Friendly
-          </ToggleButton>
-          <ToggleButton
-            id="vegetarian_friendly"
-            active={props.advancedFilterValues.includes("Vegetarian Friendly")}
-            variant="outline-secondary"
-            value={"Vegetarian Friendly"}
-          >
-            Vegetarian Friendly
-          </ToggleButton>
-          <ToggleButton
-            id="vegan_products"
-            active={props.advancedFilterValues.includes("Vegan Products")}
-            variant="outline-secondary"
-            value={"Vegan Products"}
-          >
-            Vegan Products
-          </ToggleButton>
-          <ToggleButton
-            id="vintage"
-            active={props.advancedFilterValues.includes("Vintage")}
-            variant="outline-secondary"
-            value={"Vintage"}
-          >
-            Vintage
-          </ToggleButton>
-        </ToggleButtonGroup>
-
-        <h3>Ethical</h3>
-        <ToggleButtonGroup
-          type="checkbox"
-          size="sm"
-          className="mb-2"
-          style={{ flexWrap: "wrap", width: "90%" }}
-          onChange={(vals: string[]) =>
-            props.setAdvancedFilterValues(
-              props.advancedFilterValues.concat(vals)
-            )
-          }
-        >
-          <ToggleButton
-            id="ethical_supply_chain"
-            active={props.advancedFilterValues.includes("Ethical Supply Chain")}
-            variant="outline-secondary"
-            value={"Ethical Supply Chain"}
-          >
-            Ethical Supply Chain
-          </ToggleButton>
-          <ToggleButton
-            id="handmade"
-            active={props.advancedFilterValues.includes("Handmade")}
-            variant="outline-secondary"
-            value={"Handmade"}
-          >
-            Handmade
-          </ToggleButton>
-          <ToggleButton
-            id="animal_cruelty_free"
-            active={props.advancedFilterValues.includes("Animal Cruelty Free")}
-            variant="outline-secondary"
-            value={"Animal Cruelty Free"}
-          >
-            Animal Cruelty Free
-          </ToggleButton>
-          <ToggleButton
-            id="locally_sourced"
-            active={props.advancedFilterValues.includes("Locally Sourced")}
-            variant="outline-secondary"
-            value={"Locally Sourced"}
-          >
-            Locally Sourced
-          </ToggleButton>
-        </ToggleButtonGroup>
-      </ul>
+          <FaAngleLeft />
+          Back to Quick Filter
+        </Button>
+      </div>
+      {Object.entries(valueDictionary).map((entry, catID) => {
+        return (
+          <div key={catID} className='mx-4 mb-2'>
+            <h1>{entry[0]}</h1>
+            <ToggleButtonGroup type='checkbox' style={{ flexWrap: 'wrap' }}>
+              {entry[1].map((value, valID) => {
+                const state = props.advancedFilterValues.includes(value);
+                return (
+                  <ToggleButton
+                    key={valID}
+                    className='mx-1'
+                    style={{
+                      ...buttonStyle,
+                      backgroundColor: state ? 'black' : '#ddd',
+                      color: state ? 'white' : 'black',
+                    }}
+                    value={value}
+                    onClick={() => {
+                      toggleButton(value);
+                    }}
+                  >
+                    {value}
+                  </ToggleButton>
+                );
+              })}
+            </ToggleButtonGroup>
+          </div>
+        );
+      })}
     </>
   );
 };
