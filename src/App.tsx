@@ -17,6 +17,9 @@ const App = () => {
   const [advancedFilterValues, setAdvancedFilterValues] = useState<string[]>(
     [] as string[]
   );
+  const [basicFilterValues, setBasicFilterValues] = useState<string[]>(
+    [] as string[]
+  );
   const [filterValues, setFilterValues] = useState<string[]>([] as string[]);
 
   // filtering businesses
@@ -69,6 +72,7 @@ const App = () => {
               setSearchText={setSearchText}
               filterValues={filterValues}
               setFilterValues={setFilterValues}
+              setBasicFilterValues={setBasicFilterValues}
             />
           }
         />

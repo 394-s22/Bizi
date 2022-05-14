@@ -3,6 +3,7 @@ import { FaAngleLeft } from 'react-icons/fa';
 import valueData from '../data/values.json';
 
 type AdvancedSearchProps = {
+  setBasicFilterValues: React.Dispatch<React.SetStateAction<string[]>>;
   searchComponent: string;
   setSearchComponent: React.Dispatch<React.SetStateAction<string>>;
   advancedFilterValues: string[];
@@ -28,8 +29,15 @@ export const AdvancedSearch = (props: AdvancedSearchProps) => {
     if (state) {
       result = result.filter((v) => v !== val);
     } else result = result.concat(val);
+    console.log("state", state);
+    console.log("result", result);
+    console.log("val", val);
     props.setAdvancedFilterValues(result);
   };
+
+  const changeBasicFilter = (group_elements: string[]) => {
+    
+  }
 
   return (
     <>
@@ -46,7 +54,13 @@ export const AdvancedSearch = (props: AdvancedSearchProps) => {
         return (
           <div key={catID} className='mx-4 mb-2'>
             <h1>{entry[0]}</h1>
-            <ToggleButtonGroup type='checkbox' style={{ flexWrap: 'wrap' }}>
+            <ToggleButtonGroup 
+              type='checkbox'
+              style={{ flexWrap: 'wrap' }}
+              //onChange={
+                //
+              //}
+            >
               {entry[1].map((value, valID) => {
                 const state = props.advancedFilterValues.includes(value);
                 return (

@@ -13,6 +13,7 @@ type SearchPageProps = {
   setAdvancedFilterValues: React.Dispatch<React.SetStateAction<string[]>>;
   filterValues: string[];
   setFilterValues: React.Dispatch<React.SetStateAction<string[]>>;
+  setBasicFilterValues: React.Dispatch<React.SetStateAction<string[]>>;
 };
 
 export const SearchPage: React.FC<SearchPageProps> = ({
@@ -22,6 +23,7 @@ export const SearchPage: React.FC<SearchPageProps> = ({
   setAdvancedFilterValues,
   filterValues,
   setFilterValues,
+  setBasicFilterValues
 }) => {
   const [searchComponent, setSearchComponent] = useState<string>("basic");
   let navigate = useNavigate();
@@ -50,6 +52,7 @@ export const SearchPage: React.FC<SearchPageProps> = ({
           setAdvancedFilterValues={setAdvancedFilterValues}
           searchComponent={searchComponent}
           setSearchComponent={setSearchComponent}
+          setBasicFilterValues={setBasicFilterValues}
         />
       )}
       <div className="text-center mt-3 mb-5">
