@@ -52,7 +52,7 @@ export const SearchPage: React.FC<SearchPageProps> = ({
           setSearchComponent={setSearchComponent}
         />
       )}
-      <div className="text-center mb-5">
+      <div className="text-center mt-3 mb-5">
         <Button
           className="mb-3"
           variant="secondary"

@@ -34,7 +34,6 @@ export const BasicFilter = (props: BasicFilterProps) => {
           onChange={(val: string[]) => {
             props.setAdvancedFilterValues(getAdvancedFilters(val));
             props.setFilterValues(val);
-            console.log(val);
           }}
         >
           <ToggleButton
