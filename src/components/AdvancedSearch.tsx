@@ -3,7 +3,8 @@ import { FaAngleLeft } from 'react-icons/fa';
 import valueData from '../data/values.json';
 
 type AdvancedSearchProps = {
-  setBasicFilterValues: React.Dispatch<React.SetStateAction<string[]>>;
+  filterValues: string[],
+  setFilterValues: React.Dispatch<React.SetStateAction<string[]>>;
   searchComponent: string;
   setSearchComponent: React.Dispatch<React.SetStateAction<string>>;
   advancedFilterValues: string[];
@@ -29,14 +30,16 @@ export const AdvancedSearch = (props: AdvancedSearchProps) => {
     if (state) {
       result = result.filter((v) => v !== val);
     } else result = result.concat(val);
-    console.log("state", state);
-    console.log("result", result);
-    console.log("val", val);
     props.setAdvancedFilterValues(result);
   };
 
-  const changeBasicFilter = (group_elements: string[]) => {
+  const changeBasicFilter = (group_elements: string[], basic: string) => {
+    const b = group_elements.every(e => props.advancedFilterValues.includes(e));
+    if (b) {
+      props.setFilterValues([basic]);
+    }
     
+    console.log(props.filterValues);
   }
 
   return (
@@ -57,9 +60,10 @@ export const AdvancedSearch = (props: AdvancedSearchProps) => {
             <ToggleButtonGroup 
               type='checkbox'
               style={{ flexWrap: 'wrap' }}
-              //onChange={
-                //
-              //}
+              onChange={() => {
+                console.log("on change works");
+                changeBasicFilter(entry[1], entry[0]);
+              }}
             >
               {entry[1].map((value, valID) => {
                 const state = props.advancedFilterValues.includes(value);
@@ -75,6 +79,7 @@ export const AdvancedSearch = (props: AdvancedSearchProps) => {
                     value={value}
                     onClick={() => {
                       toggleButton(value);
+                      //changeBasicFilter(entry[1], entry[0]);
                     }}
                   >
                     {value}
