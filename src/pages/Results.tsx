@@ -1,6 +1,7 @@
 import React from "react";
 import { BusinessList } from "../components/BusinessList";
 import { SearchBar } from "../components/SearchBar";
+import { BiziMap } from "../components/BiziMap";
 import { BusinessEntry } from "../types/BusinessTypes";
 
 type ResultsProps = {
@@ -19,6 +20,7 @@ export const Results: React.FC<ResultsProps> = ({
       <div className="my-3">
         <SearchBar setSearchText={setSearchText} searchText={searchText} />
       </div>
+      <BiziMap />
       {businessList.length > 0 ? (
         <div className="mb-5">
           <BusinessList businessList={businessList} />
