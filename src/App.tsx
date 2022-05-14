@@ -79,6 +79,8 @@ const App = () => {
               businessList={filteredData}
               searchText={searchText}
               setSearchText={setSearchText}
+              filterValues={filterValues}
+              advancedFilterValues={advancedFilterValues}
             />
           }
         />
