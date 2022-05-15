@@ -24,6 +24,7 @@ export const SearchPage: React.FC<SearchPageProps> = ({
   setFilterValues,
 }) => {
   const [searchComponent, setSearchComponent] = useState<string>("basic");
+  const [text, setText] = useState(""); // for Let's Go
   let navigate = useNavigate();
 
   return (
@@ -34,7 +35,12 @@ export const SearchPage: React.FC<SearchPageProps> = ({
       >
         Find small businesses near you that support your values
       </p>
-      <SearchBar searchText={searchText} setSearchText={setSearchText} />
+      <SearchBar
+        text={text}
+        setText={setText}
+        searchText={searchText}
+        setSearchText={setSearchText}
+      />
       <br />
       {searchComponent === "basic" ? (
         <BasicFilter
@@ -62,6 +68,7 @@ export const SearchPage: React.FC<SearchPageProps> = ({
           active
           onClick={() => {
             navigate("/results");
+            setSearchText(text);
           }}
         >
           Let's go!
