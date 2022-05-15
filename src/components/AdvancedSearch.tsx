@@ -1,3 +1,4 @@
+import { useEffect } from 'react';
 import { Button, ToggleButton, ToggleButtonGroup } from 'react-bootstrap';
 import { FaAngleLeft } from 'react-icons/fa';
 import valueData from '../data/values.json';
@@ -24,6 +25,19 @@ export const AdvancedSearch = (props: AdvancedSearchProps) => {
     borderRadius: '16px',
   };
 
+  useEffect(() => {
+    let basicFilters: string[] = [];
+    for (const [basic, group_elements] of Object.entries(valueDictionary)) {
+      const basicFilter = changeBasicFilter(group_elements, basic);
+      if (basicFilter) basicFilters.push(basic);
+    }
+    props.setFilterValues(basicFilters);
+  }, [props.advancedFilterValues]);
+
+  const changeBasicFilter = (group_elements: string[], basic: string) => {
+    return group_elements.every(e => props.advancedFilterValues.includes(e));
+  }
+
   const toggleButton = (val: string) => {
     const state = props.advancedFilterValues.includes(val);
     let result = props.advancedFilterValues;
@@ -32,15 +46,6 @@ export const AdvancedSearch = (props: AdvancedSearchProps) => {
     } else result = result.concat(val);
     props.setAdvancedFilterValues(result);
   };
-
-  const changeBasicFilter = (group_elements: string[], basic: string) => {
-    const b = group_elements.every(e => props.advancedFilterValues.includes(e));
-    if (b) {
-      props.setFilterValues([basic]);
-    }
-    
-    console.log(props.filterValues);
-  }
 
   return (
     <>
@@ -60,10 +65,6 @@ export const AdvancedSearch = (props: AdvancedSearchProps) => {
             <ToggleButtonGroup 
               type='checkbox'
               style={{ flexWrap: 'wrap' }}
-              onChange={() => {
-                console.log("on change works");
-                changeBasicFilter(entry[1], entry[0]);
-              }}
             >
               {entry[1].map((value, valID) => {
                 const state = props.advancedFilterValues.includes(value);
@@ -79,7 +80,6 @@ export const AdvancedSearch = (props: AdvancedSearchProps) => {
                     value={value}
                     onClick={() => {
                       toggleButton(value);
-                      //changeBasicFilter(entry[1], entry[0]);
                     }}
                   >
                     {value}
