@@ -1,7 +1,7 @@
-import { GoogleMap, LoadScript, Marker } from '@react-google-maps/api';
+import { GoogleMap, useLoadScript, Marker } from '@react-google-maps/api';
 import mapStyles from '../data/mapStyles';
 import { BusinessEntry } from '../types/BusinessTypes';
-import { useEffect } from 'react';
+import { useState, useEffect } from 'react';
 
 const containerStyle = {
   width: '100%',
@@ -24,12 +24,20 @@ type BiziMapProps = {
 };
 
 export const BiziMap: React.FC<BiziMapProps> = ({ businessList }) => {
+
   useEffect(() => {
     console.log('businesses change');
-  }, []);
+    console.log(businessList);;
+  }, [businessList]);
+
+  const {isLoaded, loadError} = useLoadScript({
+    googleMapsApiKey: process.env.REACT_APP_GOOGLE_MAPS_API_KEY!
+  })
+
+  if (loadError) return <p>Error loading maps</p>;
+  if (!isLoaded) return <p>'Loading maps'</p>;
 
   return (
-    <LoadScript googleMapsApiKey={process.env.REACT_APP_GOOGLE_MAPS_API_KEY!}>
       <GoogleMap
         mapContainerStyle={containerStyle}
         center={center}
@@ -39,13 +47,12 @@ export const BiziMap: React.FC<BiziMapProps> = ({ businessList }) => {
         {businessList.map((business, idx) => {
           return (
             <Marker
-              key={idx}
+              key={business.Title}
               position={business.GeoLocation ? business.GeoLocation : center}
             ></Marker>
           );
         })}
       </GoogleMap>
-    </LoadScript>
   );
 };
 

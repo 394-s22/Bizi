@@ -40,12 +40,12 @@ const App = () => {
           );
         })
       );
-
+      console.log(updatedBusinesses);
       setBusinessData(updatedBusinesses);
     };
 
     setLocations();
-  }, [businessData]);
+  }, [loadingBusinesses]);
 
   // filtering businesses
   useEffect(() => {
