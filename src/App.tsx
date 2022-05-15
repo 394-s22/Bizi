@@ -1,23 +1,51 @@
-import "bootstrap/dist/css/bootstrap.min.css";
-import { useEffect, useState } from "react";
-import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
-import "./App.css";
-import { NavBar } from "./components/NavBar";
-import { Results } from "./pages/Results";
-import { SearchPage } from "./pages/SearchPage";
-import { BusinessEntry } from "./types/BusinessTypes";
-import { useData } from "./utilities/firebase";
+import 'bootstrap/dist/css/bootstrap.min.css';
+import { useEffect, useState } from 'react';
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import './App.css';
+import { NavBar } from './components/NavBar';
+import { Results } from './pages/Results';
+import { SearchPage } from './pages/SearchPage';
+import { BusinessEntry } from './types/BusinessTypes';
+import { useData } from './utilities/firebase';
+// @ts-ignore
+import Geocode from 'react-geocode';
 
 const App = () => {
   // state variables
   const [businessData, setBusinessData, loadingBusinesses] =
-    useData<BusinessEntry[]>("/");
+    useData<BusinessEntry[]>('/');
   const [filteredData, setFilteredData] = useState<BusinessEntry[]>([]);
-  const [searchText, setSearchText] = useState<string>("");
+  const [searchText, setSearchText] = useState<string>('');
   const [advancedFilterValues, setAdvancedFilterValues] = useState<string[]>(
     [] as string[]
   );
   const [filterValues, setFilterValues] = useState<string[]>([] as string[]);
+
+  useEffect(() => {
+    if (loadingBusinesses || !businessData) return;
+    Geocode.setApiKey(process.env.REACT_APP_GOOGLE_MAPS_API_KEY!);
+    let updatedBusinesses =  businessData;
+
+    const setLocations = async () => {
+      await Promise.all(
+        Object.entries(updatedBusinesses).map(async (business) => {
+          console.log('geocoding: ' + business[1].Title);
+          return new Promise((resolve, reject) =>
+            Geocode.fromAddress(business[1].Address).then((response: any) => {
+              business[1].GeoLocation = response.results[0].geometry.location;
+              //console.log(business.GeoLocation);
+              resolve(true);
+            },
+            (error: any) => {console.log(error); resolve(true);})
+          );
+        })
+      );
+
+      setBusinessData(updatedBusinesses);
+    };
+
+    setLocations();
+  }, [businessData]);
 
   // filtering businesses
   useEffect(() => {
@@ -34,7 +62,7 @@ const App = () => {
       }
     );
 
-    const filteredText = searchText.split(" ");
+    const filteredText = searchText.split(' ');
 
     const intersect = (keywords: Array<string>, tags: Array<string>) =>
       keywords.filter((keyword) => tags.some((tag) => tag.includes(keyword)));
@@ -47,7 +75,7 @@ const App = () => {
       (business) =>
         intersect(
           filteredText.map((text) => text.toLowerCase()),
-          business["Search Tags"]
+          business['Search Tags']
             .concat([business.Title, business.Description])
             .map((text) => text.toLowerCase())
         ).length > 0
@@ -55,12 +83,14 @@ const App = () => {
     setFilteredData(finalFilteredBusinesses);
   }, [searchText, advancedFilterValues, businessData]);
 
+  //console.log(businessData);
+
   // returned page
   return (
     <Router>
       <Routes>
         <Route
-          path="/"
+          path='/'
           element={
             <SearchPage
               advancedFilterValues={advancedFilterValues}
@@ -73,7 +103,7 @@ const App = () => {
           }
         />
         <Route
-          path="/results"
+          path='/results'
           element={
             <Results
               businessList={filteredData}
@@ -82,7 +112,7 @@ const App = () => {
             />
           }
         />
-        <Route path="/advanced-search" />
+        <Route path='/advanced-search' />
       </Routes>
       <NavBar />
     </Router>
