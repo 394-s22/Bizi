@@ -20,6 +20,7 @@ const App = () => {
     [] as string[]
   );
   const [filterValues, setFilterValues] = useState<string[]>([] as string[]);
+  const [searchComponent, setSearchComponent] = useState<string>("basic");
 
   useEffect(() => {
     const setLocations = async () => {
@@ -100,6 +101,8 @@ const App = () => {
               setSearchText={setSearchText}
               filterValues={filterValues}
               setFilterValues={setFilterValues}
+              searchComponent={searchComponent}
+              setSearchComponent={setSearchComponent}
             />
           }
         />
@@ -110,12 +113,14 @@ const App = () => {
               businessList={filteredData}
               searchText={searchText}
               setSearchText={setSearchText}
+              filterValues={filterValues}
+              advancedFilterValues={advancedFilterValues}
             />
           }
         />
         <Route path='/advanced-search' />
       </Routes>
-      <NavBar />
+      <NavBar setSearchComponent={setSearchComponent} />
     </Router>
   );
 };

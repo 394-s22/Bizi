@@ -8,13 +8,18 @@ type ResultsProps = {
   businessList: BusinessEntry[];
   searchText: string;
   setSearchText: React.Dispatch<React.SetStateAction<string>>;
+  filterValues: string[];
+  advancedFilterValues: string[];
 };
 
 export const Results: React.FC<ResultsProps> = ({
   businessList,
   searchText,
   setSearchText,
+  filterValues,
+  advancedFilterValues
 }) => {
+  //const [text, setText] = useState(''); // for Let's Go
   return (
     <>
       <div
@@ -25,8 +30,11 @@ export const Results: React.FC<ResultsProps> = ({
       </div>
       <BiziMap businessList={businessList}/>
       {businessList.length > 0 ? (
-        <div className='mb-5'>
-          <BusinessList businessList={businessList} />
+        <div className="mb-5">
+          <BusinessList
+            businessList={businessList}
+            filterValues={filterValues}
+            advancedFilterValues={advancedFilterValues} />
         </div>
       ) : (
         <div className='d-flex justify-content-center align-items-center vh-100'>

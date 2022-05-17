@@ -13,6 +13,8 @@ type SearchPageProps = {
   setAdvancedFilterValues: React.Dispatch<React.SetStateAction<string[]>>;
   filterValues: string[];
   setFilterValues: React.Dispatch<React.SetStateAction<string[]>>;
+  searchComponent: string;
+  setSearchComponent: React.Dispatch<React.SetStateAction<string>>;
 };
 
 export const SearchPage: React.FC<SearchPageProps> = ({
@@ -22,8 +24,11 @@ export const SearchPage: React.FC<SearchPageProps> = ({
   setAdvancedFilterValues,
   filterValues,
   setFilterValues,
+  searchComponent,
+  setSearchComponent,
 }) => {
-  const [searchComponent, setSearchComponent] = useState<string>("basic");
+  //const [searchComponent, setSearchComponent] = useState<string>("basic");
+  const [text, setText] = useState(""); // for Let's Go
   let navigate = useNavigate();
 
   return (
@@ -34,7 +39,12 @@ export const SearchPage: React.FC<SearchPageProps> = ({
       >
         Find small businesses near you that support your values
       </p>
-      <SearchBar searchText={searchText} setSearchText={setSearchText} />
+      <SearchBar
+        text={text}
+        setText={setText}
+        searchText={searchText}
+        setSearchText={setSearchText}
+      />
       <br />
       {searchComponent === "basic" ? (
         <BasicFilter
@@ -50,6 +60,8 @@ export const SearchPage: React.FC<SearchPageProps> = ({
           setAdvancedFilterValues={setAdvancedFilterValues}
           searchComponent={searchComponent}
           setSearchComponent={setSearchComponent}
+          filterValues={filterValues}
+          setFilterValues={setFilterValues}
         />
       )}
       <div className="text-center mt-3 mb-5">
@@ -60,6 +72,7 @@ export const SearchPage: React.FC<SearchPageProps> = ({
           active
           onClick={() => {
             navigate("/results");
+            setSearchText(text);
           }}
         >
           Let's go!
