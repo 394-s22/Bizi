@@ -15,7 +15,7 @@ export const SearchBar: React.FC<SearchBarProps> = ({
         className="me-auto"
         placeholder="Search Keywords"
         value={searchText}
-        onChange={(e) => {
+        onChange={(e :React.ChangeEvent<HTMLInputElement>) => {
           setSearchText(e.target.value);
         }}
         style={{ backgroundColor: "lightgrey" }}

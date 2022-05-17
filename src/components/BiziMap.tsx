@@ -45,10 +45,12 @@ export const BiziMap: React.FC<BiziMapProps> = ({ businessList }) => {
         options={style}
       >
         {businessList.map((business, idx) => {
+          console.log(business.GeoLocation, idx);
+          if (!business.GeoLocation) return (<Marker key={business.Title} position={center}></Marker>);
           return (
             <Marker
               key={business.Title}
-              position={business.GeoLocation ? business.GeoLocation : center}
+              position={business.GeoLocation}
             ></Marker>
           );
         })}

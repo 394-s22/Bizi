@@ -22,11 +22,12 @@ const App = () => {
   const [filterValues, setFilterValues] = useState<string[]>([] as string[]);
 
   useEffect(() => {
-    if (loadingBusinesses || !businessData) return;
-    Geocode.setApiKey(process.env.REACT_APP_GOOGLE_MAPS_API_KEY!);
-    let updatedBusinesses =  businessData;
-
     const setLocations = async () => {
+      if (loadingBusinesses || !businessData) return;
+      Geocode.setApiKey(process.env.REACT_APP_GOOGLE_MAPS_API_KEY!);
+      let updatedBusinesses : BusinessEntry[] = [];
+      Object.values(businessData).forEach( entry => updatedBusinesses.push(Object.assign({}, entry)));
+
       await Promise.all(
         Object.entries(updatedBusinesses).map(async (business) => {
           console.log('geocoding: ' + business[1].Title);
@@ -44,7 +45,7 @@ const App = () => {
       setBusinessData(updatedBusinesses);
     };
 
-    setLocations();
+    setLocations().then(() => console.log('businesses updated'));
   }, [loadingBusinesses]);
 
   // filtering businesses
