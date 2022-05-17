@@ -1,4 +1,4 @@
-import React from "react";
+import { useState } from "react";
 import { BusinessList } from "../components/BusinessList";
 import { SearchBar } from "../components/SearchBar";
 import { BusinessEntry } from "../types/BusinessTypes";
@@ -18,6 +18,7 @@ export const Results: React.FC<ResultsProps> = ({
   filterValues,
   advancedFilterValues
 }) => {
+  //const [text, setText] = useState(''); // for Let's Go
   return (
     <>
       <div className="my-3">
