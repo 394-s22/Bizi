@@ -13,6 +13,8 @@ type SearchPageProps = {
   setAdvancedFilterValues: React.Dispatch<React.SetStateAction<string[]>>;
   filterValues: string[];
   setFilterValues: React.Dispatch<React.SetStateAction<string[]>>;
+  searchComponent: string;
+  setSearchComponent: React.Dispatch<React.SetStateAction<string>>;
 };
 
 export const SearchPage: React.FC<SearchPageProps> = ({
@@ -22,8 +24,10 @@ export const SearchPage: React.FC<SearchPageProps> = ({
   setAdvancedFilterValues,
   filterValues,
   setFilterValues,
+  searchComponent,
+  setSearchComponent,
 }) => {
-  const [searchComponent, setSearchComponent] = useState<string>("basic");
+  //const [searchComponent, setSearchComponent] = useState<string>("basic");
   const [text, setText] = useState(""); // for Let's Go
   let navigate = useNavigate();
 
