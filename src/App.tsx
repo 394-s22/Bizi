@@ -7,6 +7,7 @@ import { Results } from "./pages/Results";
 import { SearchPage } from "./pages/SearchPage";
 import { BusinessEntry } from "./types/BusinessTypes";
 import { useData } from "./utilities/firebase";
+import { filterBusinesses } from "./utilities/filtering";
 // @ts-ignore
 import Geocode from "react-geocode";
 
@@ -58,41 +59,8 @@ const App = () => {
 
   // filtering businesses
   useEffect(() => {
-    // app page selection
-    if (loadingBusinesses || !businessData) return;
-    const advancedFilteredBusinesses = Object.values(businessData).filter(
-      (business) => {
-        for (const value of advancedFilterValues) {
-          if (business.Initiatives?.includes(value)) {
-            return true;
-          }
-        }
-        return false;
-      }
-    );
-
-    const filteredText = searchText.split(" ");
-
-    const intersect = (keywords: Array<string>, tags: Array<string>) =>
-      keywords.filter((keyword) => tags.some((tag) => tag.includes(keyword)));
-
-    const finalFilteredBusinesses = Object.values(
-      advancedFilterValues.length > 0
-        ? advancedFilteredBusinesses
-        : businessData
-    ).filter(
-      (business) =>
-        intersect(
-          filteredText.map((text) => text.toLowerCase()),
-          business["Search Tags"]
-            .concat([business.Title, business.Description])
-            .map((text) => text.toLowerCase())
-        ).length > 0
-    );
-    setFilteredData(finalFilteredBusinesses);
+    filterBusinesses(loadingBusinesses, businessData, searchText, advancedFilterValues, setFilteredData);
   }, [searchText, advancedFilterValues, businessData]);
-
-  //console.log(businessData);
 
   // returned page
   return (
