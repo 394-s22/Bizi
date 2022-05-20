@@ -1,5 +1,10 @@
 import { useEffect } from "react";
-import { Button, ToggleButton, ToggleButtonGroup } from "react-bootstrap";
+import {
+  Accordion,
+  Button,
+  ToggleButton,
+  ToggleButtonGroup,
+} from "react-bootstrap";
 import { FaAngleLeft } from "react-icons/fa";
 import valueData from "../data/values.json";
 
@@ -58,7 +63,50 @@ export const AdvancedSearch = (props: AdvancedSearchProps) => {
           Back to Quick Filter
         </Button>
       </div>
-      {Object.entries(valueDictionary).map((entry, catID) => {
+      {
+        <Accordion alwaysOpen={true}>
+          {Object.entries(valueDictionary).map((entry, catID) => {
+            console.log("catID", catID);
+            console.log("entry", entry);
+            return (
+              <div key={catID} className="mx-4 mb-2">
+                <Accordion.Item eventKey={catID.toString()}>
+                  <Accordion.Header>{entry[0]}</Accordion.Header>
+                  <Accordion.Body>
+                    <ToggleButtonGroup
+                      type="checkbox"
+                      style={{ flexWrap: "wrap" }}
+                    >
+                      {entry[1].map((value, valID) => {
+                        const state =
+                          props.advancedFilterValues.includes(value);
+                        return (
+                          <ToggleButton
+                            key={valID}
+                            className="mx-1"
+                            style={{
+                              ...buttonStyle,
+                              backgroundColor: state ? "black" : "#ddd",
+                              color: state ? "white" : "black",
+                            }}
+                            value={value}
+                            onClick={() => {
+                              toggleButton(value);
+                            }}
+                          >
+                            {value}
+                          </ToggleButton>
+                        );
+                      })}
+                    </ToggleButtonGroup>
+                  </Accordion.Body>
+                </Accordion.Item>
+              </div>
+            );
+          })}
+        </Accordion>
+      }
+      {/* {Object.entries(valueDictionary).map((entry, catID) => {
         return (
           <div key={catID} className="mx-4 mb-2">
             <h1>{entry[0]}</h1>
@@ -86,7 +134,7 @@ export const AdvancedSearch = (props: AdvancedSearchProps) => {
             </ToggleButtonGroup>
           </div>
         );
-      })}
+      })} */}
     </>
   );
 };
