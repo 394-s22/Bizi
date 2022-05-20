@@ -8,6 +8,7 @@ import { SearchPage } from "./pages/SearchPage";
 import { BusinessEntry } from "./types/BusinessTypes";
 import { useData } from "./utilities/firebase";
 import { filterBusinesses } from "./utilities/filtering";
+import { setLocations } from "./utilities/map";
 // @ts-ignore
 import Geocode from "react-geocode";
 
@@ -22,39 +23,10 @@ const App = () => {
   );
   const [filterValues, setFilterValues] = useState<string[]>([] as string[]);
   const [searchComponent, setSearchComponent] = useState<string>("basic");
-
+  
+  // geocoding businesses (coordinates from addresses)
   useEffect(() => {
-    const setLocations = async () => {
-      if (loadingBusinesses || !businessData) return;
-      Geocode.setApiKey(process.env.REACT_APP_GOOGLE_MAPS_API_KEY!);
-      let updatedBusinesses: BusinessEntry[] = [];
-      Object.values(businessData).forEach((entry) =>
-        updatedBusinesses.push(Object.assign({}, entry))
-      );
-
-      await Promise.all(
-        Object.entries(updatedBusinesses).map(async (business) => {
-          console.log("geocoding: " + business[1].Title);
-          return new Promise((resolve, reject) =>
-            Geocode.fromAddress(business[1].Address).then(
-              (response: any) => {
-                business[1].GeoLocation = response.results[0].geometry.location;
-                //console.log(business.GeoLocation);
-                resolve(true);
-              },
-              (error: any) => {
-                console.log(error);
-                resolve(true);
-              }
-            )
-          );
-        })
-      );
-      console.log(updatedBusinesses);
-      setBusinessData(updatedBusinesses);
-    };
-
-    setLocations().then(() => console.log("businesses updated"));
+    setLocations(loadingBusinesses, businessData, setBusinessData).then(() => console.log("businesses updated"));
   }, [loadingBusinesses]);
 
   // filtering businesses
