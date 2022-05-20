@@ -2,6 +2,7 @@ import { useEffect } from "react";
 import {
   Accordion,
   Button,
+  Form,
   ToggleButton,
   ToggleButtonGroup,
 } from "react-bootstrap";
@@ -66,12 +67,13 @@ export const AdvancedSearch = (props: AdvancedSearchProps) => {
       {
         <Accordion alwaysOpen={true}>
           {Object.entries(valueDictionary).map((entry, catID) => {
-            console.log("catID", catID);
-            console.log("entry", entry);
             return (
               <div key={catID} className="mx-4 mb-2">
                 <Accordion.Item eventKey={catID.toString()}>
-                  <Accordion.Header>{entry[0]}</Accordion.Header>
+                  <Accordion.Header>
+                    <Form.Check className="mx-1" onClick={(e) => e.stopPropagation()}></Form.Check>
+                    {entry[0]}
+                  </Accordion.Header>
                   <Accordion.Body>
                     <ToggleButtonGroup
                       type="checkbox"
