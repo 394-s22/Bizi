@@ -20,16 +20,10 @@ export const SearchBar: React.FC<SearchBarProps> = ({
       <Form.Control
         className="me-auto"
         placeholder="Search Keywords"
-<<<<<<< HEAD
-        value={searchText}
-        onChange={(e :React.ChangeEvent<HTMLInputElement>) => {
-          setSearchText(e.target.value);
-=======
         value={text ? text : text2}
         onChange={(e) => {
           // setText may be undefined, use backup setText2
           setText ? setText(e.target.value) : setText2(e.target.value);
->>>>>>> master
         }}
         onKeyPress={(e) =>
           e.key === "Enter"
