@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import {
   Accordion,
   Button,
@@ -53,6 +53,20 @@ export const AdvancedSearch = (props: AdvancedSearchProps) => {
     props.setAdvancedFilterValues(result);
   };
 
+  const [checkboxStatus, setCheckboxStatus] = useState([false, false, false, false])
+  const setSingleCheckbox = (id: number, advFilters: string[]) => {
+    // setting state
+    let status = checkboxStatus;
+    status[id] = !status[id];
+    setCheckboxStatus(status);
+
+    // setting filters
+    if (status[id]) props.setAdvancedFilterValues(props.advancedFilterValues.concat(advFilters));
+    else props.setAdvancedFilterValues(props.advancedFilterValues.filter((value) => {
+      return !advFilters.includes(value);
+    }))
+  }
+
   return (
     <>
       <div className="mx-2">
@@ -71,7 +85,15 @@ export const AdvancedSearch = (props: AdvancedSearchProps) => {
               <div key={catID} className="mx-4 mb-2">
                 <Accordion.Item eventKey={catID.toString()}>
                   <Accordion.Header>
-                    <Form.Check className="mx-1" onClick={(e) => e.stopPropagation()}></Form.Check>
+                    <Form.Check
+                      className="mx-1"
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        props.setAdvancedFilterValues(entry[1]);
+                      }}
+                      value={checkboxStatus[catID].toString()}
+                      onChange={() => setSingleCheckbox(catID, entry[1])}
+                    ></Form.Check>
                     {entry[0]}
                   </Accordion.Header>
                   <Accordion.Body>
