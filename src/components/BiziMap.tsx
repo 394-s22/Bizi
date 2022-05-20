@@ -1,11 +1,11 @@
-import { GoogleMap, useLoadScript, Marker } from '@react-google-maps/api';
-import mapStyles from '../data/mapStyles';
-import { BusinessEntry } from '../types/BusinessTypes';
-import { useState, useEffect } from 'react';
+import { GoogleMap, useLoadScript, Marker } from "@react-google-maps/api";
+import mapStyles from "../data/mapStyles";
+import { BusinessEntry } from "../types/BusinessTypes";
+import { useState, useEffect } from "react";
 
 const containerStyle = {
-  width: '100%',
-  height: '400px',
+  width: "100%",
+  height: "400px",
 };
 
 const center = {
@@ -24,37 +24,34 @@ type BiziMapProps = {
 };
 
 export const BiziMap: React.FC<BiziMapProps> = ({ businessList }) => {
-
   useEffect(() => {
-    console.log('businesses change');
-    console.log(businessList);;
+    console.log("businesses change");
+    console.log(businessList);
   }, [businessList]);
 
-  const {isLoaded, loadError} = useLoadScript({
-    googleMapsApiKey: process.env.REACT_APP_GOOGLE_MAPS_API_KEY!
-  })
+  const { isLoaded, loadError } = useLoadScript({
+    googleMapsApiKey: process.env.REACT_APP_GOOGLE_MAPS_API_KEY!,
+  });
 
   if (loadError) return <p>Error loading maps</p>;
   if (!isLoaded) return <p>'Loading maps'</p>;
 
   return (
-      <GoogleMap
-        mapContainerStyle={containerStyle}
-        center={center}
-        zoom={15}
-        options={style}
-      >
-        {businessList.map((business, idx) => {
-          console.log(business.GeoLocation, idx);
-          if (!business.GeoLocation) return (<Marker key={business.Title} position={center}></Marker>);
-          return (
-            <Marker
-              key={business.Title}
-              position={business.GeoLocation}
-            ></Marker>
-          );
-        })}
-      </GoogleMap>
+    <GoogleMap
+      mapContainerStyle={containerStyle}
+      center={center}
+      zoom={15}
+      options={style}
+    >
+      {businessList.map((business, idx) => {
+        console.log(business.GeoLocation, idx);
+        if (!business.GeoLocation)
+          return <Marker key={business.Title} position={center}></Marker>;
+        return (
+          <Marker key={business.Title} position={business.GeoLocation}></Marker>
+        );
+      })}
+    </GoogleMap>
   );
 };
 
