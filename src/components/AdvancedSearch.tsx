@@ -53,7 +53,12 @@ export const AdvancedSearch = (props: AdvancedSearchProps) => {
     props.setAdvancedFilterValues(result);
   };
 
-  const [checkboxStatus, setCheckboxStatus] = useState([false, false, false, false])
+  const [checkboxStatus, setCheckboxStatus] = useState([
+    false,
+    false,
+    false,
+    false,
+  ]);
   const setSingleCheckbox = (id: number, advFilters: string[]) => {
     // setting state
     let status = checkboxStatus;
@@ -61,13 +66,19 @@ export const AdvancedSearch = (props: AdvancedSearchProps) => {
     setCheckboxStatus(status);
 
     // setting filters
-    if (status[id]) props.setAdvancedFilterValues(props.advancedFilterValues.concat(advFilters));
-    else props.setAdvancedFilterValues(props.advancedFilterValues.filter((value) => {
-      return !advFilters.includes(value);
-    }))
-  }
+    if (status[id])
+      props.setAdvancedFilterValues(
+        props.advancedFilterValues.concat(advFilters)
+      );
+    else
+      props.setAdvancedFilterValues(
+        props.advancedFilterValues.filter((value) => {
+          return !advFilters.includes(value);
+        })
+      );
+  };
 
-  const logos = [diversityLogo, communityLogo, sustainabilityLogo, ethicalLogo]
+  const logos = [diversityLogo, communityLogo, sustainabilityLogo, ethicalLogo];
 
   return (
     <>

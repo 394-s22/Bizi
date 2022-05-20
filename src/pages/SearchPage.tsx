@@ -19,7 +19,7 @@ export const SearchPage: React.FC<SearchPageProps> = ({
   advancedFilterValues,
   setAdvancedFilterValues,
   filterValues,
-  setFilterValues
+  setFilterValues,
 }) => {
   const [text, setText] = useState(""); // for Let's Go
   let navigate = useNavigate();

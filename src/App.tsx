@@ -70,7 +70,7 @@ const App = () => {
         />
         <Route path="/advanced-search" />
       </Routes>
-      <NavBar/>
+      <NavBar />
     </Router>
   );
 };
