@@ -17,11 +17,12 @@ export function getBasicFilters(business: BusinessEntry) {
 }
 
 export function filterBusinesses(
-  loadingBusinesses: boolean | null, 
-  businessData : BusinessEntry[] | undefined, 
+  loadingBusinesses: boolean | null,
+  businessData: BusinessEntry[] | undefined,
   searchText: string,
   advancedFilterValues: string[],
-  setFilteredData: React.Dispatch<React.SetStateAction<BusinessEntry[]>>) {
+  setFilteredData: React.Dispatch<React.SetStateAction<BusinessEntry[]>>
+) {
   // app page selection
   if (loadingBusinesses || !businessData) return;
   const advancedFilteredBusinesses = Object.values(businessData).filter(
@@ -41,9 +42,7 @@ export function filterBusinesses(
     keywords.filter((keyword) => tags.some((tag) => tag.includes(keyword)));
 
   const finalFilteredBusinesses = Object.values(
-    advancedFilterValues.length > 0
-      ? advancedFilteredBusinesses
-      : businessData
+    advancedFilterValues.length > 0 ? advancedFilteredBusinesses : businessData
   ).filter(
     (business) =>
       intersect(

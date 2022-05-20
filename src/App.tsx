@@ -23,15 +23,23 @@ const App = () => {
   );
   const [filterValues, setFilterValues] = useState<string[]>([] as string[]);
   const [searchComponent, setSearchComponent] = useState<string>("basic");
-  
+
   // geocoding businesses (coordinates from addresses)
   useEffect(() => {
-    setLocations(loadingBusinesses, businessData, setBusinessData).then(() => console.log("businesses updated"));
+    setLocations(loadingBusinesses, businessData, setBusinessData).then(() =>
+      console.log("businesses updated")
+    );
   }, [loadingBusinesses]);
 
   // filtering businesses
   useEffect(() => {
-    filterBusinesses(loadingBusinesses, businessData, searchText, advancedFilterValues, setFilteredData);
+    filterBusinesses(
+      loadingBusinesses,
+      businessData,
+      searchText,
+      advancedFilterValues,
+      setFilteredData
+    );
   }, [searchText, advancedFilterValues, businessData]);
 
   // returned page
