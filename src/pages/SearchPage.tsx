@@ -2,9 +2,7 @@ import { useState } from "react";
 import { Button } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
 import { AdvancedSearch } from "../components/AdvancedSearch";
-import { BasicFilter } from "../components/BasicFilter";
 import { SearchBar } from "../components/SearchBar";
-import { BusinessEntry } from "../types/BusinessTypes";
 
 type SearchPageProps = {
   searchText: string;
@@ -13,8 +11,6 @@ type SearchPageProps = {
   setAdvancedFilterValues: React.Dispatch<React.SetStateAction<string[]>>;
   filterValues: string[];
   setFilterValues: React.Dispatch<React.SetStateAction<string[]>>;
-  searchComponent: string;
-  setSearchComponent: React.Dispatch<React.SetStateAction<string>>;
 };
 
 export const SearchPage: React.FC<SearchPageProps> = ({
@@ -24,10 +20,7 @@ export const SearchPage: React.FC<SearchPageProps> = ({
   setAdvancedFilterValues,
   filterValues,
   setFilterValues,
-  searchComponent,
-  setSearchComponent,
 }) => {
-  //const [searchComponent, setSearchComponent] = useState<string>("basic");
   const [text, setText] = useState(""); // for Let's Go
   let navigate = useNavigate();
 
@@ -46,24 +39,14 @@ export const SearchPage: React.FC<SearchPageProps> = ({
         setSearchText={setSearchText}
       />
       <br />
-      {searchComponent === "basic" ? (
-        <BasicFilter
-          filterValues={filterValues}
-          setFilterValues={setFilterValues}
-          setAdvancedFilterValues={setAdvancedFilterValues}
-          searchComponent={searchComponent}
-          setSearchComponent={setSearchComponent}
-        />
-      ) : (
+      {
         <AdvancedSearch
           advancedFilterValues={advancedFilterValues}
           setAdvancedFilterValues={setAdvancedFilterValues}
-          searchComponent={searchComponent}
-          setSearchComponent={setSearchComponent}
           filterValues={filterValues}
           setFilterValues={setFilterValues}
         />
-      )}
+      }
       <div className="text-center mt-3 mb-5">
         <Button
           className="mb-3"

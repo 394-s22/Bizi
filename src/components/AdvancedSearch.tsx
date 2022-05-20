@@ -1,13 +1,19 @@
-import { useEffect } from "react";
-import { Button, ToggleButton, ToggleButtonGroup } from "react-bootstrap";
-import { FaAngleLeft } from "react-icons/fa";
+import { useEffect, useState } from "react";
+import {
+  Accordion,
+  Form,
+  ToggleButton,
+  ToggleButtonGroup,
+} from "react-bootstrap";
 import valueData from "../data/values.json";
+import communityLogo from "../logos/community.png";
+import diversityLogo from "../logos/diversity.png";
+import ethicalLogo from "../logos/ethical.png";
+import sustainabilityLogo from "../logos/sustainability.png";
 
 type AdvancedSearchProps = {
   filterValues: string[];
   setFilterValues: React.Dispatch<React.SetStateAction<string[]>>;
-  searchComponent: string;
-  setSearchComponent: React.Dispatch<React.SetStateAction<string>>;
   advancedFilterValues: string[];
   setAdvancedFilterValues: React.Dispatch<React.SetStateAction<string[]>>;
 };
@@ -47,46 +53,88 @@ export const AdvancedSearch = (props: AdvancedSearchProps) => {
     props.setAdvancedFilterValues(result);
   };
 
+  const [checkboxStatus, setCheckboxStatus] = useState([
+    false,
+    false,
+    false,
+    false,
+  ]);
+  const setSingleCheckbox = (id: number, advFilters: string[]) => {
+    // setting state
+    let status = checkboxStatus;
+    status[id] = !status[id];
+    setCheckboxStatus(status);
+
+    // setting filters
+    if (status[id])
+      props.setAdvancedFilterValues(
+        props.advancedFilterValues.concat(advFilters)
+      );
+    else
+      props.setAdvancedFilterValues(
+        props.advancedFilterValues.filter((value) => {
+          return !advFilters.includes(value);
+        })
+      );
+  };
+
+  const logos = [diversityLogo, communityLogo, sustainabilityLogo, ethicalLogo];
+
   return (
     <>
-      <div className="mx-2">
-        <Button
-          variant="light"
-          onClick={() => props.setSearchComponent("basic")}
-        >
-          <FaAngleLeft />
-          Back to Quick Filter
-        </Button>
-      </div>
-      {Object.entries(valueDictionary).map((entry, catID) => {
-        return (
-          <div key={catID} className="mx-4 mb-2">
-            <h1>{entry[0]}</h1>
-            <ToggleButtonGroup type="checkbox" style={{ flexWrap: "wrap" }}>
-              {entry[1].map((value, valID) => {
-                const state = props.advancedFilterValues.includes(value);
-                return (
-                  <ToggleButton
-                    key={valID}
-                    className="mx-1"
-                    style={{
-                      ...buttonStyle,
-                      backgroundColor: state ? "black" : "#ddd",
-                      color: state ? "white" : "black",
-                    }}
-                    value={value}
-                    onClick={() => {
-                      toggleButton(value);
-                    }}
-                  >
-                    {value}
-                  </ToggleButton>
-                );
-              })}
-            </ToggleButtonGroup>
-          </div>
-        );
-      })}
+      {
+        <Accordion alwaysOpen={true}>
+          {Object.entries(valueDictionary).map((entry, catID) => {
+            return (
+              <div key={catID} className="mx-4 mb-2">
+                <Accordion.Item eventKey={catID.toString()}>
+                  <Accordion.Header>
+                    <Form.Check
+                      className="mx-1"
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        props.setAdvancedFilterValues(entry[1]);
+                      }}
+                      value={checkboxStatus[catID].toString()}
+                      onChange={() => setSingleCheckbox(catID, entry[1])}
+                    />
+                    {<img src={logos[catID]} width="50" height="50" />}
+                    {entry[0]}
+                  </Accordion.Header>
+                  <Accordion.Body>
+                    <ToggleButtonGroup
+                      type="checkbox"
+                      style={{ flexWrap: "wrap" }}
+                    >
+                      {entry[1].map((value, valID) => {
+                        const state =
+                          props.advancedFilterValues.includes(value);
+                        return (
+                          <ToggleButton
+                            key={valID}
+                            className="mx-1"
+                            style={{
+                              ...buttonStyle,
+                              backgroundColor: state ? "black" : "#ddd",
+                              color: state ? "white" : "black",
+                            }}
+                            value={value}
+                            onClick={() => {
+                              toggleButton(value);
+                            }}
+                          >
+                            {value}
+                          </ToggleButton>
+                        );
+                      })}
+                    </ToggleButtonGroup>
+                  </Accordion.Body>
+                </Accordion.Item>
+              </div>
+            );
+          })}
+        </Accordion>
+      }
     </>
   );
 };
