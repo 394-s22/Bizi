@@ -5,6 +5,12 @@ import diversityLogo from "../logos/diversity.png";
 import ethicalLogo from "../logos/ethical.png";
 import sustainabilityLogo from "../logos/sustainability.png";
 
+////////////////////////////////////////////////
+//                                            //
+// NO LONGER RELEVANT, BUT KEPT FOR REFERENCE //
+//                                            //
+////////////////////////////////////////////////
+
 type BasicFilterProps = {
   setAdvancedFilterValues: React.Dispatch<React.SetStateAction<string[]>>;
   searchComponent: string;

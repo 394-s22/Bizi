@@ -9,8 +9,6 @@ import { BusinessEntry } from "./types/BusinessTypes";
 import { useData } from "./utilities/firebase";
 import { filterBusinesses } from "./utilities/filtering";
 import { setLocations } from "./utilities/map";
-// @ts-ignore
-import Geocode from "react-geocode";
 
 const App = () => {
   // state variables
@@ -22,7 +20,6 @@ const App = () => {
     [] as string[]
   );
   const [filterValues, setFilterValues] = useState<string[]>([] as string[]);
-  const [searchComponent, setSearchComponent] = useState<string>("basic");
 
   // geocoding businesses (coordinates from addresses)
   useEffect(() => {
@@ -56,8 +53,6 @@ const App = () => {
               setSearchText={setSearchText}
               filterValues={filterValues}
               setFilterValues={setFilterValues}
-              searchComponent={searchComponent}
-              setSearchComponent={setSearchComponent}
             />
           }
         />
@@ -75,7 +70,7 @@ const App = () => {
         />
         <Route path="/advanced-search" />
       </Routes>
-      <NavBar setSearchComponent={setSearchComponent} />
+      <NavBar/>
     </Router>
   );
 };
