@@ -36,15 +36,8 @@ export const getData = async (path: string) => {
 
 export function useData<T>(
   path: string
-): [
-  T | undefined,
-  (
-    | React.Dispatch<React.SetStateAction<T>>
-    | React.Dispatch<React.SetStateAction<undefined>>
-  ),
-  boolean | null
-] {
-  const [data, setData] = useState();
+): [T | undefined, React.Dispatch<React.SetStateAction<any>>, boolean | null] {
+  const [data, setData] = useState<T>();
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
 
