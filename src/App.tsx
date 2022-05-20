@@ -7,6 +7,8 @@ import { Results } from "./pages/Results";
 import { SearchPage } from "./pages/SearchPage";
 import { BusinessEntry } from "./types/BusinessTypes";
 import { useData } from "./utilities/firebase";
+import { filterBusinesses } from "./utilities/filtering";
+import { setLocations } from "./utilities/map";
 // @ts-ignore
 import Geocode from "react-geocode";
 
@@ -22,77 +24,23 @@ const App = () => {
   const [filterValues, setFilterValues] = useState<string[]>([] as string[]);
   const [searchComponent, setSearchComponent] = useState<string>("basic");
 
+  // geocoding businesses (coordinates from addresses)
   useEffect(() => {
-    const setLocations = async () => {
-      if (loadingBusinesses || !businessData) return;
-      Geocode.setApiKey(process.env.REACT_APP_GOOGLE_MAPS_API_KEY!);
-      let updatedBusinesses: BusinessEntry[] = [];
-      Object.values(businessData).forEach((entry) =>
-        updatedBusinesses.push(Object.assign({}, entry))
-      );
-
-      await Promise.all(
-        Object.entries(updatedBusinesses).map(async (business) => {
-          console.log("geocoding: " + business[1].Title);
-          return new Promise((resolve, reject) =>
-            Geocode.fromAddress(business[1].Address).then(
-              (response: any) => {
-                business[1].GeoLocation = response.results[0].geometry.location;
-                //console.log(business.GeoLocation);
-                resolve(true);
-              },
-              (error: any) => {
-                console.log(error);
-                resolve(true);
-              }
-            )
-          );
-        })
-      );
-      console.log(updatedBusinesses);
-      setBusinessData(updatedBusinesses);
-    };
-
-    setLocations().then(() => console.log("businesses updated"));
+    setLocations(loadingBusinesses, businessData, setBusinessData).then(() =>
+      console.log("businesses updated")
+    );
   }, [loadingBusinesses]);
 
   // filtering businesses
   useEffect(() => {
-    // app page selection
-    if (loadingBusinesses || !businessData) return;
-    const advancedFilteredBusinesses = Object.values(businessData).filter(
-      (business) => {
-        for (const value of advancedFilterValues) {
-          if (business.Initiatives?.includes(value)) {
-            return true;
-          }
-        }
-        return false;
-      }
+    filterBusinesses(
+      loadingBusinesses,
+      businessData,
+      searchText,
+      advancedFilterValues,
+      setFilteredData
     );
-
-    const filteredText = searchText.split(" ");
-
-    const intersect = (keywords: Array<string>, tags: Array<string>) =>
-      keywords.filter((keyword) => tags.some((tag) => tag.includes(keyword)));
-
-    const finalFilteredBusinesses = Object.values(
-      advancedFilterValues.length > 0
-        ? advancedFilteredBusinesses
-        : businessData
-    ).filter(
-      (business) =>
-        intersect(
-          filteredText.map((text) => text.toLowerCase()),
-          business["Search Tags"]
-            .concat([business.Title, business.Description])
-            .map((text) => text.toLowerCase())
-        ).length > 0
-    );
-    setFilteredData(finalFilteredBusinesses);
   }, [searchText, advancedFilterValues, businessData]);
-
-  //console.log(businessData);
 
   // returned page
   return (
