@@ -2,6 +2,7 @@ import { Card } from 'react-bootstrap';
 import valueData from '../data/values.json';
 import { BusinessEntry } from '../types/BusinessTypes';
 import { getActiveColor } from './AdvancedSearch';
+import '../App.css';
 
 const buttonStyle: React.CSSProperties = {
   border: 'none',
@@ -43,10 +44,12 @@ export const Business: React.FC<BusinessProps> = (props) => {
         >
           Values:
           <div
+            className='invisible-scrollbar'
             style={{
               alignItems: 'center',
               display: 'flex',
               whiteSpace: 'nowrap',
+              overflow: 'scroll',
             }}
           >
             {props.business.Initiatives?.map((val, idx) => {
