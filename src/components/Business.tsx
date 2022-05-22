@@ -1,8 +1,8 @@
 import { Card } from 'react-bootstrap';
+import '../App.css';
 import valueData from '../data/values.json';
 import { BusinessEntry } from '../types/BusinessTypes';
 import { getActiveColor } from './AdvancedSearch';
-import '../App.css';
 
 const buttonStyle: React.CSSProperties = {
   border: 'none',
@@ -24,6 +24,16 @@ const getCoreValue = (subvalue: string) => {
   return Object.keys(dictionary).find((key) =>
     dictionary[key].includes(subvalue)
   ) as string;
+};
+
+const getFormattedInitiative = (val: string, idx: number) => {
+  const coreValue = getCoreValue(val);
+  const buttonColor = getActiveColor(coreValue);
+  return (
+    <span style={{ ...buttonStyle, backgroundColor: buttonColor }} key={idx}>
+      {val}
+    </span>
+  );
 };
 
 type BusinessProps = {
@@ -52,19 +62,9 @@ export const Business: React.FC<BusinessProps> = (props) => {
               overflow: 'scroll',
             }}
           >
-            {props.business.Initiatives?.map((val, idx) => {
-              const coreValue = getCoreValue(val);
-              const buttonColor = getActiveColor(coreValue);
-              return (
-                <span
-                  style={{ ...buttonStyle, backgroundColor: buttonColor }}
-                  key={idx}
-                >
-                  {'   '}
-                  {val}
-                </span>
-              );
-            })}
+            {props.business.Initiatives?.map((val, idx) =>
+              getFormattedInitiative(val, idx)
+            )}
           </div>
         </Card.Subtitle>
       </Card.Body>
