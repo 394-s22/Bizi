@@ -17,6 +17,8 @@ const style = {
   styles: mapStyles,
   disableDefaultUI: true,
   zoomControl: true,
+  gestureHandling: "greedy",
+  keyboardShortcuts: false,
 };
 
 type BiziMapProps = {
