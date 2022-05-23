@@ -1,8 +1,8 @@
 import { Card } from 'react-bootstrap';
 import '../App.css';
-import valueData from '../data/values.json';
 import { BusinessEntry } from '../types/BusinessTypes';
-import { getActiveColor } from './AdvancedSearch';
+import { getActiveColor } from '../utilities/values';
+import { getCoreValue } from '../utilities/values';
 
 const buttonStyle: React.CSSProperties = {
   border: 'none',
@@ -16,14 +16,6 @@ const buttonStyle: React.CSSProperties = {
   marginLeft: '5px',
   textAlign: 'center',
   fontSize: 'small',
-};
-
-const dictionary: { [key: string]: string[] } = valueData;
-
-const getCoreValue = (subvalue: string) => {
-  return Object.keys(dictionary).find((key) =>
-    dictionary[key].includes(subvalue)
-  ) as string;
 };
 
 const getFormattedInitiative = (val: string, idx: number) => {
@@ -52,7 +44,7 @@ export const Business: React.FC<BusinessProps> = (props) => {
           style={{ alignItems: 'center', display: 'flex' }}
           className='mb-2 text-muted'
         >
-          Values:
+          <span style={{ marginRight: '3px' }}>Values:</span>
           <div
             className='invisible-scrollbar'
             style={{

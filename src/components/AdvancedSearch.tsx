@@ -3,13 +3,14 @@ import {
   Accordion,
   Form,
   ToggleButton,
-  ToggleButtonGroup,
+  ToggleButtonGroup
 } from 'react-bootstrap';
 import valueData from '../data/values.json';
 import communityLogo from '../logos/community.png';
 import diversityLogo from '../logos/diversity.png';
 import ethicalLogo from '../logos/ethical.png';
 import sustainabilityLogo from '../logos/sustainability.png';
+import { getActiveColor } from '../utilities/values';
 
 type AdvancedSearchProps = {
   filterValues: string[];
@@ -28,21 +29,6 @@ const buttonStyle: React.CSSProperties = {
   textAlign: 'center',
   margin: '2px 1px',
   borderRadius: '16px',
-};
-
-export const getActiveColor = (val: string) => {
-  switch (val) {
-    case 'Diversity':
-      return '#FDC269';
-    case 'Community':
-      return '#8FC4EB';
-    case 'Sustainability':
-      return '#78CC5B';
-    case 'Ethical':
-      return '#F47369';
-    default:
-      return '#ddd';
-  }
 };
 
 export const AdvancedSearch = (props: AdvancedSearchProps) => {
@@ -67,7 +53,6 @@ export const AdvancedSearch = (props: AdvancedSearchProps) => {
     } else result = result.concat(val);
     props.setAdvancedFilterValues(result);
   };
-
 
   const [checkboxStatus, setCheckboxStatus] = useState([
     false,
