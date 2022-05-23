@@ -29,6 +29,7 @@ export const Results: React.FC<ResultsProps> = ({
         <SearchBar setSearchText={setSearchText} searchText={searchText} />
       </div>
       <BiziMap businessList={businessList} />
+      <h1 className="mx-3 my-3">Results</h1>
       {businessList.length > 0 ? (
         <div className="mb-5">
           <BusinessList

@@ -1,7 +1,5 @@
-import valueData from "../data/values.json";
-import { BusinessEntry } from "../types/BusinessTypes";
-
-const valueDictionary: { [key: string]: string[] } = valueData;
+import { BusinessEntry } from '../types/BusinessTypes';
+import { valueDictionary } from '../utilities/values';
 
 export function getBasicFilters(business: BusinessEntry) {
   const advancedFilters: string[] = business.Initiatives;
@@ -36,7 +34,7 @@ export function filterBusinesses(
     }
   );
 
-  const filteredText = searchText.split(" ");
+  const filteredText = searchText.split(' ');
 
   const intersect = (keywords: Array<string>, tags: Array<string>) =>
     keywords.filter((keyword) => tags.some((tag) => tag.includes(keyword)));
@@ -47,7 +45,7 @@ export function filterBusinesses(
     (business) =>
       intersect(
         filteredText.map((text) => text.toLowerCase()),
-        business["Search Tags"]
+        business['Search Tags']
           .concat([business.Title, business.Description])
           .map((text) => text.toLowerCase())
       ).length > 0
