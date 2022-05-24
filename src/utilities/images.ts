@@ -7,32 +7,32 @@ export const getImage = async (width: number, height: number) => {
   return URL.createObjectURL(imgBlob);
 };
 
+export const getImageArray = async (
+  width: number,
+  height: number,
+  count: number
+) => {
+  let result: string[] = [];
+  while (count > 0) {
+    const imgURL = await getImage(width, height);
+    result.push(imgURL);
+    count--;
+  }
+  return await Promise.all(result);
+};
+
 export const setThumbnailImages = async (
   loadingBusinesses: boolean | null,
   businessData: BusinessEntry[] | undefined,
   setBusinessData: React.Dispatch<React.SetStateAction<BusinessEntry[]>>
 ) => {
   if (loadingBusinesses || !businessData) return;
-  let updatedBusinesses: BusinessEntry[] = [];
-  Object.values(businessData).forEach((entry) =>
-    updatedBusinesses.push(Object.assign({}, entry))
-  );
+  const imgArray = await getImageArray(75, 75, Object.keys(businessData).length);
 
-  await Promise.all(
-    Object.values(updatedBusinesses).map(async (business) => {
-      return new Promise((resolve, reject) =>
-        getImage(75, 75).then(
-          (response: any) => {
-            business.Thumbnail = response;
-            resolve(true);
-          },
-          (error: any) => {
-            console.log(error);
-            resolve(true);
-          }
-        )
-      );
-    })
-  );
-  setBusinessData(updatedBusinesses);
+  setBusinessData((data) => {
+    return Object.values(data).map((business, idx) => {
+      business.Thumbnail = imgArray[idx];
+      return business;
+    });
+  });
 };
