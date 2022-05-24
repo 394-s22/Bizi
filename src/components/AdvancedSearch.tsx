@@ -62,17 +62,11 @@ export const AdvancedSearch = (props: AdvancedSearchProps) => {
   });
 
   const setSingleCheckbox = (filter: string, advFilters: string[]) => {
-    // setting state
-    let status = checkboxStatus;
-    status[filter] = !status[filter];
-    setCheckboxStatus(status);
-    console.log(checkboxStatus);
-
-    // setting basic filters
-
+    // getting state
+    const status = props.filterValues.includes(filter);
 
     // setting advanced filters
-    if (status[filter])
+    if (!status)
       props.setAdvancedFilterValues(
         props.advancedFilterValues.concat(advFilters)
       );
@@ -96,13 +90,12 @@ export const AdvancedSearch = (props: AdvancedSearchProps) => {
                 <Accordion.Item eventKey={catID.toString()}>
                   <Accordion.Header>
                     <Form.Check
-                      checked = {checkboxStatus[entry[0]]}
+                      checked = {props.filterValues.includes(entry[0])}
                       className='mx-1'
                       onClick={(e) => {
                         e.stopPropagation();
                         props.setAdvancedFilterValues(entry[1]);
                       }}
-                      //value={checkboxStatus[catID].toString()}
                       onChange={() => setSingleCheckbox(entry[0], entry[1])}
                     />
                     {<img src={logos[catID]} width='50' height='50' />}
