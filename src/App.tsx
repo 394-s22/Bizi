@@ -9,6 +9,7 @@ import { BusinessEntry } from "./types/BusinessTypes";
 import { useData } from "./utilities/firebase";
 import { filterBusinesses } from "./utilities/filtering";
 import { setLocations } from "./utilities/map";
+import { setThumbnailImages } from "./utilities/images";
 
 const App = () => {
   // state variables
@@ -24,7 +25,14 @@ const App = () => {
   // geocoding businesses (coordinates from addresses)
   useEffect(() => {
     setLocations(loadingBusinesses, businessData, setBusinessData).then(() =>
-      console.log("businesses updated")
+      console.log("businesses location updated")
+    );
+  }, [loadingBusinesses]);
+
+  // generating thumbnails for each business
+  useEffect(() => {
+    setThumbnailImages(loadingBusinesses, businessData, setBusinessData).then(() =>
+      console.log("businesses thumbnail updated")
     );
   }, [loadingBusinesses]);
 
