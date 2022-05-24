@@ -31,8 +31,8 @@ const App = () => {
 
   // generating thumbnails for each business
   useEffect(() => {
-    setThumbnailImages(loadingBusinesses, businessData, setBusinessData).then(() =>
-      console.log("businesses thumbnail updated")
+    setThumbnailImages(loadingBusinesses, businessData, setBusinessData).then(
+      () => console.log("businesses thumbnail updated")
     );
   }, [loadingBusinesses]);
 

@@ -1,16 +1,16 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState } from "react";
 import {
   Accordion,
   Form,
   ToggleButton,
-  ToggleButtonGroup
-} from 'react-bootstrap';
-import valueData from '../data/values.json';
-import communityLogo from '../logos/community.png';
-import diversityLogo from '../logos/diversity.png';
-import ethicalLogo from '../logos/ethical.png';
-import sustainabilityLogo from '../logos/sustainability.png';
-import { getActiveColor } from '../utilities/values';
+  ToggleButtonGroup,
+} from "react-bootstrap";
+import valueData from "../data/values.json";
+import communityLogo from "../logos/community.png";
+import diversityLogo from "../logos/diversity.png";
+import ethicalLogo from "../logos/ethical.png";
+import sustainabilityLogo from "../logos/sustainability.png";
+import { getActiveColor } from "../utilities/values";
 
 type AdvancedSearchProps = {
   filterValues: string[];
@@ -22,13 +22,13 @@ type AdvancedSearchProps = {
 const valueDictionary: { [key: string]: string[] } = valueData;
 
 const buttonStyle: React.CSSProperties = {
-  backgroundColor: '#ddd',
-  border: 'none',
-  color: 'black',
-  padding: '5px 10px',
-  textAlign: 'center',
-  margin: '2px 1px',
-  borderRadius: '16px',
+  backgroundColor: "#ddd",
+  border: "none",
+  color: "black",
+  padding: "5px 10px",
+  textAlign: "center",
+  margin: "2px 1px",
+  borderRadius: "16px",
 };
 
 export const AdvancedSearch = (props: AdvancedSearchProps) => {
@@ -54,11 +54,13 @@ export const AdvancedSearch = (props: AdvancedSearchProps) => {
     props.setAdvancedFilterValues(result);
   };
 
-  const [checkboxStatus, setCheckboxStatus] = useState<{ [key: string]: boolean }>({
-    'Diversity': props.filterValues.includes('Diversity'),
-    'Community': props.filterValues.includes('Community'),
-    'Sustainability': props.filterValues.includes('Sustainability'),
-    'Ethical': props.filterValues.includes('Ethical'),
+  const [checkboxStatus, setCheckboxStatus] = useState<{
+    [key: string]: boolean;
+  }>({
+    Diversity: props.filterValues.includes("Diversity"),
+    Community: props.filterValues.includes("Community"),
+    Sustainability: props.filterValues.includes("Sustainability"),
+    Ethical: props.filterValues.includes("Ethical"),
   });
 
   const setSingleCheckbox = (filter: string, advFilters: string[]) => {
@@ -86,25 +88,25 @@ export const AdvancedSearch = (props: AdvancedSearchProps) => {
         <Accordion alwaysOpen={true}>
           {Object.entries(valueDictionary).map((entry, catID) => {
             return (
-              <div key={catID} className='mx-4 mb-2'>
+              <div key={catID} className="mx-4 mb-2">
                 <Accordion.Item eventKey={catID.toString()}>
                   <Accordion.Header>
                     <Form.Check
-                      checked = {props.filterValues.includes(entry[0])}
-                      className='mx-1'
+                      checked={props.filterValues.includes(entry[0])}
+                      className="mx-1"
                       onClick={(e) => {
                         e.stopPropagation();
                         props.setAdvancedFilterValues(entry[1]);
                       }}
                       onChange={() => setSingleCheckbox(entry[0], entry[1])}
                     />
-                    {<img src={logos[catID]} width='50' height='50' />}
+                    {<img src={logos[catID]} width="50" height="50" />}
                     {entry[0]}
                   </Accordion.Header>
                   <Accordion.Body>
                     <ToggleButtonGroup
-                      type='checkbox'
-                      style={{ flexWrap: 'wrap' }}
+                      type="checkbox"
+                      style={{ flexWrap: "wrap" }}
                     >
                       {entry[1].map((value, valID) => {
                         const state =
@@ -113,11 +115,11 @@ export const AdvancedSearch = (props: AdvancedSearchProps) => {
                         return (
                           <ToggleButton
                             key={valID}
-                            className='mx-1'
+                            className="mx-1"
                             style={{
                               ...buttonStyle,
-                              backgroundColor: state ? activeColor : '#ddd',
-                              color: state ? 'white' : 'black',
+                              backgroundColor: state ? activeColor : "#ddd",
+                              color: state ? "white" : "black",
                             }}
                             value={value}
                             onClick={() => {

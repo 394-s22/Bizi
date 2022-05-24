@@ -30,7 +30,7 @@ export const BiziMap: React.FC<BiziMapProps> = ({ businessList }) => {
     console.log("businesses change");
     console.log(businessList);
   }, [businessList]);
-  
+
   const { isLoaded, loadError } = useLoadScript({
     googleMapsApiKey: process.env.REACT_APP_GOOGLE_MAPS_API_KEY!,
   });
