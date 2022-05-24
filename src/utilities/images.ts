@@ -1,4 +1,4 @@
-import { BusinessEntry } from '../types/BusinessTypes';
+import { BusinessEntry } from "../types/BusinessTypes";
 
 export const getImage = async (width: number, height: number) => {
   const srcURL = `https://picsum.photos/${width}/${height}`;
