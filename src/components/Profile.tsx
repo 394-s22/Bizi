@@ -10,16 +10,15 @@ type ProfileProps = {
 
 export const Profile: React.FC<ProfileProps> = (props) => {
     
-    const handleClose = () => {
-        //e.stopPropagation();
-        // also clicking behind the modal (see: business.tsx console.log('hi')) 
+    const handleClose = (e: React.MouseEvent<HTMLButtonElement>) => {
+        e.stopPropagation();
         props.setShow(false);
         console.log('hiding');
         console.log(props.show);
     }
 
     return (
-        <Modal show={props.show} fullscreen={props.show ? true : undefined} onClose={handleClose}>
+        <Modal show={props.show} fullscreen={true} onClose={handleClose}>
             <Modal.Header>
                 <Button variant="light" onClick={handleClose}>
                     <FaAngleLeft></FaAngleLeft>Results
