@@ -38,10 +38,11 @@ export const Business: React.FC<BusinessProps> = (props) => {
   const [showModal, setShowModal] = useState(false);
 
   return (
-    <Card onClick={() => {
-      setShowModal(true);
-      console.log('hi');
-    }}>
+    <Card
+      onClick={() => {
+        setShowModal(true);
+      }}
+    >
       <div style={{ display: "flex" }}>
         <img
           src={props.imgURL}
