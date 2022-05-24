@@ -54,15 +54,6 @@ export const AdvancedSearch = (props: AdvancedSearchProps) => {
     props.setAdvancedFilterValues(result);
   };
 
-  const [checkboxStatus, setCheckboxStatus] = useState<{
-    [key: string]: boolean;
-  }>({
-    Diversity: props.filterValues.includes("Diversity"),
-    Community: props.filterValues.includes("Community"),
-    Sustainability: props.filterValues.includes("Sustainability"),
-    Ethical: props.filterValues.includes("Ethical"),
-  });
-
   const setSingleCheckbox = (filter: string, advFilters: string[]) => {
     // getting state
     const status = props.filterValues.includes(filter);
