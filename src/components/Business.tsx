@@ -1,8 +1,7 @@
 import { Card } from 'react-bootstrap';
 import '../App.css';
 import { BusinessEntry } from '../types/BusinessTypes';
-import { getActiveColor } from '../utilities/values';
-import { getCoreValue } from '../utilities/values';
+import { getActiveColor, getCoreValue } from '../utilities/values';
 
 const buttonStyle: React.CSSProperties = {
   border: 'none',
@@ -30,36 +29,48 @@ const getFormattedInitiative = (val: string, idx: number) => {
 
 type BusinessProps = {
   business: BusinessEntry;
+  imgURL: string;
 };
 
 export const Business: React.FC<BusinessProps> = (props) => {
   return (
     <Card>
-      <Card.Body>
-        <Card.Title>{props.business.Title}</Card.Title>
-        <Card.Subtitle className='mb-2 text-muted'>
-          {props.business.Subheading}
-        </Card.Subtitle>
-        <Card.Subtitle
-          style={{ alignItems: 'center', display: 'flex' }}
-          className='mb-2 text-muted'
-        >
-          <span style={{ marginRight: '3px' }}>Values:</span>
-          <div
-            className='invisible-scrollbar'
-            style={{
-              alignItems: 'center',
-              display: 'flex',
-              whiteSpace: 'nowrap',
-              overflow: 'scroll',
-            }}
+      <div style={{ display: 'flex' }}>
+        <img
+          src={props.imgURL}
+          style={{
+            margin: 'auto',
+            padding: '10px',
+            borderRadius: '16px'
+          }}
+        />
+        <Card.Body>
+          <Card.Title>{props.business.Title}</Card.Title>
+          <Card.Subtitle className='mb-2 text-muted'>
+            {props.business.Subheading}
+          </Card.Subtitle>
+          <Card.Subtitle
+            style={{ alignItems: 'center', display: 'flex' }}
+            className='mb-2 text-muted'
           >
-            {props.business.Initiatives?.map((val, idx) =>
-              getFormattedInitiative(val, idx)
-            )}
-          </div>
-        </Card.Subtitle>
-      </Card.Body>
+            <span style={{ marginRight: '3px' }}>Values:</span>
+            <div
+              className='invisible-scrollbar'
+              style={{
+                alignItems: 'center',
+                justifyContent: 'center',
+                display: 'flex',
+                whiteSpace: 'nowrap',
+                overflow: 'hidden',
+              }}
+            >
+              {props.business.Initiatives?.map((val, idx) =>
+                getFormattedInitiative(val, idx)
+              )}
+            </div>
+          </Card.Subtitle>
+        </Card.Body>
+      </div>
     </Card>
   );
 };
