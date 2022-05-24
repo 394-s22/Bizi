@@ -36,13 +36,13 @@ export const AdvancedSearch = (props: AdvancedSearchProps) => {
     let basicFilters: string[] = [];
     for (const [basic, group_elements] of Object.entries(valueDictionary)) {
       const basicFilter = changeBasicFilter(group_elements, basic);
-      if (basicFilter) basicFilters.push(basic);
+      if (basicFilter) basicFilters.push(basic); // also update checkbox here?
     }
     props.setFilterValues(basicFilters);
   }, [props.advancedFilterValues]);
 
   const changeBasicFilter = (group_elements: string[], basic: string) => {
-    return group_elements.every((e) => props.advancedFilterValues.includes(e));
+    return group_elements.some((e) => props.advancedFilterValues.includes(e));
   };
 
   const toggleButton = (val: string) => {
@@ -54,21 +54,25 @@ export const AdvancedSearch = (props: AdvancedSearchProps) => {
     props.setAdvancedFilterValues(result);
   };
 
-  const [checkboxStatus, setCheckboxStatus] = useState([
-    false,
-    false,
-    false,
-    false,
-  ]);
+  const [checkboxStatus, setCheckboxStatus] = useState<{ [key: string]: boolean }>({
+    'Diversity': props.filterValues.includes('Diversity'),
+    'Community': props.filterValues.includes('Community'),
+    'Sustainability': props.filterValues.includes('Sustainability'),
+    'Ethical': props.filterValues.includes('Ethical'),
+  });
 
-  const setSingleCheckbox = (id: number, advFilters: string[]) => {
+  const setSingleCheckbox = (filter: string, advFilters: string[]) => {
     // setting state
     let status = checkboxStatus;
-    status[id] = !status[id];
+    status[filter] = !status[filter];
     setCheckboxStatus(status);
+    console.log(checkboxStatus);
 
-    // setting filters
-    if (status[id])
+    // setting basic filters
+
+
+    // setting advanced filters
+    if (status[filter])
       props.setAdvancedFilterValues(
         props.advancedFilterValues.concat(advFilters)
       );
@@ -92,13 +96,14 @@ export const AdvancedSearch = (props: AdvancedSearchProps) => {
                 <Accordion.Item eventKey={catID.toString()}>
                   <Accordion.Header>
                     <Form.Check
+                      checked = {checkboxStatus[entry[0]]}
                       className='mx-1'
                       onClick={(e) => {
                         e.stopPropagation();
                         props.setAdvancedFilterValues(entry[1]);
                       }}
-                      value={checkboxStatus[catID].toString()}
-                      onChange={() => setSingleCheckbox(catID, entry[1])}
+                      //value={checkboxStatus[catID].toString()}
+                      onChange={() => setSingleCheckbox(entry[0], entry[1])}
                     />
                     {<img src={logos[catID]} width='50' height='50' />}
                     {entry[0]}
