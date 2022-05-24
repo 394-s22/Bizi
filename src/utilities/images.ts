@@ -12,13 +12,13 @@ export const getImageArray = async (
   height: number,
   count: number
 ) => {
-  let result: string[] = [];
+  const result: string[] = [];
   while (count > 0) {
     const imgURL = await getImage(width, height);
     result.push(imgURL);
     count--;
   }
-  return await Promise.all(result);
+  return result;
 };
 
 export const setThumbnailImages = async (
@@ -27,7 +27,11 @@ export const setThumbnailImages = async (
   setBusinessData: React.Dispatch<React.SetStateAction<BusinessEntry[]>>
 ) => {
   if (loadingBusinesses || !businessData) return;
-  const imgArray = await getImageArray(75, 75, Object.keys(businessData).length);
+  const imgArray = await getImageArray(
+    75,
+    75,
+    Object.keys(businessData).length
+  );
 
   setBusinessData((data) => {
     return Object.values(data).map((business, idx) => {
