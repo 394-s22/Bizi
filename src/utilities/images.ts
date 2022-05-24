@@ -1,13 +1,10 @@
 import { BusinessEntry } from '../types/BusinessTypes';
 
 export const getImage = async (w: number, h: number) => {
-  const fetchImage = async (w: number, h: number) => {
-    const srcURL = `https://picsum.photos/${w}/${h}`;
-    const response = await fetch(srcURL);
-    const imgBlob = await response.blob();
-    return URL.createObjectURL(imgBlob);
-  };
-  return await fetchImage(w, h);
+  const srcURL = `https://picsum.photos/${w}/${h}`;
+  const response = await fetch(srcURL);
+  const imgBlob = await response.blob();
+  return URL.createObjectURL(imgBlob);
 };
 
 export const setThumbnailImages = async (
