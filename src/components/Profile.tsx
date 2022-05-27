@@ -47,12 +47,14 @@ export const Profile: React.FC<ProfileProps> = (props) => {
       <Modal.Title className="mx-3 text-muted" style={{fontSize: 'medium'}}>{props.business['Business Type']}</Modal.Title>
       <Modal.Body>
         <>
-          {/* {props.business.Description} */}
-          {Array.from(coreValues).map((value: string) => {
+          <div>
+            {Array.from(coreValues).map((value: string) => {
             const logo = getLogo(value);
             console.log(logo);
             return <img width="100px" height="100px" src={logo} alt={value}/>
-          })}
+            })}
+          </div>
+          {props.business.Description}
         </>
       </Modal.Body>
     </Modal>
