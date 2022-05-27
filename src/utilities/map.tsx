@@ -1,6 +1,8 @@
 // @ts-ignore
 import Geocode from "react-geocode";
 import { BusinessEntry } from "../types/BusinessTypes";
+import { setData } from "./firebase";
+
 
 export async function setLocations(
   loadingBusinesses: boolean | null,
@@ -32,4 +34,5 @@ export async function setLocations(
     })
   );
   setBusinessData(updatedBusinesses);
+  setData('/', updatedBusinesses);
 }
