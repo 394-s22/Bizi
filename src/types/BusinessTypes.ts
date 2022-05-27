@@ -4,7 +4,7 @@ export type BusinessEntry = {
   Title: string;
   Description: string;
   "Business Type": string;
-  Thumbnail: string;
+  Thumbnail?: string;
   Initiatives: string[]; //["initiative 1", "initiative 2", "initiative 3"] (choose any, optional field),
   Website?: string; //"" (optional field),
   PhoneNumber: string; //"" ,//(required)
