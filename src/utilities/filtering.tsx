@@ -45,7 +45,7 @@ export function filterBusinesses(
     (business) =>
       intersect(
         filteredText.map((text) => text.toLowerCase()),
-        business["Search Tags"] != undefined ?
+        business["Search Tags"] !== undefined ?
           business["Search Tags"]
             .concat([business.Title, business.Description])
             .map((text) => text?.toLowerCase())
