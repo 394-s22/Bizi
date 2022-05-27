@@ -38,7 +38,7 @@ export const BusinessList: React.FC<BusinessListProps> = ({ businessList }) => {
     <Stack direction="vertical">
       {Object.values(filteredBusinesses).map<ReactNode>(
         (business: BusinessEntry, key: number) => (
-          <Business key={key} business={business} imgURL={business.Thumbnail} />
+          <Business key={key} business={business} imgURL={business.Thumbnail || ""} />
         )
       )}
     </Stack>
