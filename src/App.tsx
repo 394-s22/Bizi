@@ -25,7 +25,7 @@ const App = () => {
   // geocoding businesses (coordinates from addresses)
   useEffect(() => {
     setLocations(loadingBusinesses, businessData, setBusinessData).then(() =>
-      console.log("businesses location updated")
+    console.log("businesses location updated")
     );
   }, [loadingBusinesses]);
 

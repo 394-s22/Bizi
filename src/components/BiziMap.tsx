@@ -26,11 +26,6 @@ type BiziMapProps = {
 };
 
 export const BiziMap: React.FC<BiziMapProps> = ({ businessList }) => {
-  useEffect(() => {
-    console.log("businesses change");
-    console.log(businessList);
-  }, [businessList]);
-
   const { isLoaded, loadError } = useLoadScript({
     googleMapsApiKey: process.env.REACT_APP_GOOGLE_MAPS_API_KEY!,
   });
@@ -46,7 +41,6 @@ export const BiziMap: React.FC<BiziMapProps> = ({ businessList }) => {
       options={style}
     >
       {businessList.map((business, idx) => {
-        console.log(business.GeoLocation, idx);
         if (!business.GeoLocation)
           return <Marker key={business.Title} position={center}></Marker>;
         return (

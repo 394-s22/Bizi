@@ -39,20 +39,28 @@ export const Business: React.FC<BusinessProps> = (props) => {
 
   return (
     <Card
-      onClick={() => {
-        setShowModal(true);
-      }}
-    >
-      <div style={{ display: "flex" }}>
+    onClick={() => {
+      setShowModal(true);
+    }}>
+      <Card.Body
+        style={{
+          display: "flex",
+          alignItems: "center",
+          gap: "20px",
+        }}
+      >
         <img
           src={props.imgURL}
           style={{
-            margin: "auto",
-            padding: "10px",
             borderRadius: "16px",
           }}
         />
-        <Card.Body>
+        <div
+          style={{
+            overflow: "hidden",
+            width: "100%",
+          }}
+        >
           <Card.Title>{props.business.Title}</Card.Title>
           <Card.Subtitle className="mb-2 text-muted">
             {props.business.Subheading}
@@ -66,10 +74,9 @@ export const Business: React.FC<BusinessProps> = (props) => {
               className="invisible-scrollbar"
               style={{
                 alignItems: "center",
-                justifyContent: "center",
                 display: "flex",
                 whiteSpace: "nowrap",
-                overflow: "hidden",
+                overflow: "scroll",
               }}
             >
               {props.business.Initiatives?.map((val, idx) =>
@@ -77,13 +84,13 @@ export const Business: React.FC<BusinessProps> = (props) => {
               )}
             </div>
           </Card.Subtitle>
-        </Card.Body>
-        <Profile
+        </div>
+      </Card.Body>
+      <Profile
           business={props.business}
           show={showModal}
           setShow={setShowModal}
         />
-      </div>
     </Card>
   );
 };

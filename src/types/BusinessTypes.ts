@@ -3,7 +3,7 @@ export type coordinate = { lat: number; lng: number };
 export type BusinessEntry = {
   Title: string;
   Description: string;
-  BusinessType: string;
+  "Business Type": string;
   Thumbnail: string;
   Initiatives: string[]; //["initiative 1", "initiative 2", "initiative 3"] (choose any, optional field),
   Website?: string; //"" (optional field),
