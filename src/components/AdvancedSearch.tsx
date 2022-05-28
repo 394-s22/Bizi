@@ -76,7 +76,7 @@ export const AdvancedSearch = (props: AdvancedSearchProps) => {
   return (
     <>
       {
-        <Accordion alwaysOpen={true}>
+        <Accordion alwaysOpen={true} style={{ paddingBottom: "8.5em" }}>
           {Object.entries(valueDictionary).map((entry, catID) => {
             return (
               <div key={catID} className="mx-4 mb-2">

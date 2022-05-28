@@ -10,6 +10,7 @@ export const NavBar: React.FC = () => {
         overflow: "auto",
         bottom: "0",
         width: "100%",
+        zIndex: 3,
       }}
       bg="dark"
     >
