@@ -47,10 +47,20 @@ export const SearchPage: React.FC<SearchPageProps> = ({
           setFilterValues={setFilterValues}
         />
       }
-      <div className="text-center mt-3 mb-5">
+      <div
+        className="text-center mt-3 mb-5"
+        style={{
+          position: "fixed",
+          bottom: 5,
+          width: "100%",
+          background: "#ffffff",
+          zIndex: 3,
+        }}
+      >
         <Button
           className="mb-3"
           variant="secondary"
+          style={{ margin: "1em" }}
           size="lg"
           active
           onClick={() => {
