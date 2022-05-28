@@ -1,5 +1,5 @@
 import { Form, Stack } from "react-bootstrap";
-import { useState } from "react";
+import React, { useState } from "react";
 
 type SearchBarProps = {
   text?: string;
@@ -21,11 +21,11 @@ export const SearchBar: React.FC<SearchBarProps> = ({
         className="me-auto"
         placeholder="Search Keywords"
         value={text ? text : text2}
-        onChange={(e) => {
+        onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
           // setText may be undefined, use backup setText2
           setText ? setText(e.target.value) : setText2(e.target.value);
         }}
-        onKeyPress={(e) =>
+        onKeyPress={(e: React.KeyboardEvent<HTMLInputElement>) =>
           e.key === "Enter"
             ? setSearchText((e.target as HTMLTextAreaElement).value)
             : null

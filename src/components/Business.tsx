@@ -2,6 +2,8 @@ import { Card } from "react-bootstrap";
 import "../App.css";
 import { BusinessEntry } from "../types/BusinessTypes";
 import { getActiveColor, getCoreValue } from "../utilities/values";
+import { Profile } from "./Profile";
+import { useState } from "react";
 
 const buttonStyle: React.CSSProperties = {
   border: "none",
@@ -33,8 +35,13 @@ type BusinessProps = {
 };
 
 export const Business: React.FC<BusinessProps> = (props) => {
+  const [showModal, setShowModal] = useState(false);
+
   return (
-    <Card>
+    <Card
+    onClick={() => {
+      setShowModal(true);
+    }}>
       <Card.Body
         style={{
           display: "flex",
@@ -79,6 +86,11 @@ export const Business: React.FC<BusinessProps> = (props) => {
           </Card.Subtitle>
         </div>
       </Card.Body>
+      <Profile
+          business={props.business}
+          show={showModal}
+          setShow={setShowModal}
+        />
     </Card>
   );
 };
