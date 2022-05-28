@@ -35,7 +35,6 @@ export const Results: React.FC<ResultsProps> = ({
           <BusinessList
             businessList={businessList}
             filterValues={filterValues}
-            advancedFilterValues={advancedFilterValues}
           />
         </div>
       ) : (
