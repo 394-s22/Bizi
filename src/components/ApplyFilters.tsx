@@ -36,7 +36,9 @@ export const ApplyFilters: React.FC<ApplyFiltersProps> = ({
                 filterValues={filterValues}
                 setFilterValues={setFilterValues}
             />
-            <Button>Apply Filters</Button>
+            <Button
+                onClick={handleClose}
+            >Apply Filters</Button>
         </Modal>
     )
 }
