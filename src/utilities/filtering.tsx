@@ -15,7 +15,9 @@ export function getBasicFilters(business: BusinessEntry) {
 }
 
 export function intersect(keywords: Array<string>, tags: Array<string>) {
-  return keywords.filter((keyword) => tags.some((tag) => tag?.includes(keyword)));
+  return keywords.filter((keyword) =>
+    tags.some((tag) => tag?.includes(keyword))
+  );
 }
 
 export function filterBusinesses(
@@ -40,21 +42,17 @@ export function filterBusinesses(
 
   const filteredText = searchText.split(" ");
 
-  // const intersect = (keywords: Array<string>, tags: Array<string>) =>
-  //   keywords.filter((keyword) => tags.some((tag) => tag?.includes(keyword)));
-
   const finalFilteredBusinesses = Object.values(
     advancedFilterValues.length > 0 ? advancedFilteredBusinesses : businessData
   ).filter(
     (business) =>
       intersect(
         filteredText.map((text) => text.toLowerCase()),
-        business["Search Tags"] !== undefined ?
-          business["Search Tags"]
-            .concat([business.Title, business.Description])
-            .map((text) => text?.toLowerCase())
-          :
-          []
+        business["Search Tags"] !== undefined
+          ? business["Search Tags"]
+              .concat([business.Title, business.Description])
+              .map((text) => text?.toLowerCase())
+          : []
       ).length > 0
   );
   setFilteredData(finalFilteredBusinesses);

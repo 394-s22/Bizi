@@ -8,18 +8,19 @@ import { Business } from "./Business";
 type BusinessListProps = {
   businessList: BusinessEntry[];
   filterValues: string[];
-  advancedFilterValues: string[];
 };
 
-export const BusinessList: React.FC<BusinessListProps> = ({ businessList, filterValues }) => {
+export const BusinessList: React.FC<BusinessListProps> = ({
+  businessList,
+  filterValues,
+}) => {
   const filteredBusinesses = businessList;
 
   const matchedBasicFilters = (business: BusinessEntry) => {
     if (filterValues === []) return 0;
     const basic = getBasicFilters(business);
     return intersect(basic, filterValues).length;
-  }
-  // need to pass in the list of basic/advanced filter values that were selected
+  };
   // prioritize businesses that fulfill the most selected BASIC filters
   // then sort by the number of advanced filters satisfied (regardless of the category)
   // get # basic filters satisfied
@@ -32,10 +33,13 @@ export const BusinessList: React.FC<BusinessListProps> = ({ businessList, filter
 
       if (basicFilters1 < basicFilters2) return 1;
       if (basicFilters2 < basicFilters1) return -1;
-      if (basicFilters1 === basicFilters2 ) console.log("equal sorting");
 
-      const initiatives1 = business1.Initiatives? business1.Initiatives.length : 0;
-      const initiatives2 = business2.Initiatives? business2.Initiatives.length : 0;
+      const initiatives1 = business1.Initiatives
+        ? business1.Initiatives.length
+        : 0;
+      const initiatives2 = business2.Initiatives
+        ? business2.Initiatives.length
+        : 0;
 
       if (initiatives1 < initiatives2) return 1;
       if (initiatives2 < initiatives1) return -1;
@@ -47,7 +51,11 @@ export const BusinessList: React.FC<BusinessListProps> = ({ businessList, filter
     <Stack direction="vertical">
       {Object.values(filteredBusinesses).map<ReactNode>(
         (business: BusinessEntry, key: number) => (
-          <Business key={key} business={business} imgURL={business.Thumbnail || ""} />
+          <Business
+            key={key}
+            business={business}
+            imgURL={business.Thumbnail || ""}
+          />
         )
       )}
     </Stack>
