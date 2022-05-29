@@ -77,11 +77,11 @@ export const Profile: React.FC<ProfileProps> = (props) => {
         </div>
       </Modal.Title>
       <Modal.Title className="mx-3">
-        <Button style={{height: "90px", width: "90px" }} variant="outline-secondary">
+        <Button style={{height: "80px", width: "100px" }} variant="outline-secondary">
             <FaPhoneAlt></FaPhoneAlt><br></br>Call</Button>
-        <Button style={{height: "90px", width: "90px" }} variant="outline-secondary">
+        <Button style={{height: "80px", width: "100px" }} variant="outline-secondary">
           <FaMapMarkedAlt></FaMapMarkedAlt><br></br>Directions</Button>
-        <Button style={{height: "90px", width: "90px" }} variant="outline-secondary">
+        <Button style={{height: "80px", width: "100px" }} variant="outline-secondary">
           <FaClipboard></FaClipboard><br></br>Website</Button>
       </Modal.Title>
       <Modal.Body>
