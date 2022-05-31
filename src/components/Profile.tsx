@@ -1,5 +1,5 @@
 import { BusinessEntry } from "../types/BusinessTypes";
-import { Modal, Button, Carousel } from "react-bootstrap";
+import { Modal, Button, Carousel, ButtonGroup, Row, Col } from "react-bootstrap";
 import { FaAngleLeft, FaPhoneAlt, FaMapMarkedAlt, FaClipboard } from "react-icons/fa";
 import diversityLogo from "../logos/diversity.png";
 import communityLogo from "../logos/community.png";
@@ -76,13 +76,28 @@ export const Profile: React.FC<ProfileProps> = (props) => {
             })}
         </div>
       </Modal.Title>
-      <Modal.Title className="mx-3">
-        <Button style={{height: "80px", width: "100px" }} variant="outline-secondary">
-            <FaPhoneAlt></FaPhoneAlt><br></br>Call</Button>
-        <Button style={{height: "80px", width: "100px" }} variant="outline-secondary">
-          <FaMapMarkedAlt></FaMapMarkedAlt><br></br>Directions</Button>
-        <Button style={{height: "80px", width: "100px" }} variant="outline-secondary">
-          <FaClipboard></FaClipboard><br></br>Website</Button>
+      <Modal.Title className="d-flex mx-3 justify-content-center">
+        <Row>
+          <Col>
+            <Button style={{borderRadius: "50%"}} className="mx-2" variant="outline-secondary">
+                <FaPhoneAlt></FaPhoneAlt>
+            </Button>
+            <p style={{textAlign: "center", fontSize: "small"}}>Call</p>
+          </Col>
+          <Col>
+            <Button style={{borderRadius: "50%"}} className="mx-2" variant="outline-secondary">
+              <FaMapMarkedAlt></FaMapMarkedAlt>
+            </Button>
+            <p style={{fontSize: "small"}}>Directions</p>
+          </Col>
+          <Col>
+              <form action={props.business.Website || ""} target="_blank">
+                <Button type="submit" style={{borderRadius: "50%"}} className="mx-2" variant="outline-secondary">
+                  <FaClipboard ></FaClipboard></Button>
+              </form>
+              <p style={{textAlign: "center", fontSize: "small"}}>Website</p>
+          </Col>
+        </Row>
       </Modal.Title>
       <Modal.Body>
           {props.business.Description}
