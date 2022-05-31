@@ -43,15 +43,21 @@ export const Profile: React.FC<ProfileProps> = (props) => {
           <FaAngleLeft></FaAngleLeft>Results
         </Button>
       </Modal.Header>
-      <Modal.Title className="mx-3 mt-3" style={{fontSize: 'x-large'}}>{props.business.Title}</Modal.Title>
-      <Modal.Title className="mx-3 text-muted" style={{fontSize: 'medium'}}>{props.business['Business Type']}</Modal.Title>
+      <Modal.Title className="mx-3 mt-3" style={{ fontSize: "x-large" }}>
+        {props.business.Title}
+      </Modal.Title>
+      <Modal.Title className="mx-3 text-muted" style={{ fontSize: "medium" }}>
+        {props.business["Business Type"]}
+      </Modal.Title>
       <Modal.Body>
         <>
           <div>
             {Array.from(coreValues).map((value: string) => {
-            const logo = getLogo(value);
-            console.log(logo);
-            return <img width="100px" height="100px" src={logo} alt={value}/>
+              const logo = getLogo(value);
+              console.log(logo);
+              return (
+                <img width="100px" height="100px" src={logo} alt={value} />
+              );
             })}
           </div>
           {props.business.Description}

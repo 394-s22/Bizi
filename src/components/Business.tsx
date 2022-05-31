@@ -39,9 +39,10 @@ export const Business: React.FC<BusinessProps> = (props) => {
 
   return (
     <Card
-    onClick={() => {
-      setShowModal(true);
-    }}>
+      onClick={() => {
+        setShowModal(true);
+      }}
+    >
       <Card.Body
         style={{
           display: "flex",
@@ -87,10 +88,10 @@ export const Business: React.FC<BusinessProps> = (props) => {
         </div>
       </Card.Body>
       <Profile
-          business={props.business}
-          show={showModal}
-          setShow={setShowModal}
-        />
+        business={props.business}
+        show={showModal}
+        setShow={setShowModal}
+      />
     </Card>
   );
 };

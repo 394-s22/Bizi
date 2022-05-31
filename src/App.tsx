@@ -64,7 +64,9 @@ const App = () => {
               searchText={searchText}
               setSearchText={setSearchText}
               filterValues={filterValues}
+              setFilterValues={setFilterValues}
               advancedFilterValues={advancedFilterValues}
+              setAdvancedFilterValues={setAdvancedFilterValues}
             />
           }
         />

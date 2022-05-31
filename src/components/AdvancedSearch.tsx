@@ -85,13 +85,22 @@ export const AdvancedSearch = (props: AdvancedSearchProps) => {
                     <Form.Check
                       checked={props.filterValues.includes(entry[0])}
                       className="mx-1"
-                      onClick={(e: React.MouseEvent<HTMLInputElement, MouseEvent>) => {
+                      onClick={(
+                        e: React.MouseEvent<HTMLInputElement, MouseEvent>
+                      ) => {
                         e.stopPropagation();
                         props.setAdvancedFilterValues(entry[1]);
                       }}
                       onChange={() => setSingleCheckbox(entry[0], entry[1])}
                     />
-                    {<img src={logos[catID]} width="50" height="50" alt={`${entry[0]} logo`}/>}
+                    {
+                      <img
+                        src={logos[catID]}
+                        width="50"
+                        height="50"
+                        alt={`${entry[0]} logo`}
+                      />
+                    }
                     {entry[0]}
                   </Accordion.Header>
                   <Accordion.Body>
