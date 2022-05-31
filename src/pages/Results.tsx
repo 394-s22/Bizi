@@ -6,7 +6,7 @@ import { BiziMap } from "../components/BiziMap";
 import { BusinessEntry } from "../types/BusinessTypes";
 import { Button } from "react-bootstrap";
 import { ApplyFilters } from "../components/ApplyFilters";
-import { BiFilter } from 'react-icons/bi';
+import { BiFilter } from "react-icons/bi";
 
 type ResultsProps = {
   businessList: BusinessEntry[];
@@ -25,7 +25,7 @@ export const Results: React.FC<ResultsProps> = ({
   filterValues,
   setFilterValues,
   advancedFilterValues,
-  setAdvancedFilterValues
+  setAdvancedFilterValues,
 }) => {
   const [showModal, setShowModal] = useState(false);
 
@@ -49,9 +49,10 @@ export const Results: React.FC<ResultsProps> = ({
             margin: "2px 1px",
             marginLeft: "10%",
             borderRadius: "10px",
-            fontSize: "small"
+            fontSize: "small",
           }}
-        >Values <BiFilter/>
+        >
+          Values <BiFilter />
         </Button>
       </div>
       <BiziMap businessList={businessList} />
