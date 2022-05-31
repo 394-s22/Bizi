@@ -30,7 +30,7 @@ export const SearchBar: React.FC<SearchBarProps> = ({
             ? setSearchText((e.target as HTMLTextAreaElement).value)
             : null
         }
-        style={{ backgroundColor: "lightgrey" }}
+        style={{ backgroundColor: "lightgrey", borderColor: "gray", borderRadius: "10px" }}
       />
     </Stack>
   );

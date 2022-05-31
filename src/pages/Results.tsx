@@ -6,6 +6,7 @@ import { BiziMap } from "../components/BiziMap";
 import { BusinessEntry } from "../types/BusinessTypes";
 import { Button } from "react-bootstrap";
 import { ApplyFilters } from "../components/ApplyFilters";
+import { BiFilter } from 'react-icons/bi';
 
 type ResultsProps = {
   businessList: BusinessEntry[];
@@ -35,9 +36,23 @@ export const Results: React.FC<ResultsProps> = ({
         style={{ position: "absolute", zIndex: "2", width: "100%" }}
       >
         <SearchBar setSearchText={setSearchText} searchText={searchText} />
-        <Button onClick={() => {
-          setShowModal(true);
-        }}>Values</Button>
+        <Button
+          onClick={() => {
+            setShowModal(true);
+          }}
+          style={{
+            backgroundColor: "#ddd",
+            borderColor: "gray",
+            color: "black",
+            padding: "5px 10px",
+            textAlign: "center",
+            margin: "2px 1px",
+            marginLeft: "10%",
+            borderRadius: "10px",
+            fontSize: "small"
+          }}
+        >Values <BiFilter/>
+        </Button>
       </div>
       <BiziMap businessList={businessList} />
       <h1 className="mx-3 my-3">Results</h1>
@@ -62,7 +77,7 @@ export const Results: React.FC<ResultsProps> = ({
         setFilterValues={setFilterValues}
         advancedFilterValues={advancedFilterValues}
         setAdvancedFilterValues={setAdvancedFilterValues}
-        />
+      />
     </>
   );
 };
