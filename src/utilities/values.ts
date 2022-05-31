@@ -26,8 +26,8 @@ export const getCoreValue = (subvalue: string) => {
 
 export const getBusinessCoreValues = (business: BusinessEntry) => {
   const result = new Set<string>();
-  if(!business || !business.Initiatives) return result;
+  if (!business || !business.Initiatives) return result;
 
   business.Initiatives.forEach((value) => result.add(getCoreValue(value)));
   return result;
-}
+};
