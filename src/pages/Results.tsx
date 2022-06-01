@@ -14,6 +14,9 @@ type ResultsProps = {
   setSearchText: React.Dispatch<React.SetStateAction<string>>;
   advancedFilterValues: string[];
   setAdvancedFilterValues: React.Dispatch<React.SetStateAction<string[]>>;
+  loadingBusinesses: boolean | null;
+  businessData: BusinessEntry[] | undefined;
+  setFilteredData: React.Dispatch<React.SetStateAction<BusinessEntry[]>>;
 };
 
 export const Results: React.FC<ResultsProps> = ({
@@ -22,9 +25,12 @@ export const Results: React.FC<ResultsProps> = ({
   setSearchText,
   advancedFilterValues,
   setAdvancedFilterValues,
+  loadingBusinesses,
+  businessData,
+  setFilteredData
 }) => {
   const [showModal, setShowModal] = useState(false);
-
+  const [initialState, setInitialState] = useState(advancedFilterValues)
 
   return (
     <>
@@ -36,6 +42,7 @@ export const Results: React.FC<ResultsProps> = ({
         <Button
           onClick={() => {
             setShowModal(true);
+            setInitialState(advancedFilterValues);
           }}
           style={{
             backgroundColor: "#ddd",
@@ -72,6 +79,12 @@ export const Results: React.FC<ResultsProps> = ({
         setShow={setShowModal}
         advancedFilterValues={advancedFilterValues}
         setAdvancedFilterValues={setAdvancedFilterValues}
+        loadingBusinesses={loadingBusinesses}
+        businessData={businessData}
+        setFilteredData={setFilteredData}
+        searchText={searchText}
+        advFilterValuesInitial={initialState}
+        setInitialState={setInitialState}
       />
     </>
   );

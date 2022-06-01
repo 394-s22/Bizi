@@ -7,7 +7,6 @@ import { Results } from "./pages/Results";
 import { SearchPage } from "./pages/SearchPage";
 import { BusinessEntry } from "./types/BusinessTypes";
 import { useData } from "./utilities/firebase";
-import { filterBusinesses } from "./utilities/filtering";
 import { setThumbnailImages } from "./utilities/images";
 
 const App = () => {
@@ -20,10 +19,6 @@ const App = () => {
     [] as string[]
   );
 
-  useEffect(() => {
-    console.log('filtered data changed')
-  }, [filteredData]);
-  
   // generating thumbnails for each business
   useEffect(() => {
     setThumbnailImages(loadingBusinesses, businessData, setBusinessData).then(
@@ -58,6 +53,9 @@ const App = () => {
               setSearchText={setSearchText}
               advancedFilterValues={advancedFilterValues}
               setAdvancedFilterValues={setAdvancedFilterValues}
+              loadingBusinesses={loadingBusinesses}
+              businessData={businessData}
+              setFilteredData={setFilteredData}
             />
           }
         />
