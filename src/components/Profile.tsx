@@ -11,6 +11,7 @@ import ethicalLogo from "../logos/ethical.png";
 import sustainabilityLogo from "../logos/sustainability.png";
 import { BusinessEntry } from "../types/BusinessTypes";
 import { getBusinessCoreValues, getCoreValue } from "../utilities/values";
+import { useState, useEffect } from "react";
 
 type ProfileProps = {
   business: BusinessEntry;
@@ -40,9 +41,20 @@ export const Profile: React.FC<ProfileProps> = (props) => {
   };
 
   const coreValues = getBusinessCoreValues(props.business);
+  const [fullscreen, setFullscreen] = useState(true);
+
+  useEffect(() => {
+    if (window.innerWidth > 700) {
+      setFullscreen(false);
+    } else setFullscreen(true);
+  }, [window.innerWidth]);
 
   return (
-    <Modal show={props.show} fullscreen={true} onClose={handleClose}>
+    <Modal
+      show={props.show}
+      fullscreen={fullscreen ? true : undefined}
+      onClose={handleClose}
+    >
       <Modal.Header>
         <Button variant="light" onClick={handleClose}>
           <FaAngleLeft></FaAngleLeft>Results
@@ -78,9 +90,11 @@ export const Profile: React.FC<ProfileProps> = (props) => {
           {props.business.Title}
         </Modal.Title>
         <div
+          className="px-2"
           style={{
             display: "flex",
             marginLeft: "auto",
+            justifyContent: "flex-end",
           }}
         >
           {Array.from(coreValues).map((value: string, idx: number) => {
@@ -92,6 +106,7 @@ export const Profile: React.FC<ProfileProps> = (props) => {
                 height="40px"
                 src={logo}
                 alt={value}
+                style={{ marginLeft: "-15%"}}
               />
             );
           })}
@@ -102,7 +117,7 @@ export const Profile: React.FC<ProfileProps> = (props) => {
       </Modal.Title>
 
       <Modal.Title
-        className="d-flex my-3 justify-content-center"
+        className="d-flex mt-3 justify-content-center"
         style={{ borderBottom: "solid 1px lightgrey" }}
       >
         <Row>
