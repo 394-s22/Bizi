@@ -7,7 +7,6 @@ import { Results } from "./pages/Results";
 import { SearchPage } from "./pages/SearchPage";
 import { BusinessEntry } from "./types/BusinessTypes";
 import { useData } from "./utilities/firebase";
-import { filterBusinesses } from "./utilities/filtering";
 import { setThumbnailImages } from "./utilities/images";
 
 const App = () => {
@@ -19,7 +18,6 @@ const App = () => {
   const [advancedFilterValues, setAdvancedFilterValues] = useState<string[]>(
     [] as string[]
   );
-  const [filterValues, setFilterValues] = useState<string[]>([] as string[]);
 
   // generating thumbnails for each business
   useEffect(() => {
@@ -27,17 +25,6 @@ const App = () => {
       () => console.log("businesses thumbnail updated")
     );
   }, [loadingBusinesses]);
-
-  // filtering businesses
-  useEffect(() => {
-    filterBusinesses(
-      loadingBusinesses,
-      businessData,
-      searchText,
-      advancedFilterValues,
-      setFilteredData
-    );
-  }, [searchText, advancedFilterValues, businessData]);
 
   // returned page
   return (
@@ -51,8 +38,9 @@ const App = () => {
               setAdvancedFilterValues={setAdvancedFilterValues}
               searchText={searchText}
               setSearchText={setSearchText}
-              filterValues={filterValues}
-              setFilterValues={setFilterValues}
+              loadingBusinesses={loadingBusinesses}
+              businessData={businessData}
+              setFilteredData={setFilteredData}
             />
           }
         />
@@ -63,10 +51,11 @@ const App = () => {
               businessList={filteredData}
               searchText={searchText}
               setSearchText={setSearchText}
-              filterValues={filterValues}
-              setFilterValues={setFilterValues}
               advancedFilterValues={advancedFilterValues}
               setAdvancedFilterValues={setAdvancedFilterValues}
+              loadingBusinesses={loadingBusinesses}
+              businessData={businessData}
+              setFilteredData={setFilteredData}
             />
           }
         />

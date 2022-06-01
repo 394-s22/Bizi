@@ -13,8 +13,6 @@ import sustainabilityLogo from "../logos/sustainability.png";
 import { getActiveColor } from "../utilities/values";
 
 type AdvancedSearchProps = {
-  filterValues: string[];
-  setFilterValues: React.Dispatch<React.SetStateAction<string[]>>;
   advancedFilterValues: string[];
   setAdvancedFilterValues: React.Dispatch<React.SetStateAction<string[]>>;
 };
@@ -32,13 +30,14 @@ const buttonStyle: React.CSSProperties = {
 };
 
 export const AdvancedSearch = (props: AdvancedSearchProps) => {
+  const [filterValues, setFilterValues] = useState<string[]>([] as string[]);
   useEffect(() => {
     let basicFilters: string[] = [];
     for (const [basic, group_elements] of Object.entries(valueDictionary)) {
       const basicFilter = changeBasicFilter(group_elements, basic);
       if (basicFilter) basicFilters.push(basic); // also update checkbox here?
     }
-    props.setFilterValues(basicFilters);
+    setFilterValues(basicFilters);
   }, [props.advancedFilterValues]);
 
   const changeBasicFilter = (group_elements: string[], basic: string) => {
@@ -56,7 +55,7 @@ export const AdvancedSearch = (props: AdvancedSearchProps) => {
 
   const setSingleCheckbox = (filter: string, advFilters: string[]) => {
     // getting state
-    const status = props.filterValues.includes(filter);
+    const status = filterValues.includes(filter);
 
     // setting advanced filters
     if (!status)
@@ -83,7 +82,7 @@ export const AdvancedSearch = (props: AdvancedSearchProps) => {
                 <Accordion.Item eventKey={catID.toString()}>
                   <Accordion.Header>
                     <Form.Check
-                      checked={props.filterValues.includes(entry[0])}
+                      checked={filterValues.includes(entry[0])}
                       className="mx-1"
                       onClick={(
                         e: React.MouseEvent<HTMLInputElement, MouseEvent>

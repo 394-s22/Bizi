@@ -10,7 +10,7 @@ import diversityLogo from "../logos/diversity.png";
 import ethicalLogo from "../logos/ethical.png";
 import sustainabilityLogo from "../logos/sustainability.png";
 import { BusinessEntry } from "../types/BusinessTypes";
-import { getBusinessCoreValues, getCoreValue } from "../utilities/values";
+import { getBasicFilters, getCoreValue } from "../utilities/filtering";
 import { useState, useEffect } from "react";
 
 type ProfileProps = {
@@ -40,7 +40,7 @@ export const Profile: React.FC<ProfileProps> = (props) => {
     props.setShow(false);
   };
 
-  const coreValues = getBusinessCoreValues(props.business);
+  const coreValues = getBasicFilters(props.business);
   const [fullscreen, setFullscreen] = useState(true);
 
   useEffect(() => {
@@ -97,7 +97,7 @@ export const Profile: React.FC<ProfileProps> = (props) => {
             justifyContent: "flex-end",
           }}
         >
-          {Array.from(coreValues).map((value: string, idx: number) => {
+          {coreValues.map((value: string, idx: number) => {
             const logo = getLogo(value);
             return (
               <img
@@ -106,7 +106,7 @@ export const Profile: React.FC<ProfileProps> = (props) => {
                 height="40px"
                 src={logo}
                 alt={value}
-                style={{ marginLeft: "-15%"}}
+                style={{ marginLeft: "-15%" }}
               />
             );
           })}
@@ -159,7 +159,7 @@ export const Profile: React.FC<ProfileProps> = (props) => {
       </Modal.Title>
       <Modal.Body className="mx-2">
         <div className="mb-3">{props.business.Description}</div>
-        {Array.from(coreValues).map((coreValue: string, idx: number) => {
+        {coreValues.map((coreValue: string, idx: number) => {
           return (
             <div key={idx}>
               <p>
