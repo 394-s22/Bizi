@@ -12,8 +12,6 @@ type ResultsProps = {
   businessList: BusinessEntry[];
   searchText: string;
   setSearchText: React.Dispatch<React.SetStateAction<string>>;
-  filterValues: string[];
-  setFilterValues: React.Dispatch<React.SetStateAction<string[]>>;
   advancedFilterValues: string[];
   setAdvancedFilterValues: React.Dispatch<React.SetStateAction<string[]>>;
 };
@@ -22,12 +20,11 @@ export const Results: React.FC<ResultsProps> = ({
   businessList,
   searchText,
   setSearchText,
-  filterValues,
-  setFilterValues,
   advancedFilterValues,
   setAdvancedFilterValues,
 }) => {
   const [showModal, setShowModal] = useState(false);
+
 
   return (
     <>
@@ -61,7 +58,6 @@ export const Results: React.FC<ResultsProps> = ({
         <div className="mb-5">
           <BusinessList
             businessList={businessList}
-            filterValues={filterValues}
           />
         </div>
       ) : (
@@ -74,8 +70,6 @@ export const Results: React.FC<ResultsProps> = ({
       <ApplyFilters
         show={showModal}
         setShow={setShowModal}
-        filterValues={filterValues}
-        setFilterValues={setFilterValues}
         advancedFilterValues={advancedFilterValues}
         setAdvancedFilterValues={setAdvancedFilterValues}
       />

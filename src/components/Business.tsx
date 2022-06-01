@@ -1,7 +1,8 @@
 import { Card } from "react-bootstrap";
 import "../App.css";
 import { BusinessEntry } from "../types/BusinessTypes";
-import { getActiveColor, getCoreValue } from "../utilities/values";
+import { getActiveColor } from "../utilities/values";
+import { getCoreValue } from "../utilities/filtering";
 import { Profile } from "./Profile";
 import { useState } from "react";
 

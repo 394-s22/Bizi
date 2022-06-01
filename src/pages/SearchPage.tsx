@@ -1,16 +1,19 @@
-import { useState } from "react";
+import React, { useState } from "react";
 import { Button } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
 import { AdvancedSearch } from "../components/AdvancedSearch";
 import { SearchBar } from "../components/SearchBar";
+import { BusinessEntry } from "../types/BusinessTypes";
+import { filterBusinesses } from "../utilities/filtering";
 
 type SearchPageProps = {
   searchText: string;
   setSearchText: React.Dispatch<React.SetStateAction<string>>;
   advancedFilterValues: string[];
   setAdvancedFilterValues: React.Dispatch<React.SetStateAction<string[]>>;
-  filterValues: string[];
-  setFilterValues: React.Dispatch<React.SetStateAction<string[]>>;
+  loadingBusinesses: boolean | null;
+  businessData: BusinessEntry[] | undefined;
+  setFilteredData: React.Dispatch<React.SetStateAction<BusinessEntry[]>>;
 };
 
 export const SearchPage: React.FC<SearchPageProps> = ({
@@ -18,8 +21,9 @@ export const SearchPage: React.FC<SearchPageProps> = ({
   setSearchText,
   advancedFilterValues,
   setAdvancedFilterValues,
-  filterValues,
-  setFilterValues,
+  loadingBusinesses,
+  businessData,
+  setFilteredData
 }) => {
   const [text, setText] = useState(""); // for Let's Go
   let navigate = useNavigate();
@@ -43,8 +47,6 @@ export const SearchPage: React.FC<SearchPageProps> = ({
         <AdvancedSearch
           advancedFilterValues={advancedFilterValues}
           setAdvancedFilterValues={setAdvancedFilterValues}
-          filterValues={filterValues}
-          setFilterValues={setFilterValues}
         />
       }
       <div
@@ -66,6 +68,8 @@ export const SearchPage: React.FC<SearchPageProps> = ({
           onClick={() => {
             navigate("/results");
             setSearchText(text);
+            filterBusinesses(loadingBusinesses, businessData, searchText, 
+                            advancedFilterValues, setFilteredData);
           }}
         >
           Let's go!

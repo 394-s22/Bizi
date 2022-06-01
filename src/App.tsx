@@ -19,25 +19,17 @@ const App = () => {
   const [advancedFilterValues, setAdvancedFilterValues] = useState<string[]>(
     [] as string[]
   );
-  const [filterValues, setFilterValues] = useState<string[]>([] as string[]);
 
+  useEffect(() => {
+    console.log('filtered data changed')
+  }, [filteredData]);
+  
   // generating thumbnails for each business
   useEffect(() => {
     setThumbnailImages(loadingBusinesses, businessData, setBusinessData).then(
       () => console.log("businesses thumbnail updated")
     );
   }, [loadingBusinesses]);
-
-  // filtering businesses
-  useEffect(() => {
-    filterBusinesses(
-      loadingBusinesses,
-      businessData,
-      searchText,
-      advancedFilterValues,
-      setFilteredData
-    );
-  }, [searchText, advancedFilterValues, businessData]);
 
   // returned page
   return (
@@ -51,8 +43,9 @@ const App = () => {
               setAdvancedFilterValues={setAdvancedFilterValues}
               searchText={searchText}
               setSearchText={setSearchText}
-              filterValues={filterValues}
-              setFilterValues={setFilterValues}
+              loadingBusinesses={loadingBusinesses}
+              businessData={businessData}
+              setFilteredData={setFilteredData}
             />
           }
         />
@@ -63,8 +56,6 @@ const App = () => {
               businessList={filteredData}
               searchText={searchText}
               setSearchText={setSearchText}
-              filterValues={filterValues}
-              setFilterValues={setFilterValues}
               advancedFilterValues={advancedFilterValues}
               setAdvancedFilterValues={setAdvancedFilterValues}
             />
