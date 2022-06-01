@@ -1,11 +1,17 @@
-import { BusinessEntry } from "../types/BusinessTypes";
-import { Modal, Button, Carousel, ButtonGroup, Row, Col } from "react-bootstrap";
-import { FaAngleLeft, FaPhoneAlt, FaMapMarkedAlt, FaClipboard } from "react-icons/fa";
-import diversityLogo from "../logos/diversity.png";
+import { Button, Carousel, Col, Modal, Row } from "react-bootstrap";
+import {
+  FaAngleLeft,
+  FaClipboard,
+  FaMapMarkedAlt,
+  FaPhoneAlt,
+} from "react-icons/fa";
 import communityLogo from "../logos/community.png";
-import sustainabilityLogo from "../logos/sustainability.png";
+import diversityLogo from "../logos/diversity.png";
 import ethicalLogo from "../logos/ethical.png";
-import { getBusinessCoreValues } from "../utilities/values";
+import sustainabilityLogo from "../logos/sustainability.png";
+import { BusinessEntry } from "../types/BusinessTypes";
+import { getBusinessCoreValues, getCoreValue } from "../utilities/values";
+import { useState, useEffect } from "react";
 
 type ProfileProps = {
   business: BusinessEntry;
@@ -35,9 +41,20 @@ export const Profile: React.FC<ProfileProps> = (props) => {
   };
 
   const coreValues = getBusinessCoreValues(props.business);
+  const [fullscreen, setFullscreen] = useState(true);
+
+  useEffect(() => {
+    if (window.innerWidth > 700) {
+      setFullscreen(false);
+    } else setFullscreen(true);
+  }, [window.innerWidth]);
 
   return (
-    <Modal show={props.show} fullscreen={true} onClose={handleClose}>
+    <Modal
+      show={props.show}
+      fullscreen={fullscreen ? true : undefined}
+      onClose={handleClose}
+    >
       <Modal.Header>
         <Button variant="light" onClick={handleClose}>
           <FaAngleLeft></FaAngleLeft>Results
@@ -45,62 +62,130 @@ export const Profile: React.FC<ProfileProps> = (props) => {
       </Modal.Header>
 
       <Modal.Title>
-        <Carousel style={{height: "20%", width: "100%" }}>
+        <Carousel style={{ height: "20%", width: "100%" }}>
           <Carousel.Item>
             <img
               className="d-block w-100"
-              src={"https://i.picsum.photos/id/549/390/200.jpg?hmac=DebyxWg4u0tOmsYNHOSvyiFpbw_dASsJBggIb7pZhKE"}
-              style={{objectFit: "cover"}}
+              src={
+                "https://i.picsum.photos/id/549/390/200.jpg?hmac=DebyxWg4u0tOmsYNHOSvyiFpbw_dASsJBggIb7pZhKE"
+              }
+              style={{ objectFit: "cover" }}
               alt="First slide"
             />
           </Carousel.Item>
           <Carousel.Item>
             <img
               className="d-block w-100"
-              src={"https://i.picsum.photos/id/882/390/200.jpg?hmac=J0QEyauZvH5lwY422twsEif1bRI6FRvaxBXNueUKIpc"}
-              style={{objectFit: "cover"}}
+              src={
+                "https://i.picsum.photos/id/882/390/200.jpg?hmac=J0QEyauZvH5lwY422twsEif1bRI6FRvaxBXNueUKIpc"
+              }
+              style={{ objectFit: "cover" }}
               alt="Second slide"
             />
           </Carousel.Item>
         </Carousel>
       </Modal.Title>
-
-      <Modal.Title className="mx-3 mt-3" style={{fontSize: 'x-large'}}>{props.business.Title}</Modal.Title>
-      <Modal.Title className="mx-3 text-muted" style={{fontSize: 'medium'}}>{props.business['Business Type']}</Modal.Title>
-      <Modal.Title className="mx-3">
-        <div>
-            {Array.from(coreValues).map((value: string) => {
+      <div className="d-flex mt-2">
+        <Modal.Title className="mx-3" style={{ fontSize: "x-large" }}>
+          {props.business.Title}
+        </Modal.Title>
+        <div
+          className="px-2"
+          style={{
+            display: "flex",
+            marginLeft: "auto",
+            justifyContent: "flex-end",
+          }}
+        >
+          {Array.from(coreValues).map((value: string, idx: number) => {
             const logo = getLogo(value);
-            console.log(logo);
-            return <img width="50px" height="50px" src={logo} alt={value}/>
-            })}
+            return (
+              <img
+                key={idx}
+                width="40px"
+                height="40px"
+                src={logo}
+                alt={value}
+                style={{ marginLeft: "-15%"}}
+              />
+            );
+          })}
         </div>
+      </div>
+      <Modal.Title className="mx-3 text-muted" style={{ fontSize: "medium" }}>
+        {props.business["Business Type"]}
       </Modal.Title>
-      <Modal.Title className="d-flex mx-3 justify-content-center">
+
+      <Modal.Title
+        className="d-flex mt-3 justify-content-center"
+        style={{ borderBottom: "solid 1px lightgrey" }}
+      >
         <Row>
           <Col>
-            <Button style={{borderRadius: "50%"}} className="mx-2" variant="outline-secondary">
-                <FaPhoneAlt></FaPhoneAlt>
+            <Button
+              style={{ borderRadius: "50%" }}
+              className="mx-2"
+              variant="outline-secondary"
+            >
+              <FaPhoneAlt></FaPhoneAlt>
             </Button>
-            <p style={{textAlign: "center", fontSize: "small"}}>Call</p>
+            <p style={{ textAlign: "center", fontSize: "small" }}>Call</p>
           </Col>
           <Col>
-            <Button style={{borderRadius: "50%"}} className="mx-2" variant="outline-secondary">
+            <Button
+              style={{ borderRadius: "50%" }}
+              className="mx-2"
+              variant="outline-secondary"
+            >
               <FaMapMarkedAlt></FaMapMarkedAlt>
             </Button>
-            <p style={{fontSize: "small"}}>Directions</p>
+            <p style={{ fontSize: "small" }}>Directions</p>
           </Col>
           <Col>
-              <form action={props.business.Website || ""} target="_blank">
-                <Button type="submit" style={{borderRadius: "50%"}} className="mx-2" variant="outline-secondary">
-                  <FaClipboard ></FaClipboard></Button>
-              </form>
-              <p style={{textAlign: "center", fontSize: "small"}}>Website</p>
+            <form action={props.business.Website} target="_blank">
+              <Button
+                type="submit"
+                style={{ borderRadius: "50%" }}
+                className="mx-2"
+                disabled={!props.business.Website}
+                variant="outline-secondary"
+              >
+                <FaClipboard></FaClipboard>
+              </Button>
+            </form>
+            <p style={{ textAlign: "center", fontSize: "small" }}>Website</p>
           </Col>
         </Row>
       </Modal.Title>
-      <Modal.Body>
-          {props.business.Description}
+      <Modal.Body className="mx-2">
+        <div className="mb-3">{props.business.Description}</div>
+        {Array.from(coreValues).map((coreValue: string, idx: number) => {
+          return (
+            <div key={idx}>
+              <p>
+                <b>{coreValue}</b>
+              </p>
+              {props.business.Initiatives.filter(
+                (subvalue) => getCoreValue(subvalue) === coreValue
+              ).map((subvalue: string, idx: number) => {
+                return (
+                  <p
+                    key={idx}
+                    style={{
+                      backgroundColor: "white",
+                      border: "solid 1px black",
+                      borderRadius: "10px",
+                      width: "fit-content",
+                      padding: "5px 16px",
+                    }}
+                  >
+                    {subvalue}
+                  </p>
+                );
+              })}
+            </div>
+          );
+        })}
       </Modal.Body>
     </Modal>
   );
