@@ -8,7 +8,7 @@ const containerStyle = {
   height: "400px",
 };
 
-const center = {
+const EvanstonLatLng = {
   lat: 42.0451,
   lng: -87.6877,
 };
@@ -32,6 +32,8 @@ export const BiziMap: React.FC<BiziMapProps> = ({ businessList }) => {
 
   if (loadError) return <p>Error loading maps</p>;
   if (!isLoaded) return <p>'Loading maps'</p>;
+
+  const center = businessList[0]?.GeoLocation || EvanstonLatLng;
 
   return (
     <GoogleMap
