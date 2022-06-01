@@ -23,7 +23,7 @@ export const SearchPage: React.FC<SearchPageProps> = ({
   setAdvancedFilterValues,
   loadingBusinesses,
   businessData,
-  setFilteredData
+  setFilteredData,
 }) => {
   const [text, setText] = useState(""); // for Let's Go
   let navigate = useNavigate();
@@ -68,8 +68,13 @@ export const SearchPage: React.FC<SearchPageProps> = ({
           onClick={() => {
             navigate("/results");
             setSearchText(text);
-            filterBusinesses(loadingBusinesses, businessData, searchText, 
-                            advancedFilterValues, setFilteredData);
+            filterBusinesses(
+              loadingBusinesses,
+              businessData,
+              searchText,
+              advancedFilterValues,
+              setFilteredData
+            );
           }}
         >
           Let's go!

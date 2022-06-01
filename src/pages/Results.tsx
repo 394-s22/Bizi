@@ -27,10 +27,10 @@ export const Results: React.FC<ResultsProps> = ({
   setAdvancedFilterValues,
   loadingBusinesses,
   businessData,
-  setFilteredData
+  setFilteredData,
 }) => {
   const [showModal, setShowModal] = useState(false);
-  const [initialState, setInitialState] = useState(advancedFilterValues)
+  const [initialState, setInitialState] = useState(advancedFilterValues);
 
   return (
     <>
@@ -63,9 +63,7 @@ export const Results: React.FC<ResultsProps> = ({
       <h1 className="mx-3 my-3">Results</h1>
       {businessList.length > 0 ? (
         <div className="mb-5">
-          <BusinessList
-            businessList={businessList}
-          />
+          <BusinessList businessList={businessList} />
         </div>
       ) : (
         <div className="d-flex justify-content-center align-items-center vh-100">

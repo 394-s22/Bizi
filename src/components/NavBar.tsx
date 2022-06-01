@@ -12,7 +12,7 @@ export const NavBar: React.FC = () => {
         bottom: "0",
         width: "100%",
         zIndex: 3,
-        borderTop: "solid 1px lightgrey"
+        borderTop: "solid 1px lightgrey",
       }}
       bg="light"
     >

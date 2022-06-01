@@ -16,4 +16,3 @@ export const getActiveColor = (val: string) => {
       return "#ddd";
   }
 };
-

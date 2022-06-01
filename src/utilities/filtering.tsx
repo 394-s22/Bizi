@@ -65,8 +65,14 @@ export function filterBusinesses(
 
   finalFilteredBusinesses.sort(
     (business1: BusinessEntry, business2: BusinessEntry) => {
-      const basicFilters1 = matchedBasicFilters(business1, advancedFilterValues);
-      const basicFilters2 = matchedBasicFilters(business2, advancedFilterValues);
+      const basicFilters1 = matchedBasicFilters(
+        business1,
+        advancedFilterValues
+      );
+      const basicFilters2 = matchedBasicFilters(
+        business2,
+        advancedFilterValues
+      );
 
       if (basicFilters1 < basicFilters2) return 1;
       if (basicFilters2 < basicFilters1) return -1;
@@ -87,10 +93,13 @@ export function filterBusinesses(
   setFilteredData(finalFilteredBusinesses);
 }
 
-export const matchedBasicFilters = (business: BusinessEntry, advancedFilterValues: string[]) => {
+export const matchedBasicFilters = (
+  business: BusinessEntry,
+  advancedFilterValues: string[]
+) => {
   const filterValues = Array.from(
-    new Set(advancedFilterValues
-      .map(value => getCoreValue(value))));
+    new Set(advancedFilterValues.map((value) => getCoreValue(value)))
+  );
   if (filterValues === []) return 0;
   const basic = getBasicFilters(business);
   return intersect(basic, filterValues).length;

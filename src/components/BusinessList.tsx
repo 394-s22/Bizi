@@ -7,10 +7,7 @@ type BusinessListProps = {
   businessList: BusinessEntry[];
 };
 
-export const BusinessList: React.FC<BusinessListProps> = ({
-  businessList
-}) => {
-
+export const BusinessList: React.FC<BusinessListProps> = ({ businessList }) => {
   return (
     <Stack direction="vertical">
       {Object.values(businessList).map<ReactNode>(

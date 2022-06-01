@@ -1,7 +1,7 @@
 import { Modal, Button } from "react-bootstrap";
 import { AdvancedSearch } from "./AdvancedSearch";
 import { BusinessEntry } from "../types/BusinessTypes";
-import { filterBusinesses } from "../utilities/filtering"
+import { filterBusinesses } from "../utilities/filtering";
 
 type ApplyFiltersProps = {
   show: boolean;
@@ -26,9 +26,8 @@ export const ApplyFilters: React.FC<ApplyFiltersProps> = ({
   businessData,
   setFilteredData,
   advFilterValuesInitial,
-  setInitialState
+  setInitialState,
 }) => {
-  
   const handleClose = () => {
     setAdvancedFilterValues(advFilterValuesInitial);
     setShow(false);
@@ -39,8 +38,13 @@ export const ApplyFilters: React.FC<ApplyFiltersProps> = ({
   };
 
   const handleApply = () => {
-    filterBusinesses(loadingBusinesses, businessData, searchText,
-      advancedFilterValues, setFilteredData);
+    filterBusinesses(
+      loadingBusinesses,
+      businessData,
+      searchText,
+      advancedFilterValues,
+      setFilteredData
+    );
     setShow(false);
   };
 
@@ -48,17 +52,16 @@ export const ApplyFilters: React.FC<ApplyFiltersProps> = ({
     <Modal show={show} onClose={handleClose}>
       <Modal.Header>
         <Button onClick={handleClose}>Back</Button>
-        <Button style={{ float: 'right' }} onClick={handleReset}>Reset</Button>
-
+        <Button style={{ float: "right" }} onClick={handleReset}>
+          Reset
+        </Button>
       </Modal.Header>
       <Modal.Title className="mx-3 mt-3">Values</Modal.Title>
       <AdvancedSearch
         advancedFilterValues={advancedFilterValues}
         setAdvancedFilterValues={setAdvancedFilterValues}
       />
-      <Button onClick={handleApply}>
-        Apply Filters
-      </Button>
+      <Button onClick={handleApply}>Apply Filters</Button>
     </Modal>
   );
 };

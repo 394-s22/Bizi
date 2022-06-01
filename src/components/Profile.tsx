@@ -106,7 +106,7 @@ export const Profile: React.FC<ProfileProps> = (props) => {
                 height="40px"
                 src={logo}
                 alt={value}
-                style={{ marginLeft: "-15%"}}
+                style={{ marginLeft: "-15%" }}
               />
             );
           })}
