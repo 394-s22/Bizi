@@ -38,7 +38,14 @@ export const Results: React.FC<ResultsProps> = ({
         className="my-3"
         style={{ position: "absolute", zIndex: "2", width: "100%" }}
       >
-        <SearchBar setSearchText={setSearchText} searchText={searchText} />
+        <SearchBar
+          loadingBusinesses={loadingBusinesses}
+          businessData={businessData}
+          searchText={searchText}
+          setSearchText={setSearchText}
+          advancedFilterValues={advancedFilterValues}
+          setFilteredData={setFilteredData}
+        />
         <Button
           onClick={() => {
             setShowModal(true);

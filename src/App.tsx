@@ -8,6 +8,7 @@ import { SearchPage } from "./pages/SearchPage";
 import { BusinessEntry } from "./types/BusinessTypes";
 import { useData } from "./utilities/firebase";
 import { setThumbnailImages } from "./utilities/images";
+import { filterBusinesses } from "./utilities/filtering";
 
 const App = () => {
   // state variables

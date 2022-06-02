@@ -25,7 +25,6 @@ export const SearchPage: React.FC<SearchPageProps> = ({
   businessData,
   setFilteredData,
 }) => {
-  const [text, setText] = useState(""); // for Let's Go
   let navigate = useNavigate();
 
   return (
@@ -37,10 +36,13 @@ export const SearchPage: React.FC<SearchPageProps> = ({
         Find small businesses near you that support your values
       </p>
       <SearchBar
-        text={text}
-        setText={setText}
+        loadingBusinesses={loadingBusinesses}
+        businessData={businessData}
         searchText={searchText}
         setSearchText={setSearchText}
+        advancedFilterValues={advancedFilterValues}
+        setFilteredData={setFilteredData}
+
       />
       <br />
       {
@@ -67,7 +69,6 @@ export const SearchPage: React.FC<SearchPageProps> = ({
           active
           onClick={() => {
             navigate("/results");
-            setSearchText(text);
             filterBusinesses(
               loadingBusinesses,
               businessData,
