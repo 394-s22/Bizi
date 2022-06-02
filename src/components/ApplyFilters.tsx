@@ -13,7 +13,6 @@ type ApplyFiltersProps = {
   businessData: BusinessEntry[] | undefined;
   setFilteredData: React.Dispatch<React.SetStateAction<BusinessEntry[]>>;
   advFilterValuesInitial: string[];
-  setInitialState: React.Dispatch<React.SetStateAction<string[]>>;
 };
 
 export const ApplyFilters: React.FC<ApplyFiltersProps> = ({
@@ -26,7 +25,6 @@ export const ApplyFilters: React.FC<ApplyFiltersProps> = ({
   businessData,
   setFilteredData,
   advFilterValuesInitial,
-  setInitialState,
 }) => {
   const handleClose = () => {
     setAdvancedFilterValues(advFilterValuesInitial);
@@ -49,19 +47,41 @@ export const ApplyFilters: React.FC<ApplyFiltersProps> = ({
   };
 
   return (
-    <Modal show={show} onClose={handleClose}>
-      <Modal.Header>
-        <Button onClick={handleClose}>Back</Button>
-        <Button style={{ float: "right" }} onClick={handleReset}>
+    <Modal show={show} onClose={handleClose} centered>
+      <Modal.Header style={{ borderBottom: "none" }}>
+        <a
+          style={{ color: "#304FF9", fontWeight: "bold" }}
+          onClick={handleClose}
+        >
+          Back
+        </a>
+        <a
+          style={{ color: "#304FF9", fontWeight: "bold", float: "right" }}
+          onClick={handleReset}
+        >
           Reset
-        </Button>
+        </a>
       </Modal.Header>
-      <Modal.Title className="mx-3 mt-3">Values</Modal.Title>
+      <Modal.Title className="mx-4 mb-3">Values</Modal.Title>
       <AdvancedSearch
         advancedFilterValues={advancedFilterValues}
         setAdvancedFilterValues={setAdvancedFilterValues}
       />
-      <Button onClick={handleApply}>Apply Filters</Button>
+      <div className="text-center">
+        <Button
+          className="py-2 m-3"
+          style={{
+            borderRadius: "14px",
+            fontSize: "larger",
+            fontWeight: "bold",
+            backgroundColor: "#1539FA",
+            width: "80%",
+          }}
+          onClick={handleApply}
+        >
+          Apply Filters
+        </Button>
+      </div>
     </Modal>
   );
 };
