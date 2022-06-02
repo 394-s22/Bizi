@@ -66,7 +66,10 @@ export const Results: React.FC<ResultsProps> = ({
           <BusinessList businessList={businessList} />
         </div>
       ) : (
-        <div className="d-flex justify-content-center align-items-center vh-100">
+        <div
+          className="d-flex justify-content-center align-items-center"
+          style={{ height: "35vh" }}
+        >
           <p style={{ color: "grey", fontSize: "large" }}>
             No results found . . .
           </p>
@@ -82,7 +85,6 @@ export const Results: React.FC<ResultsProps> = ({
         setFilteredData={setFilteredData}
         searchText={searchText}
         advFilterValuesInitial={initialState}
-        setInitialState={setInitialState}
       />
     </>
   );
