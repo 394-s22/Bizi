@@ -1,17 +1,18 @@
-import { Button, Carousel, Col, Modal, Row } from "react-bootstrap";
+import { Button, Carousel, Col, Modal, Overlay, OverlayTrigger, Row, Tooltip } from "react-bootstrap";
 import {
   FaAngleLeft,
   FaClipboard,
   FaMapMarkedAlt,
   FaPhoneAlt,
 } from "react-icons/fa";
+import { AiFillInfoCircle } from "react-icons/ai"
 import communityLogo from "../logos/community.png";
 import diversityLogo from "../logos/diversity.png";
 import ethicalLogo from "../logos/ethical.png";
 import sustainabilityLogo from "../logos/sustainability.png";
 import { BusinessEntry } from "../types/BusinessTypes";
 import { getBasicFilters, getCoreValue } from "../utilities/filtering";
-import { useState, useEffect } from "react";
+import { useState, useEffect, ReactNode } from "react";
 
 type ProfileProps = {
   business: BusinessEntry;
@@ -179,7 +180,18 @@ export const Profile: React.FC<ProfileProps> = (props) => {
                       padding: "5px 16px",
                     }}
                   >
-                    {subvalue}
+                    {subvalue} <OverlayTrigger
+                      placement="right"
+                      delay={{ show: 250, hide: 400 }}
+                      overlay={
+                        <Tooltip>
+                          Description coming soon!
+                        </Tooltip>
+                      }
+                    ><span>
+                        <AiFillInfoCircle></AiFillInfoCircle>
+                        </span>
+                      </OverlayTrigger>
                   </p>
                 );
               })}
