@@ -1,10 +1,13 @@
 import { BusinessEntry } from "../types/BusinessTypes";
-
 export const getImage = async (width: number, height: number) => {
   const srcURL = `https://picsum.photos/${width}/${height}`;
   const response = await fetch(srcURL);
   const imgBlob = await response.blob();
-  return URL.createObjectURL(imgBlob);
+  const reader = new FileReader();
+  return new Promise<string>((resolve, reject) => {
+    reader.onloadend = (_e) => resolve(reader.result as string);
+    reader.readAsDataURL(imgBlob);
+  });
 };
 
 export const getImageArray = async (

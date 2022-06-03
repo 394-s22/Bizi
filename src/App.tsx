@@ -1,5 +1,5 @@
 import "bootstrap/dist/css/bootstrap.min.css";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import "./App.css";
 import { NavBar } from "./components/NavBar";
@@ -7,8 +7,6 @@ import { Results } from "./pages/Results";
 import { SearchPage } from "./pages/SearchPage";
 import { BusinessEntry } from "./types/BusinessTypes";
 import { useData } from "./utilities/firebase";
-import { setThumbnailImages } from "./utilities/images";
-import { filterBusinesses } from "./utilities/filtering";
 
 const App = () => {
   // state variables
@@ -19,13 +17,6 @@ const App = () => {
   const [advancedFilterValues, setAdvancedFilterValues] = useState<string[]>(
     [] as string[]
   );
-
-  // generating thumbnails for each business
-  useEffect(() => {
-    setThumbnailImages(loadingBusinesses, businessData, setBusinessData).then(
-      () => console.log("businesses thumbnail updated")
-    );
-  }, [loadingBusinesses]);
 
   // returned page
   return (
