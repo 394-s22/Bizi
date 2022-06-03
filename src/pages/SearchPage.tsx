@@ -42,11 +42,10 @@ export const SearchPage: React.FC<SearchPageProps> = ({
         setSearchText={setSearchText}
         advancedFilterValues={advancedFilterValues}
         setFilteredData={setFilteredData}
-
       />
       <br />
       {
-        <div style={{ marginBottom: '9em' }}>
+        <div style={{ marginBottom: "9em" }}>
           <AdvancedSearch
             advancedFilterValues={advancedFilterValues}
             setAdvancedFilterValues={setAdvancedFilterValues}
