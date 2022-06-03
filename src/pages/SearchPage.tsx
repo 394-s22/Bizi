@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import { Button } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
 import { AdvancedSearch } from "../components/AdvancedSearch";
@@ -46,10 +46,12 @@ export const SearchPage: React.FC<SearchPageProps> = ({
       />
       <br />
       {
-        <AdvancedSearch
-          advancedFilterValues={advancedFilterValues}
-          setAdvancedFilterValues={setAdvancedFilterValues}
-        />
+        <div style={{ marginBottom: '9em' }}>
+          <AdvancedSearch
+            advancedFilterValues={advancedFilterValues}
+            setAdvancedFilterValues={setAdvancedFilterValues}
+          />
+        </div>
       }
       <div
         className="text-center mt-3 mb-5"
