@@ -1,11 +1,19 @@
-import { Button, Carousel, Col, Modal, Overlay, OverlayTrigger, Row, Tooltip } from "react-bootstrap";
+import {
+  Button,
+  Carousel,
+  Col,
+  Modal,
+  OverlayTrigger,
+  Row,
+  Tooltip,
+} from "react-bootstrap";
 import {
   FaAngleLeft,
   FaClipboard,
   FaMapMarkedAlt,
   FaPhoneAlt,
 } from "react-icons/fa";
-import { AiFillInfoCircle } from "react-icons/ai"
+import { AiFillInfoCircle } from "react-icons/ai";
 import communityLogo from "../logos/community.png";
 import diversityLogo from "../logos/diversity.png";
 import ethicalLogo from "../logos/ethical.png";
@@ -180,18 +188,16 @@ export const Profile: React.FC<ProfileProps> = (props) => {
                       padding: "5px 16px",
                     }}
                   >
-                    {subvalue} <OverlayTrigger
+                    {subvalue}{" "}
+                    <OverlayTrigger
                       placement="right"
                       delay={{ show: 250, hide: 400 }}
-                      overlay={
-                        <Tooltip>
-                          Description coming soon!
-                        </Tooltip>
-                      }
-                    ><span>
+                      overlay={<Tooltip>Description coming soon!</Tooltip>}
+                    >
+                      <span>
                         <AiFillInfoCircle></AiFillInfoCircle>
-                        </span>
-                      </OverlayTrigger>
+                      </span>
+                    </OverlayTrigger>
                   </p>
                 );
               })}
